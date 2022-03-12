@@ -2,6 +2,9 @@ import UpdatePasswordForm from '../../Forms/UpdatePassword/UpdatePassword';
 import {useSelector, useDispatch} from 'react-redux';
 import { RootState } from '../../../app/store';
 import {updatePasswordHandler} from '../../../features/updatePasswordSlicd';
+import Loader from '../../../components/Loader/Loader'
+
+import {StyledFormContainer,StyledWrapper} from './StyledUpdatePassword';
 
 interface updatePassword {
     oldPassword: string,
@@ -19,11 +22,13 @@ const PasswordUpdate:React.FC = () => {
         dispatch(updatePasswordHandler(obj))
     };
 
-    return <div>
-        {loading && <div>...Loading</div>}
+    return <StyledWrapper>
+        <StyledFormContainer>
+        <Loader isLoading={loading} />
         <h1>Password Update</h1>
         <UpdatePasswordForm onUpdatePassword={updatePassword} />
-    </div>
+        </StyledFormContainer>
+    </StyledWrapper>
 }
 
 export default PasswordUpdate

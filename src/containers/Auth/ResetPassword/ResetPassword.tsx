@@ -1,8 +1,11 @@
 import React from 'react';
 import ResetPasswordForm from '../../Forms/ResetPassword/ResetPassword';
+import Loader from '../../../components/Loader/Loader';
 import {useDispatch, useSelector} from 'react-redux';
 import {resetPasswordHandler} from '../../../features/resetPassword';
 import { RootState } from '../../../app/store';
+
+import {StyledWrapper, StyledFormContainer} from './StyledResetPassword'
 
 interface ResetPassword {
     newPassword: string,
@@ -19,11 +22,13 @@ const ResetPassword:React.FC = () => {
         dispatch(resetPasswordHandler(obj));
     }
 
-    return <div>
-        {loading && <div>...Loading</div>}
+    return <StyledWrapper>
+        <StyledFormContainer>
+        <Loader isLoading={loading} />
         Reset Password
         <ResetPasswordForm onResetPassword={passwordResetHandler} />
-    </div>
+        </StyledFormContainer>
+    </StyledWrapper>
 };
 
 export default ResetPassword

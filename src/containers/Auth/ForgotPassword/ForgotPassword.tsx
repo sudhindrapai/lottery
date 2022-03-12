@@ -3,6 +3,8 @@ import ForgotPasswordForm from '../../Forms/ForgotPassword/ForgotPassword';
 import {useSelector, useDispatch} from 'react-redux';
 import {forgotPasswordHandler} from '../../../features/forgotPassword';
 import { RootState } from '../../../app/store';
+import Loader from '../../../components/Loader/Loader';
+import {StyledWrapper, StyledFormContainer} from './StyledForgotPassword';
 
 interface ForgotPassword {
     emailId: string
@@ -17,11 +19,13 @@ const ForgotPassword: React.FC = () => {
         dispatch(forgotPasswordHandler(obj))
     }
 
-    return <div>
-        {loading && <div>...Loading</div>}
+    return <StyledWrapper>
+        <StyledFormContainer>
+        <Loader isLoading={loading} />
         <h1>Forgot Password</h1>
         <ForgotPasswordForm  onClickSendLink={onClickSendLink} />
-    </div>
+        </StyledFormContainer>
+    </StyledWrapper>
 }
 
 export default ForgotPassword

@@ -1,6 +1,8 @@
 import './App.css';
 import {Routes, Route} from 'react-router-dom';
 
+import AppWrapper from './containers/AppWrapper/AppWrapper';
+
 import Profile from './containers/Profile/Profile';
 import Registration from './containers/Auth/Signup/SignUp';
 import Signin from './containers/Auth/Siginin/Signin';
@@ -10,6 +12,7 @@ import ForgotPassword from './containers/Auth/ForgotPassword/ForgotPassword';
 
 function App() {
   return (
+    <AppWrapper>
     <div className="App">
       <Routes>
         <Route path={"/account/profile"} element={<Profile />} />
@@ -21,6 +24,7 @@ function App() {
         <Route path={"*"} element={<h2>404</h2>} />
       </Routes>
     </div>
+    </AppWrapper>
   );
 }
 

@@ -1,5 +1,6 @@
 import React from 'react';
-import {StyledLoginBox} from './styleSignin';
+import {StyledWrapper, StyledFormContainer} from './styleSignin';
+import Loader from '../../../components/Loader/Loader';
 import SigninForm from '../../Forms/Login/Login'
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../app/store';
@@ -20,11 +21,13 @@ const Login: React.FC = () => {
 
     let loadingState = useSelector((state:RootState) => state.login.isLoading)
 
-    return <StyledLoginBox>
-        {loadingState && <div>...loading</div>}
-        <h1>Signin</h1>
-        <SigninForm onClickSignin={signinHandler} />
-    </StyledLoginBox>
+    return <StyledWrapper>
+        <StyledFormContainer>
+            <Loader isLoading={loadingState} />
+            <h1>Signin</h1>
+            <SigninForm onClickSignin={signinHandler} />
+        </StyledFormContainer>
+    </StyledWrapper>
 };
 
 export default Login;

@@ -8,3 +8,7 @@
   object-fit: contain;
   padding: 10px;
 }
+
+:root {
+  --color-borderColor: #cccccc;
+}
