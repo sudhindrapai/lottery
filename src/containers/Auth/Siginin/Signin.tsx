@@ -27,11 +27,11 @@ const Login: React.FC = () => {
     }
 
     const redirectToForgotPassword = (): void => {
-        navigate("/account/forgot-password");
+        navigate("/temp/account/forgot-password");
     }
 
     const redirectToRegister = ():void => {
-        navigate("/account/registration");
+        navigate("/temp/account/registration");
     } 
 
     let loadingState = useSelector((state:RootState) => state.login.isLoading)

@@ -25,7 +25,7 @@ const ForgotPassword: React.FC = () => {
     }
 
     const routeToLogin = () => {
-        navigate("/account/signin");
+        navigate("/temp/account/signin");
     }
 
     return <StyledWrapper>

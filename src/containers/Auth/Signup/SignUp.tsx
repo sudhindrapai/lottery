@@ -27,7 +27,7 @@ const SignUp:React.FC = () => {
     };
 
     const routeTologin = () => {
-        navigate("/account/signin");
+        navigate("/temp/account/signin");
     }
 
     return <StyledWrapper>
