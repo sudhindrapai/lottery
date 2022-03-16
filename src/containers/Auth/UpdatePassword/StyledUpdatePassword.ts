@@ -23,5 +23,6 @@ background-color: #ffffff;
 @media screen and (max-width: 500px){
     max-width: 100%;
     box-shadow: unset;
-    border: none
+    border: none;
+    min-height: unset;
 }`;
