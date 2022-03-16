@@ -3,7 +3,7 @@ import FormBuilder from '../../FormBuilder/FormBuilder';
 import Button from '../../../components/UI/Buttons/Button';
 import {updateFormInputState, validateForm} from '../../../Utility/Utility';
 import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement, ButtonSizeVariant, ButtonVariant, ButtonType} from '../../../Utility/InterFacesAndEnum';
-
+import {LoginAccountContainer,LoginAccountOption} from './StyledReg'
 
 interface RegFormState {
     form: FormElement[],
@@ -11,7 +11,8 @@ interface RegFormState {
 }
 
 interface RegistrationProps {
-    onRegister(obj:CreateAccount):void
+    onRegister(obj:CreateAccount):void,
+    onSelectLogin():void
 }
 
 interface CreateAccount {
@@ -95,7 +96,7 @@ const registrationFormInitalState: RegFormState = {
     isValidForm: false
 }
 
-const RegistrationForm:React.FC<RegistrationProps> = ({onRegister}) => {
+const RegistrationForm:React.FC<RegistrationProps> = ({onRegister, onSelectLogin}) => {
 
     const [values, setValues] = useState<RegFormState>(registrationFormInitalState);
 
@@ -137,6 +138,12 @@ const RegistrationForm:React.FC<RegistrationProps> = ({onRegister}) => {
                     clicked={handleFormSubmision}>
                     Submit
                 </Button>
+                <LoginAccountContainer>
+                    Already have an account?
+                    <LoginAccountOption onClick={onSelectLogin}>
+                        Login
+                    </LoginAccountOption>
+                </LoginAccountContainer>
         </form>
 };
 

@@ -1,12 +1,14 @@
 import React from 'react';
 import RegistratoinForm from '../../Forms/Registration/Registration';
 import Loader from '../../../components/Loader/Loader';
-import Backdrop from '../../../components/Backdrop/Backdrop'
 import {useDispatch, useSelector} from 'react-redux';
 import {createSignup} from '../../../features/registrationSlice';
 import { RootState } from '../../../app/store';
+import {FeatierArrowLeft} from '../../../icons';
+import {useNavigate} from 'react-router-dom';
+import Header from '../../../components/Header/Header';
 
-import {StyledWrapper, StyledFormContainer} from './StylesSignup';
+import {StyledWrapper, StyledFormContainer, StyledFormHeader, StyledIconContainer} from './StylesSignup';
 
 interface CreateAccount {
     emailId: string,
@@ -15,6 +17,7 @@ interface CreateAccount {
     lastName:string,
 }
 const SignUp:React.FC = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const isLoading = useSelector((state: RootState) => state.register.isLoading);
@@ -23,11 +26,21 @@ const SignUp:React.FC = () => {
         dispatch(createSignup(obj))
     };
 
+    const routeTologin = () => {
+        navigate("/account/signin");
+    }
+
     return <StyledWrapper>
+        <Header isHeaderVisible={true} />
+        <Loader isLoading={isLoading} />
             <StyledFormContainer>
-                <Loader isLoading={isLoading} />
-                <h1>Registration</h1>
-                <RegistratoinForm onRegister={customerRegistrationHandler} /> 
+                <StyledFormHeader>
+                    <StyledIconContainer onClick={routeTologin}>
+                        <FeatierArrowLeft />
+                    </StyledIconContainer>
+                    Sign up
+                </StyledFormHeader>
+                <RegistratoinForm onRegister={customerRegistrationHandler} onSelectLogin={routeTologin} /> 
             </StyledFormContainer>
         </StyledWrapper>
 };

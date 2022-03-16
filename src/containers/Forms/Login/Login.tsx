@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import FormBuilder from '../../FormBuilder/FormBuilder';
 import Button from '../../../components/UI/Buttons/Button';
 import {updateFormInputState, validateForm} from '../../../Utility/Utility';
+import {ForgotPassword, CreateAccountContainer, CreateAccountOption} from './StyledLogin'
 import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement, ButtonSizeVariant, ButtonVariant, ButtonType} from '../../../Utility/InterFacesAndEnum';
 
 interface SigninFormState {
@@ -16,6 +17,8 @@ interface SigninAccount {
 
 interface SigninProps {
     onClickSignin(obj:SigninAccount):void
+    onClickForgotPassword(): void
+    onClickCreateAccount():void
 }
 
 const signinFormInitalState: SigninFormState = {
@@ -58,7 +61,7 @@ const signinFormInitalState: SigninFormState = {
     isValidForm: false
 }
 
-const SigninForm:React.FC<SigninProps> = ({onClickSignin}) => {
+const SigninForm:React.FC<SigninProps> = ({onClickSignin, onClickForgotPassword, onClickCreateAccount}) => {
     const [values, setValues] = useState<SigninFormState>(signinFormInitalState);
 
     const handleInputChange = (event:React.ChangeEvent <HTMLTextAreaElement | HTMLInputElement>):void => {
@@ -84,8 +87,13 @@ const SigninForm:React.FC<SigninProps> = ({onClickSignin}) => {
         onClickSignin(createSignin);
     }
 
+
+
     return <form name={"Customer Registration"} html-for={"customer resgistraion"} autoComplete="off">
                 <FormBuilder formElements={values.form} onInputChange = {handleInputChange}  />
+                <ForgotPassword onClick={onClickForgotPassword}>
+                    Forgot Password?
+                </ForgotPassword>
                 <Button 
                     disabled={false} 
                     fullWidth={true} 
@@ -95,6 +103,9 @@ const SigninForm:React.FC<SigninProps> = ({onClickSignin}) => {
                     clicked={handleFormSubmision} >
                         Signin
                 </Button>
+                <CreateAccountContainer onClick={onClickCreateAccount}>
+                    Don't have an account? <CreateAccountOption>Sign up</CreateAccountOption>
+                </CreateAccountContainer>
         </form>
 };
 

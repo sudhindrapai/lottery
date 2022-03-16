@@ -1,6 +1,6 @@
-import React, { Children } from 'react';
-import { Button } from '@mui/material';
-
+import React from 'react';
+import { Button, ButtonProps } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import {ButtonSizeVariant, ButtonVariant, ButtonType} from '../../../Utility/InterFacesAndEnum';
 
 interface ButtonState {
@@ -12,13 +12,23 @@ interface ButtonState {
     type: ButtonType,
     clicked(event:React.MouseEvent<HTMLButtonElement, MouseEvent>):void
 }
+
+const ColorButton = styled(Button)<ButtonProps>(() => ({
+    color: '#ffffff',
+    backgroundColor: '#FFC839',
+    padding: "16px",
+    '&:hover': {
+      backgroundColor: '#FFC839',
+    },
+  }));
+
 const ButtonComponent:React.FC<ButtonState> = ({disabled, fullWidth, href, size, variant, type, clicked, children}) => {
-    return <Button disabled={disabled} 
+    return <ColorButton disabled={disabled} 
     fullWidth={fullWidth} 
     type={type} 
     variant = {variant}
     onClick={clicked}
-    size={size}>{children}</Button>
+    size={size}>{children}</ColorButton>
 };
 
 export default ButtonComponent

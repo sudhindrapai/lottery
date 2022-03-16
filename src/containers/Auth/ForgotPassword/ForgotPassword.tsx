@@ -1,16 +1,21 @@
 import React from 'react';
 import ForgotPasswordForm from '../../Forms/ForgotPassword/ForgotPassword';
+import Header from '../../../components/Header/Header';
 import {useSelector, useDispatch} from 'react-redux';
 import {forgotPasswordHandler} from '../../../features/forgotPassword';
 import { RootState } from '../../../app/store';
 import Loader from '../../../components/Loader/Loader';
-import {StyledWrapper, StyledFormContainer} from './StyledForgotPassword';
+import {StyledWrapper, StyledFormContainer, StyledFormHeader, StyledIconContainer, StyledDescription} from './StyledForgotPassword';
+import {FeatierArrowLeft} from '../../../icons';
+import {useNavigate} from 'react-router-dom';
 
 interface ForgotPassword {
     emailId: string
 }
 
 const ForgotPassword: React.FC = () => {
+
+    const navigate = useNavigate()
 
     const dispatch = useDispatch();
     let loading = useSelector((state: RootState) => state.forgotPassword.isLoading);
@@ -19,10 +24,23 @@ const ForgotPassword: React.FC = () => {
         dispatch(forgotPasswordHandler(obj))
     }
 
+    const routeToLogin = () => {
+        navigate("/account/signin");
+    }
+
     return <StyledWrapper>
-        <StyledFormContainer>
+        <Header isHeaderVisible={true} />
         <Loader isLoading={loading} />
-        <h1>Forgot Password</h1>
+        <StyledFormContainer>
+            <StyledFormHeader>
+            <StyledIconContainer onClick={routeToLogin} >
+                <FeatierArrowLeft />
+            </StyledIconContainer>
+            Forgot Password?
+            </StyledFormHeader>
+            <StyledDescription>
+            Please enter your registered email address to reset the password
+            </StyledDescription>
         <ForgotPasswordForm  onClickSendLink={onClickSendLink} />
         </StyledFormContainer>
     </StyledWrapper>

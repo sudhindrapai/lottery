@@ -4,7 +4,7 @@ export const StyledWrapper = styled.div`
 flex-flow: column;
 display: flex;
 align-items: center;
-justify-content: center;
+justify-content: flex-start;
 height: 100vh;
 `;
 
@@ -14,6 +14,21 @@ width: 100%;
 box-sizing: border-box;
 border: 1px solid var(--color-borderColor);
 padding: 30px;
-box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-border-radius: 8px;
+box-shadow: 0px 4px 44px rgba(0, 0, 0, 0.12);
+border-radius: 20px;
+max-width:420px;
+@media screen and (max-width: 500px){
+    max-width: 100%;
+    box-shadow: unset;
+    border: none
+}
+`;
+
+export const Image = styled.img`
+max-width: 271px;
+max-width: 271px;
+@media screen and (max-width: 500px){
+    max-width: 100%;
+    max-height: 100%
+}
 `;
