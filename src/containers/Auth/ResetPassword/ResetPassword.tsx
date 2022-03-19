@@ -10,7 +10,8 @@ import {StyledWrapper, StyledFormContainer, StyledFormHeader, StyledIconContaine
 import {useNavigate} from 'react-router-dom';
 
 
-import {FeatherCross} from '../../../icons'
+import {FeatherCross} from '../../../icons';
+import {RouterPath} from '../../../routes';
 
 interface ResetPassword {
     newPassword: string,
@@ -28,7 +29,7 @@ const ResetPassword:React.FC = () => {
     }
 
     const routeToLogin = () => {
-        navigate("/temp/account/signin");
+        navigate(RouterPath.signIn);
     }
 
     return <StyledWrapper>

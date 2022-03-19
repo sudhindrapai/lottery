@@ -4,7 +4,9 @@ import Register from '../features/registrationSlice';
 import Profile from '../features/profileSlice';
 import UpdatePassword from '../features/updatePasswordSlicd';
 import ResetPassword from '../features/resetPassword';
-import ForgotPassword from '../features/forgotPassword'
+import ForgotPassword from '../features/forgotPassword';
+import Notifcation from "../features/notificationSlice";
+import Navigation from "../features/navigationSlice";
 
 const store = configureStore({
     reducer:{
@@ -13,7 +15,9 @@ const store = configureStore({
        Profile: Profile,
        passwordUpdate: UpdatePassword,
        resetPassword: ResetPassword,
-       forgotPassword: ForgotPassword
+       forgotPassword: ForgotPassword,
+       notifcation:Notifcation,
+       navigation: Navigation
     }
 })
 

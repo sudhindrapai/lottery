@@ -77,3 +77,9 @@ export interface FormElement {
     dobDate?: Date,
     row?:number
 }
+
+export enum NotificationType {
+    success = "success",
+    error = "error",
+    warning = 'warning'
+}

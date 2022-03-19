@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyledWrapper, StyledFormContainer, Image} from './styleSignin';
 import Loader from '../../../components/Loader/Loader';
 import SigninForm from '../../Forms/Login/Login';
@@ -8,7 +8,7 @@ import { RootState } from '../../../app/store';
 import { createLogin } from '../../../features/loginSlice';
 import { useNavigate } from "react-router-dom";
 
-
+import {RouterPath} from '../../../routes';
 import LoginImage from '../../../assets/loginImage.png'
 
 interface SigninAccount {
@@ -22,19 +22,27 @@ const Login: React.FC = () => {
 
     const dispatch = useDispatch();
 
+    let loadingState = useSelector((state:RootState) => state.login.isLoading);
+    let isLoggedIn = useSelector((state:RootState) => state.login.isLoggedin);
+
     const signinHandler = (obj:SigninAccount):void => {
         dispatch(createLogin(obj))
     }
 
     const redirectToForgotPassword = (): void => {
-        navigate("/temp/account/forgot-password");
+        navigate(RouterPath.forgotPassword);
     }
 
     const redirectToRegister = ():void => {
-        navigate("/temp/account/registration");
+        navigate(RouterPath.signUp);
     } 
 
-    let loadingState = useSelector((state:RootState) => state.login.isLoading)
+    useEffect(() => {
+        if (isLoggedIn) {
+            navigate("/temp");
+        window.location.reload();
+        }
+    }, [isLoggedIn])
 
     return <StyledWrapper>
         <Header isHeaderVisible={true} />

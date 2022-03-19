@@ -8,6 +8,7 @@ import Loader from '../../../components/Loader/Loader';
 import {StyledWrapper, StyledFormContainer, StyledFormHeader, StyledIconContainer, StyledDescription} from './StyledForgotPassword';
 import {FeatierArrowLeft} from '../../../icons';
 import {useNavigate} from 'react-router-dom';
+import {RouterPath} from '../../../routes';
 
 interface ForgotPassword {
     emailId: string
@@ -25,7 +26,7 @@ const ForgotPassword: React.FC = () => {
     }
 
     const routeToLogin = () => {
-        navigate("/temp/account/signin");
+        navigate(RouterPath.signIn);
     }
 
     return <StyledWrapper>

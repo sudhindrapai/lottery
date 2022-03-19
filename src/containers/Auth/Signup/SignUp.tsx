@@ -7,6 +7,7 @@ import { RootState } from '../../../app/store';
 import {FeatierArrowLeft} from '../../../icons';
 import {useNavigate} from 'react-router-dom';
 import Header from '../../../components/Header/Header';
+import {RouterPath} from '../../../routes';
 
 import {StyledWrapper, StyledFormContainer, StyledFormHeader, StyledIconContainer} from './StylesSignup';
 
@@ -27,7 +28,7 @@ const SignUp:React.FC = () => {
     };
 
     const routeTologin = () => {
-        navigate("/temp/account/signin");
+        navigate(RouterPath.signIn);
     }
 
     return <StyledWrapper>

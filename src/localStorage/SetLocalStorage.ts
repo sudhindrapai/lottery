@@ -18,6 +18,14 @@ const setPublicUserId = (id: string) => {
     }
 }
 
+const clearLoginDetails = () => {
+    if (typeof Storage !== undefined){
+        localStorage.removeItem("ACCESS_TOKEN");
+        localStorage.removeItem("REFRESH_TOKEN");
+        localStorage.removeItem("PUBLIC_USER_ID");
+    }
+};
+
 export const setLocalStorage = (type:string, value:any) => {
     switch(type){
         case localStorageActionTypes.SET_ACCESS_REFRESH_TOKEN:
@@ -25,6 +33,9 @@ export const setLocalStorage = (type:string, value:any) => {
             break;
         case localStorageActionTypes.SET_PUBLIC_USER_ID:
             setPublicUserId(value);
+            break;
+        case localStorageActionTypes.CLEAR_LOGIN_USER_DETAIL:
+            clearLoginDetails();
             break;
         default: 
         return null;

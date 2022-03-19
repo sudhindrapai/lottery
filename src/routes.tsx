@@ -18,19 +18,32 @@ const ComingSoonImg = () => {
   return <img src={commingSoonImgUrl} style={{maxHeight: "100%", maxWidth: "100%", height: "99vh", objectFit: "contain"}} />
 }
 
+export const RouterPath = {
+  profile: "/temp/account/profile",
+  signUp: "/temp/account/registration",
+  signIn: "/temp/account/signin",
+  updatePassword: "/temp/account/password-update",
+  resetPassword: "/temp/account/reset-password",
+  forgotPassword: "/temp/account/forgot-password",
+  tempRoot: "/temp",
+  root: "/",
+  notFound: "*"
+};
+
 const AppRoutes = () => {
-  const rootComponent = getLocalStorage(localStorageActionType.GET_ACCESS_TOKEN) ? <Home /> : <Signin />
+  // const rootComponent = getLocalStorage(localStorageActionType.GET_ACCESS_TOKEN) ? <Home /> : <Signin />;
+  const rootComponent = getLocalStorage(localStorageActionType.GET_ACCESS_TOKEN) ? <Home /> : <Home />;
     return (
         <Routes>
-            <Route path={"/temp/account/profile"} element={<Profile />} />
-            <Route path={"/temp/account/registration"} element={<Registration />} />
-            <Route path={"/temp/account/signin"} element={<Signin />} />
-            <Route path= {"/temp/account/password-update"} element={<PasswordUpdate />} />
-            <Route path={"/temp/account/reset-password"} element={<ResetPassword />} />
-            <Route path={"/temp/account/forgot-password"} element={<ForgotPassword />} />
-            <Route path={"/temp"} element={rootComponent} />
-            <Route path={"/"} element={<ComingSoonImg />} />
-            <Route path={"*"} element={<h2>404</h2>} />
+            <Route path={RouterPath.profile} element={<Profile />} />
+            <Route path={RouterPath.signUp} element={<Registration />} />
+            <Route path={RouterPath.signIn} element={<Signin />} />
+            <Route path= {RouterPath.updatePassword} element={<PasswordUpdate />} />
+            <Route path={RouterPath.resetPassword} element={<ResetPassword />} />
+            <Route path={RouterPath.forgotPassword} element={<ForgotPassword />} />
+            <Route path={RouterPath.tempRoot} element={rootComponent} />
+            <Route path={RouterPath.root} element={<ComingSoonImg />} />
+            <Route path={RouterPath.notFound} element={<h2>404</h2>} />
       </Routes>
     )
 }

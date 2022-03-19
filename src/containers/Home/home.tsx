@@ -1,10 +1,9 @@
 import React from 'react';
-
-import Header from '../../components/Header/Header';
+import Navigation from '../../components/Navigation/DesktopNavigation';
 
 const Home = () => {
     return <div>
-        <Header isHeaderVisible={true} />
+        <Navigation />
     </div>
 }
 

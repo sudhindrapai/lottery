@@ -1,5 +1,10 @@
 import * as endPoint from '../networkUtilities/endpoints';
 import {createSlice, PayloadAction, createAsyncThunk} from '@reduxjs/toolkit';
+import {NotificationType} from '../Utility/InterFacesAndEnum';
+import {toggleNotificationVisibility} from './notificationSlice';
+
+import * as localStorageActionType from '../localStorage/ActionTypes';
+import {setLocalStorage} from '../localStorage/SetLocalStorage';
 
 interface LoginState {
     isLoading: boolean,
@@ -39,11 +44,30 @@ export const createLogin = createAsyncThunk(
             }
         })
         .then((response) => {
-            response.json()
+            return response.json()
+            
+        })
+        .then((data) => {
+            let responseObj = data.result;
+            let publicUserId = responseObj.publicUserId;
+            let tokenObj = {
+                accessToken: responseObj.accessToken,
+                refreshToken: responseObj.refreshToken
+            }
+            setLocalStorage(localStorageActionType.SET_ACCESS_REFRESH_TOKEN, tokenObj);
+            setLocalStorage(localStorageActionType.SET_PUBLIC_USER_ID, publicUserId);
+           
             dispatch(toggleLogin({
                 isLoggedin:true
+            }))
+            
+            dispatch(toggleNotificationVisibility({
+                isVisible: true,
+                status: NotificationType.success,
+                message: "success message"
             }));
-        }).catch((error) => {
+        })
+        .catch((error) => {
             console.log(error);
         })
         .finally(() => {
