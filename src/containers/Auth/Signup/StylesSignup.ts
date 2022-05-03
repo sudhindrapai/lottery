@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import BadkgroundUrl from '../../../assets/authScreenBgImage.png';
 
 export const StyledWrapper = styled.div`
 flex-flow: column;
@@ -7,7 +6,6 @@ display: flex;
 align-items: center;
 justify-content: flex-start;
 height: 100vh;
-background: url(${BadkgroundUrl}) no-repeat center center fixed;
 `;
 
 export const StyledFormContainer = styled.div`
@@ -31,7 +29,9 @@ export const StyledFormHeader = styled.div`
 display: flex;
 align-items: flex-start;
 justify-content: flex-start;
-margin-bottom: 40px;
+margin-bottom: 30px;
+color: #000000;
+font-size: 16px;
 `;
 export const StyledIconContainer = styled.span`
 margin-right: 15px;

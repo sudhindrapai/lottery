@@ -9,7 +9,9 @@ import { createLogin } from '../../../features/loginSlice';
 import { useNavigate } from "react-router-dom";
 
 import {RouterPath} from '../../../routes';
-import LoginImage from '../../../assets/loginImage.png'
+import LoginImage from '../../../assets/loginImage.png';
+import AuthWrapper from '../AuthWrapper/AuthWrapper';
+import LoginImg from '../../../assets/loginCupImg.png'
 
 interface SigninAccount {
     email: string,
@@ -45,7 +47,7 @@ const Login: React.FC = () => {
     }, [isLoggedIn])
 
     return <StyledWrapper>
-        <Header isHeaderVisible={true} />
+        <AuthWrapper imgUrl={LoginImg} altText={"loginImage"} >
         <StyledFormContainer>
             <Loader isLoading={loadingState} />
             <Image src={LoginImage} />
@@ -53,6 +55,7 @@ const Login: React.FC = () => {
             onClickForgotPassword={redirectToForgotPassword} 
             onClickCreateAccount={redirectToRegister} />
         </StyledFormContainer>
+        </AuthWrapper>
     </StyledWrapper>
 };
 

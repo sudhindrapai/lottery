@@ -4,14 +4,14 @@ import Loader from '../../../components/Loader/Loader';
 import {useDispatch, useSelector} from 'react-redux';
 import {resetPasswordHandler} from '../../../features/resetPassword';
 import { RootState } from '../../../app/store';
-import Header from '../../../components/Header/Header';
 import {StyledWrapper, StyledFormContainer, StyledFormHeader, StyledIconContainer, StyledDescription} from './StyledResetPassword';
 
 import {useNavigate} from 'react-router-dom';
-
+import AuthWrapper from '../AuthWrapper/AuthWrapper';
 
 import {FeatherCross} from '../../../icons';
 import {RouterPath} from '../../../routes';
+import RegImgUrl from '../../../assets/registerImg.png';
 
 interface ResetPassword {
     newPassword: string,
@@ -33,14 +33,14 @@ const ResetPassword:React.FC = () => {
     }
 
     return <StyledWrapper>
-        <Header isHeaderVisible={true} />
         <Loader isLoading={loading} />
+        <AuthWrapper imgUrl={RegImgUrl} altText={"Forgot password"} >
         <StyledFormContainer>
             <StyledFormHeader>
                 <StyledIconContainer onClick={routeToLogin} >
                     <FeatherCross />
                 </StyledIconContainer>
-                Set new password
+                Set New Password
             </StyledFormHeader>
             <StyledDescription>
             Here you can set new password for signing in to Kings Rings account. 
@@ -49,6 +49,7 @@ const ResetPassword:React.FC = () => {
             </StyledDescription>
         <ResetPasswordForm onResetPassword={passwordResetHandler} />
         </StyledFormContainer>
+        </AuthWrapper>
     </StyledWrapper>
 };
 

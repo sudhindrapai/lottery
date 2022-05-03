@@ -9,6 +9,8 @@ import {StyledWrapper, StyledFormContainer, StyledFormHeader, StyledIconContaine
 import {FeatierArrowLeft} from '../../../icons';
 import {useNavigate} from 'react-router-dom';
 import {RouterPath} from '../../../routes';
+import AuthWraper from '../AuthWrapper/AuthWrapper';
+import ForgotPasswordImg from '../../../assets/forgotPassword.png';
 
 interface ForgotPassword {
     emailId: string
@@ -30,20 +32,21 @@ const ForgotPassword: React.FC = () => {
     }
 
     return <StyledWrapper>
-        <Header isHeaderVisible={true} />
         <Loader isLoading={loading} />
+        <AuthWraper imgUrl={ForgotPasswordImg} altText="forgot password" >
         <StyledFormContainer>
             <StyledFormHeader>
             <StyledIconContainer onClick={routeToLogin} >
                 <FeatierArrowLeft />
             </StyledIconContainer>
-            Forgot Password?
+            Forgot your password?
             </StyledFormHeader>
             <StyledDescription>
             Please enter your registered email address to reset the password
             </StyledDescription>
         <ForgotPasswordForm  onClickSendLink={onClickSendLink} />
         </StyledFormContainer>
+        </AuthWraper>
     </StyledWrapper>
 }
 

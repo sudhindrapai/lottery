@@ -8,6 +8,7 @@ import {Routes, Route} from 'react-router-dom';
 import Profile from './containers/Profile/Profile';
 import Registration from './containers/Auth/Signup/SignUp';
 import Signin from './containers/Auth/Siginin/Signin';
+import TwoFA from "./containers/Auth/TwoFA/TwoFA";
 import PasswordUpdate from './containers/Auth/UpdatePassword/UpdatePassword';
 import ResetPassword from './containers/Auth/ResetPassword/ResetPassword';
 import ForgotPassword from './containers/Auth/ForgotPassword/ForgotPassword';
@@ -22,6 +23,7 @@ export const RouterPath = {
   profile: "/temp/account/profile",
   signUp: "/temp/account/registration",
   signIn: "/temp/account/signin",
+  twoFA: "/temp/account/2FA",
   updatePassword: "/temp/account/password-update",
   resetPassword: "/temp/account/reset-password",
   forgotPassword: "/temp/account/forgot-password",
@@ -38,6 +40,7 @@ const AppRoutes = () => {
             <Route path={RouterPath.profile} element={<Profile />} />
             <Route path={RouterPath.signUp} element={<Registration />} />
             <Route path={RouterPath.signIn} element={<Signin />} />
+            <Route path={RouterPath.twoFA} element={<TwoFA />} />
             <Route path= {RouterPath.updatePassword} element={<PasswordUpdate />} />
             <Route path={RouterPath.resetPassword} element={<ResetPassword />} />
             <Route path={RouterPath.forgotPassword} element={<ForgotPassword />} />

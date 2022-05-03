@@ -10,6 +10,8 @@ font-size: 14px;
 line-height: 18px;
 margin-bottom: 16px;
 cursor: pointer;
+color: #000000;
+margin-bottom: 50px;
 `;
 
 export const CreateAccountContainer = styled.div`
@@ -30,6 +32,6 @@ font-weight: 500;
 font-size: 14px;
 line-height: 18px;
 cursor: pointer;
-color: #000000;
+color: #3674bf;
 margin-left: 5px;
 `;
