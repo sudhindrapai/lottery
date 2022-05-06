@@ -134,3 +134,7 @@ export const validateForm = (formElements:FormElement[]):boolean => {
     }
     return isValidForm
 } 
+
+// method to add padding zero to the incoming digit 
+// incoming value 8 it will return 08
+export const addPaddingZero = (digit: number):string => digit > 9 ? `${digit}` : `0${digit}`;

@@ -3,6 +3,8 @@ import FormBuilder from '../../FormBuilder/FormBuilder';
 import Button from '../../../components/UI/Buttons/Button';
 import {updateFormInputState, validateForm} from '../../../Utility/Utility';
 import {FormElement, FormElementType, ButtonSizeVariant,ButtonType, ButtonVariant, InputVariant, InputTypes, customValidationType} from '../../../Utility/InterFacesAndEnum';
+import CountdownTimer from '../../../components/Timer/Timer';
+import {ButtonWrapper} from './StyledTwoFA';
 
 interface TwoFAFormState {
     form: FormElement[],
@@ -10,6 +12,7 @@ interface TwoFAFormState {
     numberOfAttempt: number;
     maxNumberOfAttempt: number;
     isValidForm: boolean;
+    isResendButtonVisible:false
 }
 
 interface TwoFAProps {
@@ -18,29 +21,30 @@ interface TwoFAProps {
 }
 
 const twoFAState:TwoFAFormState = {
-    form:[
+    form: [
         {
             elementType: FormElementType.input,
-            value:"",
-            id:"verificationCode",
-            isRequired:true,
+            value: "",
+            id: "verificationCode",
+            isRequired: true,
             fullWidth: true,
             isCustomValidationRequred: false,
             inputVariant: InputVariant.outlined,
             inputType: InputTypes.number,
             customValidationType: customValidationType.null,
-            isValidInput:false,
-            isTouched:false,
-            errorMessage:"",
-            label:"Enter verification code",
-            radioGroupValues:[],
-            isPasswordHidden:true
+            isValidInput: false,
+            isTouched: false,
+            errorMessage: "",
+            label: "Enter verification code",
+            radioGroupValues: [],
+            isPasswordHidden: true
         }
     ],
-    resendCodeTimer: 180,
+    resendCodeTimer: 10,
     numberOfAttempt: 1,
     maxNumberOfAttempt: 3,
-    isValidForm: false
+    isValidForm: false,
+    isResendButtonVisible: false
 }
 
 const TwoFA:FC<TwoFAProps> = ({onClickLogin, onClickResendCode}) => {
@@ -54,8 +58,37 @@ const TwoFA:FC<TwoFAProps> = ({onClickLogin, onClickResendCode}) => {
         });
     }
 
+    const toggleResendOption = () => {
+        console.log("toggleResendOption")
+    };
+
+    const onClickRestart = () => {};
+
+    const handleFormSubmision = () => {
+        onClickLogin();
+    }
+
     return <form name={"Customer Registration"} html-for={"customer resgistraion"} autoComplete="off">
         <FormBuilder formElements={values.form} onInputChange = {handleInputChange}  />
+        <CountdownTimer totalDuration={180} 
+        restartCounterText = {"Resend Code"}
+        onReachEnd={toggleResendOption} 
+        color={"#000000"} 
+        fontSize={16} 
+        maxResendAttempt = {2}
+        resendTextColor = {"#FFB332"}
+        restartCounter={onClickRestart} />
+        <ButtonWrapper>
+        <Button 
+                    disabled={false} 
+                    fullWidth={true} 
+                    size={ButtonSizeVariant.medium} 
+                    variant={ButtonVariant.contained} 
+                    type={ButtonType.submit} 
+                    clicked={handleFormSubmision} >
+                        Signin
+                </Button>
+                </ButtonWrapper>
     </form>
 };
 
