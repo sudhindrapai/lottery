@@ -15,7 +15,7 @@ interface NotificationProps {
 const notificatoinState: NotificationProps = {
     isVisible: false,
     status: NotificationType.success,
-    message: ""
+    message: "this is test message"
 }
 
 const notificationSlice = createSlice({

@@ -1,4 +1,3 @@
-import { useThemeProps } from '@mui/system';
 import styled from 'styled-components';
 
 interface StyledTimerWrapperProps {
