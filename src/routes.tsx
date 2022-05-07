@@ -11,6 +11,7 @@ import Signin from './containers/Auth/Siginin/Signin';
 import TwoFA from "./containers/Auth/TwoFA/TwoFA";
 import PasswordUpdate from './containers/Auth/UpdatePassword/UpdatePassword';
 import ResetPassword from './containers/Auth/ResetPassword/ResetPassword';
+import ResendPwdResetLink from './containers/Auth/ResendMail/ResendMail';
 import ForgotPassword from './containers/Auth/ForgotPassword/ForgotPassword';
 import Home from './containers/Home/home';
 
@@ -26,6 +27,7 @@ export const RouterPath = {
   twoFA: "/temp/account/2FA",
   updatePassword: "/temp/account/password-update",
   resetPassword: "/temp/account/reset-password",
+  resendResetLink: "/temp/account/resend-pwd-reset-link",
   forgotPassword: "/temp/account/forgot-password",
   tempRoot: "/temp",
   root: "/",
@@ -43,6 +45,7 @@ const AppRoutes = () => {
             <Route path={RouterPath.twoFA} element={<TwoFA />} />
             <Route path= {RouterPath.updatePassword} element={<PasswordUpdate />} />
             <Route path={RouterPath.resetPassword} element={<ResetPassword />} />
+            <Route path={RouterPath.resendResetLink} element={<ResendPwdResetLink />} />
             <Route path={RouterPath.forgotPassword} element={<ForgotPassword />} />
             <Route path={RouterPath.tempRoot} element={rootComponent} />
             <Route path={RouterPath.root} element={<ComingSoonImg />} />

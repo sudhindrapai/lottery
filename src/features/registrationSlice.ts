@@ -1,5 +1,7 @@
 import {createSlice, PayloadAction, createAsyncThunk} from '@reduxjs/toolkit';
 import * as endpoints from '../networkUtilities/endpoints';
+import {NotificationType} from '../Utility/InterFacesAndEnum';
+import {toggleNotificationVisibility} from './notificationSlice';
 
 interface RegisterState {
     isAccountCreated: boolean,
@@ -40,13 +42,26 @@ export const createSignup = createAsyncThunk(
             }
         })
         .then((response) => {
-            response.json()
-            console.log(response)
+            return response.json();
         })
-        .catch((error) => {
-            console.log(error);
+        .then((data) => {
             dispatch(toggleRegister({
                 isRegistered: true
+            }));
+            dispatch(toggleNotificationVisibility({
+                isVisible: true,
+                status: NotificationType.success,
+                message: data.errorMsg
+            }))
+        })
+        .catch((error) => {
+            dispatch(toggleNotificationVisibility({
+                isVisible: true,
+                status: NotificationType.error,
+                message: error.errorMsg
+            }))
+            dispatch(toggleRegister({
+                isRegistered: false
             }));
         })
         .finally(() => {

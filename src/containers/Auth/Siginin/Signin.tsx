@@ -1,11 +1,10 @@
-import React, {useEffect} from 'react';
+import {useEffect, FC} from 'react';
 import {StyledWrapper, StyledFormContainer, Image} from './styleSignin';
 import Loader from '../../../components/Loader/Loader';
 import SigninForm from '../../Forms/Login/Login';
-import Header from '../../../components/Header/Header';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../app/store';
-import { createLogin } from '../../../features/loginSlice';
+import { createLogin, toggleLogin } from '../../../features/loginSlice';
 import { useNavigate } from "react-router-dom";
 
 import {RouterPath} from '../../../routes';
@@ -18,7 +17,7 @@ interface SigninAccount {
     password: string
 }
 
-const Login: React.FC = () => {
+const Login:FC = () => {
 
     const navigate = useNavigate();
 
@@ -42,9 +41,13 @@ const Login: React.FC = () => {
     useEffect(() => {
         if (isLoggedIn) {
             navigate("/temp");
-        window.location.reload();
-        }
-    }, [isLoggedIn])
+        } 
+        return () => {
+            dispatch(toggleLogin({
+                isLoggedin: false
+            }));
+        } 
+    }, [isLoggedIn]);
 
     return <StyledWrapper>
         <AuthWrapper imgUrl={LoginImg} altText={"loginImage"} >

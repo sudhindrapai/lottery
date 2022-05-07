@@ -14,7 +14,7 @@ interface ButtonState {
 }
 
 const ColorButton = styled(Button)<ButtonProps>(() => ({
-    color: '#ffffff',
+    color: '#000000',
     backgroundColor: '#FFC839',
     padding: "16px",
     '&:hover': {

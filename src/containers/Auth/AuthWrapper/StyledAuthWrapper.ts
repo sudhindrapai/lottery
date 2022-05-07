@@ -24,6 +24,10 @@ background: rgba(255, 200, 57, 0.2);
 mix-blend-mode: multiply;
 height: 100%;
 border: 1px solid rgba(255, 179, 50, 0.3);
+@media screen and (max-width: 425px){
+    border: unset;
+    display: none;
+}
 `;
 
 export const StyledImg = styled.img`
@@ -33,6 +37,10 @@ height: 100%;
 max-height: 100%;
 object-fit: contain;
 mix-blend-mode: multiply;
+@media screen and (max-width: 425px){
+    max-height: 300px;
+    max-width: 300px;
+}
 `;
 
 export const StyledFormSection = styled.div`
@@ -41,4 +49,7 @@ flex-flow: column;
 align-items: center;
 justify-content: center;
 flex-basis: 40%;
+@media screen and (max-width: 425px){
+    flex-basis: 100%;
+}
 `;

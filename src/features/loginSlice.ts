@@ -54,17 +54,21 @@ export const createLogin = createAsyncThunk(
                 accessToken: responseObj.accessToken,
                 refreshToken: responseObj.refreshToken
             }
-            setLocalStorage(localStorageActionType.SET_ACCESS_REFRESH_TOKEN, tokenObj);
-            setLocalStorage(localStorageActionType.SET_PUBLIC_USER_ID, publicUserId);
+            
+             setLocalStorage(localStorageActionType.SET_ACCESS_REFRESH_TOKEN, tokenObj);
+             setLocalStorage(localStorageActionType.SET_PUBLIC_USER_ID, publicUserId);
+            
            
             dispatch(toggleLogin({
                 isLoggedin:true
-            }))
+            }));
+
+            console.log(data,"login data")
             
             dispatch(toggleNotificationVisibility({
                 isVisible: true,
                 status: NotificationType.success,
-                message: "success message"
+                message: data.errorMsg
             }));
         })
         .catch((error) => {
@@ -73,7 +77,7 @@ export const createLogin = createAsyncThunk(
         .finally(() => {
             dispatch(toggleLoading({
                 isLoading: false
-            }))
+            }));
         })
     }
 )

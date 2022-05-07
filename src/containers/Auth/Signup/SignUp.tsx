@@ -1,9 +1,9 @@
-import React from 'react';
+import {FC, useEffect} from 'react';
 import RegistratoinForm from '../../Forms/Registration/Registration';
 import AuthWrapper from '../AuthWrapper/AuthWrapper';
 import Loader from '../../../components/Loader/Loader';
 import {useDispatch, useSelector} from 'react-redux';
-import {createSignup} from '../../../features/registrationSlice';
+import {createSignup, toggleRegister} from '../../../features/registrationSlice';
 import { RootState } from '../../../app/store';
 import {FeatierArrowLeft} from '../../../icons';
 import {useNavigate} from 'react-router-dom';
@@ -19,11 +19,12 @@ interface CreateAccount {
     firstName:string,
     lastName:string,
 }
-const SignUp:React.FC = () => {
+const SignUp:FC = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const isLoading = useSelector((state: RootState) => state.register.isLoading);
+    const isSignedUp = useSelector((state: RootState) => state.register.isAccountCreated);
 
     const customerRegistrationHandler = (obj:CreateAccount):void => {
         dispatch(createSignup(obj))
@@ -32,6 +33,17 @@ const SignUp:React.FC = () => {
     const routeTologin = () => {
         navigate(RouterPath.signIn);
     }
+
+    useEffect(() => {
+        if (isSignedUp === true) {
+            navigate(RouterPath.signIn);
+        }
+        return () => {
+            dispatch(toggleRegister({
+                isRegistered: false
+            }));
+        }
+    },[isSignedUp])
 
     return <StyledWrapper>
         <Loader isLoading={isLoading} />

@@ -1,10 +1,9 @@
 import React from 'react';
-import ForgotPasswordForm from '../../Forms/ForgotPassword/ForgotPassword';
 import {useSelector, useDispatch} from 'react-redux';
 import {forgotPasswordHandler} from '../../../features/forgotPassword';
 import { RootState } from '../../../app/store';
 import Loader from '../../../components/Loader/Loader';
-import {StyledWrapper, StyledFormContainer, StyledFormHeader, StyledIconContainer, StyledDescription} from './StyledForgotPassword';
+import {StyledWrapper, StyledFormContainer, StyledFormHeader, StyledIconContainer,StyledResendBtn ,StyledDescription, StyledResetLinkTitle} from './StyledResendMail';
 import {FeatierArrowLeft} from '../../../icons';
 import {useNavigate} from 'react-router-dom';
 import {RouterPath} from '../../../routes';
@@ -15,15 +14,15 @@ interface ForgotPassword {
     emailId: string
 }
 
-const ForgotPassword: React.FC = () => {
+const ResendPWDResetLink: React.FC = () => {
 
     const navigate = useNavigate()
 
     const dispatch = useDispatch();
     let loading = useSelector((state: RootState) => state.forgotPassword.isLoading);
 
-    const onClickSendLink = (obj:ForgotPassword):void => {
-        dispatch(forgotPasswordHandler(obj))
+    const onClickSendLink = ():void => {
+        // dispatch(forgotPasswordHandler(obj))
     }
 
     const routeToLogin = () => {
@@ -38,15 +37,21 @@ const ForgotPassword: React.FC = () => {
             <StyledIconContainer onClick={routeToLogin} >
                 <FeatierArrowLeft />
             </StyledIconContainer>
-            Forgot your password?
+            Check Your Email
             </StyledFormHeader>
             <StyledDescription>
-            Please enter your registered email address to reset the password
+            Please check the email address associated with the email address which you have 
+            mentioned for instructions to reset yout password.
             </StyledDescription>
-        <ForgotPasswordForm  onClickSendLink={onClickSendLink} />
+            <StyledResetLinkTitle>
+            Didn’t receive an email?
+            </StyledResetLinkTitle>
+            <StyledResendBtn onClick={onClickSendLink} >
+                Resend email
+            </StyledResendBtn>
         </StyledFormContainer>
         </AuthWraper>
     </StyledWrapper>
 }
 
-export default ForgotPassword
+export default ResendPWDResetLink
