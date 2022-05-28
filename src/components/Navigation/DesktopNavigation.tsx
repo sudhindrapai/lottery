@@ -29,6 +29,10 @@ const DesktopNavigation: React.FC = () => {
         window.location.reload();
     }
 
+    const redirectToView = (url:string) => {
+        navigate(url);
+    };
+
     let buttons = null;
     if (!accessToken) {
         buttons = <Button disabled={false} 
@@ -43,8 +47,8 @@ const DesktopNavigation: React.FC = () => {
     }
 
     let navView = navigationData.map((navObj):JSX.Element => {
-        let Item = navObj.isSelected ? SelectedNavItem : NavItem
-        return <Item>{navObj.label}</Item>
+        let Item = navObj.isSelected ? SelectedNavItem : NavItem;
+        return <Item key={navObj.key} onClick={() => {redirectToView(navObj.navRoute)}} >{navObj.label}</Item>
     });
 
     return<StyledDesktopNavContainer>

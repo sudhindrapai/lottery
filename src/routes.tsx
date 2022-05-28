@@ -14,6 +14,9 @@ import ResetPassword from './containers/Auth/ResetPassword/ResetPassword';
 import ResendPwdResetLink from './containers/Auth/ResendMail/ResendMail';
 import ForgotPassword from './containers/Auth/ForgotPassword/ForgotPassword';
 import Home from './containers/Home/home';
+import Lottery from './containers/Lotteries/Lotteries';
+import LotteryPayment from "./containers/LotteryPayment/LotteryPayment";
+import UrserProfile from './containers/UserProfile/UserProfile';
 
 import commingSoonImgUrl from '../src/commingSoon.png'
 const ComingSoonImg = () => {
@@ -29,6 +32,9 @@ export const RouterPath = {
   resetPassword: "/temp/account/reset-password",
   resendResetLink: "/temp/account/resend-pwd-reset-link",
   forgotPassword: "/temp/account/forgot-password",
+  lotteries: "/temp/lottery",
+  lotteryPaymentView: "/temp/lottery/payment",
+  userProfile:"/temp/userProfile",
   tempRoot: "/temp",
   root: "/",
   notFound: "*"
@@ -49,6 +55,9 @@ const AppRoutes = () => {
             <Route path={RouterPath.forgotPassword} element={<ForgotPassword />} />
             <Route path={RouterPath.tempRoot} element={rootComponent} />
             <Route path={RouterPath.root} element={<ComingSoonImg />} />
+            <Route path={RouterPath.lotteries} element={<Lottery />} />
+            <Route path={RouterPath.lotteryPaymentView} element={<LotteryPayment />} />
+            <Route path={RouterPath.userProfile} element={<UrserProfile />} />
             <Route path={RouterPath.notFound} element={<h2>404</h2>} />
       </Routes>
     )

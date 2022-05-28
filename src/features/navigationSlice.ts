@@ -18,13 +18,13 @@ let navigationState:NavigationState = {
         label: "Home",
         key: "home",
         navRoute:"/temp",
-        isSelected: true
+        isSelected: false
     },
     {
         label: "Lottery",
         key: "lottery",
         navRoute:"/temp/lottery",
-        isSelected: false
+        isSelected: true
     },
     {
         label: "Auction",

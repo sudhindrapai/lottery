@@ -7,6 +7,8 @@ import ResetPassword from '../features/resetPassword';
 import ForgotPassword from '../features/forgotPassword';
 import Notifcation from "../features/notificationSlice";
 import Navigation from "../features/navigationSlice";
+import Lotteries from '../features/lotteriesSlice';
+import ProfileSlide from '../features/userProfileSlice';
 
 const store = configureStore({
     reducer:{
@@ -17,7 +19,9 @@ const store = configureStore({
        resetPassword: ResetPassword,
        forgotPassword: ForgotPassword,
        notifcation:Notifcation,
-       navigation: Navigation
+       navigation: Navigation,
+       lotteries: Lotteries,
+       userProfile: ProfileSlide
     }
 })
 

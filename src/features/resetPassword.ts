@@ -44,8 +44,12 @@ export const resetPasswordHandler = createAsyncThunk(
         let publicUserId = getLocalStorage(localStorageActiontype.GET_PUBLIC_USER_ID);
 
         await fetch(`${endpoint.resetPassword}/${publicUserId}`, {
-            method: 'POST',
+            method: 'PUT',
             body: JSON.stringify(payloadObj),
+            headers:{
+                Authorization: `Bearer ${getLocalStorage(localStorageActiontype.GET_ACCESS_TOKEN)}`,
+                "Content-type": "application/json; charset=UTF-8",
+            }
         })
         .then((response) => {
             response.json();

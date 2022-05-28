@@ -49,6 +49,7 @@ export const updatePasswordHandler = createAsyncThunk(
             method: 'POST',
             body: JSON.stringify(payloadObj),
             headers:{
+                Authorization: `Bearer ${getLocalStorage(localStorageActionTypes.GET_ACCESS_TOKEN)}`,
                 "Content-type": "application/json; charset=UTF-8",
             }
         })

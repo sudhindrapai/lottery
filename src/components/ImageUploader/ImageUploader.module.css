@@ -1,0 +1,47 @@
+.Container {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.ImgContainer {
+  background-color: var(--color-border);
+  position: relative;
+}
+
+.DeleteIcon {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  padding: 2px;
+  color: var(--color-red);
+  border-left: 1px solid var(--color-red);
+  border-bottom: 1px solid var(--color-red);
+  border-bottom-left-radius: 4px;
+  cursor: pointer;
+  background-color: var(--color-wite);
+}
+
+.ImgContainer img {
+  height: 120px;
+  width: 120px;
+  object-fit: contain;
+  border: 1px solid var(--color-border);
+}
+
+.UploadIcon {
+  width: 120px;
+  height: 120px;
+  box-sizing: border-box;
+  background-color: var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-36px);
+  cursor: pointer;
+}
+
+.LoaderImg {
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  height: 45px;
+}

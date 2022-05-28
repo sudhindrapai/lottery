@@ -22,25 +22,6 @@ interface ProfileProps{
     onUpdateProfile(obj:UpdateProfileObj):void
 }
 
-// {
-//     elementType:FormElementType.datePicker,
-//     value: "",
-//     id:"dob",
-//     isRequired:true,
-//     fullWidth: true,
-//     isCustomValidationRequred: false,
-//     inputVariant: InputVariant.outlined,
-//     inputType: InputTypes.text,
-//     customValidationType: customValidationType.null,
-//     isValidInput:false,
-//     isTouched:false,
-//     errorMessage:"",
-//     label:"Date of Birth",
-//     radioGroupValues:[],
-//     isPasswordHidden:true,
-//     dobDate: new Date()
-// },
-
 const signinFormInitalState: SigninFormState = {
     form:[
         {

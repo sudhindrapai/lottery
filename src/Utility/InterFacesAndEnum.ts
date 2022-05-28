@@ -60,7 +60,7 @@ export interface RadioItem {
 
 export interface FormElement {
     elementType: FormElementType,
-    value: string,
+    value: any,
     id: string,
     isRequired: boolean,
     fullWidth: boolean,

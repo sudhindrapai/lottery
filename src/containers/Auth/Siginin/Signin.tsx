@@ -5,6 +5,7 @@ import SigninForm from '../../Forms/Login/Login';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../app/store';
 import { createLogin, toggleLogin } from '../../../features/loginSlice';
+import {getUserProfileDetail} from '../../../features/userProfileSlice';
 import { useNavigate } from "react-router-dom";
 
 import {RouterPath} from '../../../routes';
@@ -13,8 +14,8 @@ import AuthWrapper from '../AuthWrapper/AuthWrapper';
 import LoginImg from '../../../assets/loginCupImg.png'
 
 interface SigninAccount {
-    email: string,
-    password: string
+    emailId: string,
+    password: string,
 }
 
 const Login:FC = () => {
@@ -25,6 +26,7 @@ const Login:FC = () => {
 
     let loadingState = useSelector((state:RootState) => state.login.isLoading);
     let isLoggedIn = useSelector((state:RootState) => state.login.isLoggedin);
+    let isAuthenticated = useSelector((state: RootState) => state.login.isAuthenticated)
 
     const signinHandler = (obj:SigninAccount):void => {
         dispatch(createLogin(obj))
@@ -40,11 +42,17 @@ const Login:FC = () => {
 
     useEffect(() => {
         if (isLoggedIn) {
-            navigate("/temp");
+            dispatch(getUserProfileDetail());
+            if (isAuthenticated) {
+                navigate(RouterPath.userProfile);
+            } else if (isAuthenticated === false) {
+                navigate(RouterPath.twoFA);
+            }
         } 
         return () => {
             dispatch(toggleLogin({
-                isLoggedin: false
+                isLoggedin: false,
+                isAuthenticated: false
             }));
         } 
     }, [isLoggedIn]);

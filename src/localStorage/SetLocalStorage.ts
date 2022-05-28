@@ -26,6 +26,12 @@ const clearLoginDetails = () => {
     }
 };
 
+const setUserDetail = (value:any) => {
+    if (typeof Storage !== "undefined") {
+        localStorage.setItem("USER_DETAIL",JSON.stringify(value));
+    }
+}
+
 export const setLocalStorage = (type:string, value:any) => {
     switch(type){
         case localStorageActionTypes.SET_ACCESS_REFRESH_TOKEN:
@@ -37,6 +43,9 @@ export const setLocalStorage = (type:string, value:any) => {
         case localStorageActionTypes.CLEAR_LOGIN_USER_DETAIL:
             clearLoginDetails();
             break;
+            case localStorageActionTypes.SET_USER_DETAILS:
+            setUserDetail(value);
+            break
         default: 
         return null;
     }

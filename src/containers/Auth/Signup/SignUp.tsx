@@ -11,7 +11,7 @@ import {RouterPath} from '../../../routes';
 
 import {StyledWrapper, StyledFormContainer, StyledFormHeader, StyledIconContainer} from './StylesSignup';
 
-import RegImgUrl from '../../../assets/registerImg.png';
+import RegImgUrl from '../../../assets/regImage.png';
 
 interface CreateAccount {
     emailId: string,

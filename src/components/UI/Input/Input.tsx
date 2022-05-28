@@ -31,6 +31,7 @@ interface InputProps {
 
 const Input: React.FC <InputProps> = ({type, variant, label, value, name, required, fullWidth, handleInputChange, error, helperText}) => {
     return <TextField 
+    InputLabelProps={{ shrink: true }}
     autoComplete="off"
     required={required}
     type={type} 

@@ -11,8 +11,9 @@ interface SigninFormState {
 }
 
 interface SigninAccount {
-    email: string,
-    password: string
+    emailId: string,
+    password: string,
+    rememberMe: boolean
 }
 
 interface SigninProps {
@@ -76,18 +77,18 @@ const SigninForm:React.FC<SigninProps> = ({onClickSignin, onClickForgotPassword,
         event.preventDefault()
         let isValidForm = validateForm(values.form);
         let createSignin:SigninAccount = {
-            email: "",
-            password: ""
+            emailId: "",
+            password: "",
+            rememberMe: false
         };
         for (let element of values.form){
-            createSignin["email"] = element.id === "email"?element.value: createSignin.email;
-            createSignin["password"] = element.id === "password"? element.value : createSignin.password
+            createSignin["emailId"] = element.id === "email"?element.value: createSignin.emailId;
+            createSignin["password"] = element.id === "password"? element.value : createSignin.password;
+            createSignin["rememberMe"] = true;
         }
 
         onClickSignin(createSignin);
     }
-
-
 
     return <form name={"Customer Registration"} html-for={"customer resgistraion"} autoComplete="off">
                 <FormBuilder formElements={values.form} onInputChange = {handleInputChange}  />

@@ -8,7 +8,8 @@ import {setLocalStorage} from '../localStorage/SetLocalStorage';
 
 interface LoginState {
     isLoading: boolean,
-    isLoggedin: boolean
+    isLoggedin: boolean,
+    isAuthenticated: boolean
 }
 
 interface Loading {
@@ -16,16 +17,18 @@ interface Loading {
 }
 
 interface Login {
-    isLoggedin: boolean
+    isLoggedin: boolean,
+    isAuthenticated: boolean
 }
 
 const loginInitialState:LoginState = {
     isLoading: false,
-    isLoggedin: false
+    isLoggedin: false,
+    isAuthenticated: false
 }
 
 interface SigninAccount {
-    email: string,
+    emailId: string,
     password: string
 }
 
@@ -48,6 +51,8 @@ export const createLogin = createAsyncThunk(
             
         })
         .then((data) => {
+            if (data.statusCode === 200) {
+
             let responseObj = data.result;
             let publicUserId = responseObj.publicUserId;
             let tokenObj = {
@@ -58,21 +63,26 @@ export const createLogin = createAsyncThunk(
              setLocalStorage(localStorageActionType.SET_ACCESS_REFRESH_TOKEN, tokenObj);
              setLocalStorage(localStorageActionType.SET_PUBLIC_USER_ID, publicUserId);
             
-           
             dispatch(toggleLogin({
-                isLoggedin:true
+                isLoggedin:true,
+                isAuthenticated: responseObj.authenticated
             }));
-
-            console.log(data,"login data")
             
             dispatch(toggleNotificationVisibility({
                 isVisible: true,
                 status: NotificationType.success,
                 message: data.errorMsg
             }));
+        } else {
+            dispatch(toggleNotificationVisibility({
+                isVisible: true,
+                status: NotificationType.error,
+                message: data.errorMsg
+            }));
+        }
         })
         .catch((error) => {
-            console.log(error);
+            console.log(error,"error");
         })
         .finally(() => {
             dispatch(toggleLoading({
@@ -98,7 +108,8 @@ const loginSlice = createSlice({
         toggleLogin : (state, action: PayloadAction<Login>) => {
             return {
                 ...state,
-                isLoggedin: action.payload.isLoggedin
+                isLoggedin: action.payload.isLoggedin,
+                isAuthenticated: action.payload.isAuthenticated
             }
         }
     }

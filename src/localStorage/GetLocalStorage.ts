@@ -18,6 +18,13 @@ const getPublicUserId = () => {
     }
 }
 
+const getUserDetail = () => {
+    if (typeof Storage !== "undefined") {
+        let userDetailObj = localStorage.getItem("USER_DETAIL");
+        return JSON.parse(userDetailObj?userDetailObj:"{}");
+    }
+};
+
 export const getLocalStorage = (type: string) => {
     switch(type){
         case localStorageActionTypes.GET_ACCESS_TOKEN:
@@ -26,6 +33,8 @@ export const getLocalStorage = (type: string) => {
             return getRefreshToken();
         case localStorageActionTypes.GET_PUBLIC_USER_ID:
             return getPublicUserId();
+        case localStorageActionTypes.GET_USER_DETAILS:
+            return getUserDetail(); 
         default: 
         return null;
     }
