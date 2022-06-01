@@ -17,6 +17,7 @@ import Home from './containers/Home/home';
 import Lottery from './containers/Lotteries/Lotteries';
 import LotteryPayment from "./containers/LotteryPayment/LotteryPayment";
 import UrserProfile from './containers/UserProfile/UserProfile';
+import PaymentSuccess from './containers/LotteryPaymentSuccess/PaymentSuccess';
 
 import commingSoonImgUrl from '../src/commingSoon.png'
 const ComingSoonImg = () => {
@@ -34,6 +35,7 @@ export const RouterPath = {
   forgotPassword: "/temp/account/forgot-password",
   lotteries: "/temp/lottery",
   lotteryPaymentView: "/temp/lottery/payment",
+  lotteryPaymentSuccess: '/temp/lottery/payment-success',
   userProfile:"/temp/userProfile",
   tempRoot: "/temp",
   root: "/",
@@ -57,6 +59,7 @@ const AppRoutes = () => {
             <Route path={RouterPath.root} element={<ComingSoonImg />} />
             <Route path={RouterPath.lotteries} element={<Lottery />} />
             <Route path={RouterPath.lotteryPaymentView} element={<LotteryPayment />} />
+            <Route path={RouterPath.lotteryPaymentSuccess} element={<PaymentSuccess />} />
             <Route path={RouterPath.userProfile} element={<UrserProfile />} />
             <Route path={RouterPath.notFound} element={<h2>404</h2>} />
       </Routes>

@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, useState, useEffect} from 'react';
 import {ButtonSizeVariant, ButtonVariant, ButtonType} from '../../../Utility/InterFacesAndEnum';
 import Button from '../../../components/UI/Buttons/Button';
 import MobileImgSrc from '../../../assets/2FactorIcon.svg'
@@ -7,12 +7,16 @@ import {Container, About2FA, MobileImg, Details, Header, Subtitle, Divider, TwoF
 
 import {toggleTwoFA, verify2FAVerificationCode} from '../../../features/userProfileSlice';
 import {useSelector, useDispatch} from 'react-redux';
+import { RootState } from '../../../app/store';
+
 
 const TwoFa:FC = () => {
     const dispatch = useDispatch();
     const toggleModal = () => {
         setVisibility(!isVisible);
     }
+
+    let isVerified = useSelector((state:RootState) => state.userProfile.isTwoCodeVerified )
 
     const [isVisible, setVisibility] = useState(false);
 
@@ -24,8 +28,15 @@ const TwoFa:FC = () => {
 
     const verifyUserCode = (code:string) => {
         dispatch(verify2FAVerificationCode(code));
-        toggleModal();
+        
     }
+
+    useEffect(() => {
+        if (isVerified) {
+            toggleModal();
+        }
+    },[isVerified])
+
 
     return <Container>
         <TwoFAModal label={"two-step Authentication"} isVisible={isVisible} toggleModal={toggleModal} 

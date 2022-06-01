@@ -57,7 +57,7 @@ export const resetPasswordHandler = createAsyncThunk(
                 {
                     isPasswordUpdated: true
                 }
-            ))
+            ));
         })
         .catch((error) => {
             dispatch(updateErrorMessage({

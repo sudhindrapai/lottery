@@ -16,7 +16,7 @@ interface TwoFAFormState {
 }
 
 interface TwoFAProps {
-    onClickLogin(): void;
+    onClickLogin(code:string): void;
     onClickResendCode() : void
 }
 
@@ -65,7 +65,8 @@ const TwoFA:FC<TwoFAProps> = ({onClickLogin, onClickResendCode}) => {
     const onClickRestart = () => {};
 
     const handleFormSubmision = () => {
-        onClickLogin();
+        let enteredCode = values.form[0].value;
+        onClickLogin(enteredCode);
     }
 
     return <form name={"Customer Registration"} html-for={"customer resgistraion"} autoComplete="off">
@@ -84,7 +85,7 @@ const TwoFA:FC<TwoFAProps> = ({onClickLogin, onClickResendCode}) => {
                     fullWidth={true} 
                     size={ButtonSizeVariant.medium} 
                     variant={ButtonVariant.contained} 
-                    type={ButtonType.submit} 
+                    type={ButtonType.default} 
                     clicked={handleFormSubmision} >
                         Signin
                 </Button>

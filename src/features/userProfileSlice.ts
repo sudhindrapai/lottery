@@ -3,13 +3,17 @@ import * as endpoints from '../networkUtilities/endpoints'
 import * as localStorageActionType from '../localStorage/ActionTypes';
 import {getLocalStorage} from '../localStorage/GetLocalStorage';
 import {setLocalStorage} from '../localStorage/SetLocalStorage';
+import {toggleNotificationVisibility} from './notificationSlice';
+import {NotificationType} from '../Utility/InterFacesAndEnum';
 
 interface userProfile {
-    userDetail:[]
+    userDetail:[],
+    isTwoCodeVerified: boolean
 }
 
 const profileState:userProfile = {
-    userDetail:[]
+    userDetail:[],
+    isTwoCodeVerified: false
 }
 
 interface UpdateAddressForm {
@@ -67,6 +71,13 @@ export const getUserProfileDetail = createAsyncThunk(
                 "pincCde": userObj.pinCode,
                 "using2FA": userObj.using2FA
             };
+
+            dispatch(toggleNotificationVisibility({
+                isVisible: true,
+                status: NotificationType.success,
+                message: data.errorMsg
+            }));
+
             setLocalStorage(localStorageActionType.SET_USER_DETAILS, JSON.stringify(localStorageObj))
         })
     }
@@ -108,6 +119,13 @@ export const updatePersonalDetails = createAsyncThunk(
                 "using2FA": userObj.using2FA
             };
             setLocalStorage(localStorageActionType.SET_USER_DETAILS, JSON.stringify(localStorageObj));
+
+            dispatch(toggleNotificationVisibility({
+                isVisible: true,
+                status: NotificationType.success,
+                message: data.errorMsg
+            }));
+
         })
     }
 );
@@ -142,6 +160,11 @@ export const updateAddress = createAsyncThunk(
                 "using2FA": userObj.using2FA
             };
             setLocalStorage(localStorageActionType.SET_USER_DETAILS, JSON.stringify(localStorageObj));
+            dispatch(toggleNotificationVisibility({
+                isVisible: true,
+                status: NotificationType.success,
+                message: data.errorMsg
+            }));
         })
     }
 );
@@ -161,7 +184,11 @@ export const toggleTwoFA = createAsyncThunk(
             return response.json()
         })
         .then((data) => {
-            console.log(data)
+            dispatch(toggleNotificationVisibility({
+                isVisible: true,
+                status: NotificationType.success,
+                message: data.errorMsg
+            }));
         })
     }
 );
@@ -177,8 +204,36 @@ export const verify2FAVerificationCode = createAsyncThunk (
                 "Content-type": "application/json; charset=UTF-8",
             }
         })
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            if (data.statusCode === 200) {
+                dispatch(toggleNotificationVisibility({
+                    isVisible: true,
+                    status: NotificationType.success,
+                    message: "Code verified successfully"
+                }));
+                dispatch(toggleTwoFAVerified({
+                    isVerified: true
+                }));
+                let userDetail = JSON.parse(getLocalStorage(localStorageActionType.GET_USER_DETAILS));
+                
+            } else {
+                dispatch(toggleNotificationVisibility({
+                    isVisible: true,
+                    status: NotificationType.error,
+                    message: data.errorMsg
+                }));
+            }
+            
+        })
     }
 );
+
+interface TwoFAVerified {
+    isVerified: boolean
+}
 
 const profileSlice = createSlice({
     name: 'userProfile',
@@ -188,9 +243,15 @@ const profileSlice = createSlice({
             return{
                 ...state
             }
+        },
+        toggleTwoFAVerified: (state, action:PayloadAction<TwoFAVerified>) => {
+            return{
+                ...state,
+                isTwoCodeVerified: action.payload.isVerified
+            }
         }
     }
 });
 
-export const {} = profileSlice.actions;
+export const {toggleTwoFAVerified} = profileSlice.actions;
 export default profileSlice.reducer

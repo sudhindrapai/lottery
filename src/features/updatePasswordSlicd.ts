@@ -5,6 +5,9 @@ import { toggleIsProfileUpdate } from './profileSlice';
 import * as localStorageActionTypes from '../localStorage/ActionTypes';
 import {getLocalStorage} from '../localStorage/GetLocalStorage';
 
+import {toggleNotificationVisibility} from './notificationSlice';
+import {NotificationType} from '../Utility/InterFacesAndEnum';
+
 interface UpdatePasswordState{
     isPasswordUpdated:boolean,
     isLoading:boolean,
@@ -54,10 +57,26 @@ export const updatePasswordHandler = createAsyncThunk(
             }
         })
         .then((response) => {
-            response.json();
-            dispatch(toggleIsProfileUpdate({
-                isUpdated: true
-            }))
+            return response.json();
+        })
+        .then((data) => {
+            if (data.statusCode === 200) {
+                dispatch(toggleIsProfileUpdate({
+                    isUpdated: true
+                }));
+                dispatch(toggleNotificationVisibility({
+                    isVisible: true,
+                    status: NotificationType.success,
+                    message: data.errorMsg
+                }));
+            } else {
+                dispatch(toggleNotificationVisibility({
+                    isVisible: true,
+                    status: NotificationType.error,
+                    message: data.errorMsg
+                }));
+            }
+           
         })
         .catch(() => {
             dispatch(updateErrorMessage({

@@ -4,6 +4,7 @@ const baseUrl ="http://192.169.179.206:9092"
 
 export const register = `${baseUrl}/kingsrings/auth/signup`; /* Metod: POST */
 export const login = `${baseUrl}/kingsrings/auth/login`; /** Method: POST */
+export const verifySignin2FA = `${baseUrl}/kingsrings/auth/verify`;
 export const updatePassword = `${baseUrl}/kingsrings/api/v1/user/changepassword`; /** /{publicUserId}; Method: POST */
 export const forgotPassword = `${baseUrl}/kingsrings/auth/forgotpwd`; /** Method: POST */
 export const resetPassword = `${baseUrl}/kingsrings/api/v1/user/resetpwd`; /** /{{publicUserId}} Method: POST */

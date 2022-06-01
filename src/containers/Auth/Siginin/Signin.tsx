@@ -42,8 +42,8 @@ const Login:FC = () => {
 
     useEffect(() => {
         if (isLoggedIn) {
-            dispatch(getUserProfileDetail());
             if (isAuthenticated) {
+                dispatch(getUserProfileDetail());
                 navigate(RouterPath.userProfile);
             } else if (isAuthenticated === false) {
                 navigate(RouterPath.twoFA);

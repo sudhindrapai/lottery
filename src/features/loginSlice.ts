@@ -2,6 +2,7 @@ import * as endPoint from '../networkUtilities/endpoints';
 import {createSlice, PayloadAction, createAsyncThunk} from '@reduxjs/toolkit';
 import {NotificationType} from '../Utility/InterFacesAndEnum';
 import {toggleNotificationVisibility} from './notificationSlice';
+import {getLocalStorage} from '../localStorage/GetLocalStorage';
 
 import * as localStorageActionType from '../localStorage/ActionTypes';
 import {setLocalStorage} from '../localStorage/SetLocalStorage';
@@ -9,7 +10,7 @@ import {setLocalStorage} from '../localStorage/SetLocalStorage';
 interface LoginState {
     isLoading: boolean,
     isLoggedin: boolean,
-    isAuthenticated: boolean
+    isAuthenticated: boolean,
 }
 
 interface Loading {
@@ -90,7 +91,62 @@ export const createLogin = createAsyncThunk(
             }));
         })
     }
-)
+);
+
+export const verify2FACode = createAsyncThunk(
+    'verify 2FA code',
+    async (payload: string, {dispatch}) => {
+        console.log(payload,'payload')
+        
+        await fetch(endPoint.verifySignin2FA, {
+            method: 'POST',
+            body: payload,
+            headers:{
+                Authorization: `Bearer ${getLocalStorage(localStorageActionType.GET_ACCESS_TOKEN)}`,
+                "Content-type": "application/json; charset=UTF-8",
+            }
+        })
+        .then((response) => {
+            return response.json()
+        })
+        .then((data) => {
+            if (data.statusCode === 200) {
+
+                let responseObj = data.result;
+            let publicUserId = responseObj.publicUserId;
+
+            let refreshToken = getLocalStorage(localStorageActionType.GET_REFRESH_TOKEN);
+
+            let tokenObj = {
+                accessToken: responseObj.accessToken,
+                refreshToken: refreshToken
+            }
+
+            setLocalStorage(localStorageActionType.SET_ACCESS_REFRESH_TOKEN, tokenObj);
+             setLocalStorage(localStorageActionType.SET_PUBLIC_USER_ID, publicUserId);
+
+            dispatch(toggleLogin({
+                isAuthenticated: true,
+                isLoggedin: true
+            }));
+            dispatch(toggleNotificationVisibility({
+                isVisible: true,
+                status: NotificationType.success,
+                message: data.errorMsg
+            }));
+            } else {
+                dispatch(toggleNotificationVisibility({
+                    isVisible: true,
+                    status: NotificationType.error,
+                    message: data.errorMsg
+                }));
+            }
+        })
+        .catch((error) => {
+            console.log(error,"error")
+        })
+    }
+);
 
 const loginSlice = createSlice({
     name: 'login',

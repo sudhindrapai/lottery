@@ -18,4 +18,5 @@ position: fixed;
     text-transform: capitalize;
     transition: transform .2s ease-out;
     transform: translateX(${(props:NotificationContainerProps) => props.visibility === true ? 0 : "-100%" });
+    z-index: 1;
 `;
