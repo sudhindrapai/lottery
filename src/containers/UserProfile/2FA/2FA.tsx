@@ -9,6 +9,8 @@ import {toggleTwoFA, verify2FAVerificationCode} from '../../../features/userProf
 import {useSelector, useDispatch} from 'react-redux';
 import { RootState } from '../../../app/store';
 
+import * as localStorageAction from '../../../localStorage/ActionTypes';
+import {getLocalStorage} from '../../../localStorage/GetLocalStorage';
 
 const TwoFa:FC = () => {
     const dispatch = useDispatch();
@@ -19,11 +21,14 @@ const TwoFa:FC = () => {
     let isVerified = useSelector((state:RootState) => state.userProfile.isTwoCodeVerified )
 
     const [isVisible, setVisibility] = useState(false);
-
+    const [isEnabled, setStatus] = useState<boolean|null>(null);
 
     const toggleUser2FA = () => {
         dispatch(toggleTwoFA());
-        toggleModal();
+        if (isEnabled === false) {
+            toggleModal();
+            setStatus(false);
+        }
     }
 
     const verifyUserCode = (code:string) => {
@@ -35,7 +40,11 @@ const TwoFa:FC = () => {
         if (isVerified) {
             toggleModal();
         }
-    },[isVerified])
+        if (isEnabled === null) {
+            let data = getLocalStorage(localStorageAction.GET_TWO_FA_STATUS);
+            setStatus(data === true);
+        }
+    },[isVerified]);
 
 
     return <Container>
@@ -73,7 +82,7 @@ const TwoFa:FC = () => {
         variant={ButtonVariant.contained} 
         type={ButtonType.submit} 
         clicked={toggleUser2FA} >
-            TURN ON TWO-STEP
+            {isEnabled ? "TURN OFF TWO-STEP": "TURN ON TWO-STEP"}
     </Button>
             </Details>
         </About2FA>

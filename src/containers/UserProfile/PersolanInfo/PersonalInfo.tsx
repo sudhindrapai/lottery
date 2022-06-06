@@ -155,14 +155,14 @@ const PersonalInfo:FC = () => {
         dispatch(updatePersonalDetails(updateProfileObj));
     }
 
-    const uploadProfileImage = (fileObj:any) => {
+    const onSelectProfileImage = (fileObj:any) => {
         console.log(fileObj,'fileObj')
         dispatch(uploadProfileImage(fileObj));
     }
 
     return <form name={"Customer Registration"} html-for={"customer resgistraion"} autoComplete="off">
         <Container>
-        <ImageUploader url={""} onSelectImage={uploadProfileImage} />
+        <ImageUploader url={""} onSelectImage={onSelectProfileImage} />
         <FormSection>
     <FormBuilder formElements={values.form} onInputChange = {handleInputChange} onDateSelect={() => {}}  />
     <Button 

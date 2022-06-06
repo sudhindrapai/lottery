@@ -37,8 +37,8 @@ export const getLotteries = createAsyncThunk(
     async (reques, {dispatch}) => {
         await fetch (endpoints.getLotteryList,{
             method: 'GET',
-            headers: {
-                Authentication: `Bearer ${getLocalStorage(localStorageActionType.GET_ACCESS_TOKEN)}`,
+            headers:{
+                Authorization: `Bearer ${getLocalStorage(localStorageActionType.GET_ACCESS_TOKEN)}`,
                 "Content-type": "application/json; charset=UTF-8",
             }
         })
@@ -46,15 +46,20 @@ export const getLotteries = createAsyncThunk(
             return response.json()
         })
         .then((data) => {
-            console.log(data);
-            dispatch(setLotteryResponse({
-                lotteriesList: data.result
-            }));
-            dispatch(toggleNotificationVisibility({
-                isVisible: true,
-                status: NotificationType.success,
-                message: data.errorMsg
-            }))
+            if (data.statusCode === 504) {
+                dispatch(setLotteryResponse({
+                    lotteriesList: []
+                }));
+            } else if (data.statusCode === 200) {
+                dispatch(setLotteryResponse({
+                    lotteriesList: data.result
+                }));
+                dispatch(toggleNotificationVisibility({
+                    isVisible: true,
+                    status: NotificationType.success,
+                    message: data.errorMsg
+                }));
+            }
         })
         .catch((error) => {
             dispatch(toggleNotificationVisibility({

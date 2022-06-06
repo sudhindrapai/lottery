@@ -58,7 +58,7 @@ export const getUserProfileDetail = createAsyncThunk(
         })
         .then((data) => {
             let userObj = data?.result;
-            console.log(userObj,"user detail");
+            console.log(userObj,"user detail 1111");
             let localStorageObj = {
                 "firstName": userObj.firstName,
                 "lastName": userObj.lastName,
@@ -71,6 +71,8 @@ export const getUserProfileDetail = createAsyncThunk(
                 "pincCde": userObj.pinCode,
                 "using2FA": userObj.using2FA
             };
+
+            setLocalStorage(localStorageActionType.SET_TWO_FA_STATUS, userObj.using2FA.toString());
 
             dispatch(toggleNotificationVisibility({
                 isVisible: true,
@@ -119,7 +121,7 @@ export const updatePersonalDetails = createAsyncThunk(
                 "using2FA": userObj.using2FA
             };
             setLocalStorage(localStorageActionType.SET_USER_DETAILS, JSON.stringify(localStorageObj));
-
+            setLocalStorage(localStorageActionType.SET_TWO_FA_STATUS, userObj.using2FA);
             dispatch(toggleNotificationVisibility({
                 isVisible: true,
                 status: NotificationType.success,
@@ -160,6 +162,7 @@ export const updateAddress = createAsyncThunk(
                 "using2FA": userObj.using2FA
             };
             setLocalStorage(localStorageActionType.SET_USER_DETAILS, JSON.stringify(localStorageObj));
+            setLocalStorage(localStorageActionType.SET_TWO_FA_STATUS, userObj.using2FA);
             dispatch(toggleNotificationVisibility({
                 isVisible: true,
                 status: NotificationType.success,
@@ -217,7 +220,8 @@ export const verify2FAVerificationCode = createAsyncThunk (
                 dispatch(toggleTwoFAVerified({
                     isVerified: true
                 }));
-                let userDetail = JSON.parse(getLocalStorage(localStorageActionType.GET_USER_DETAILS));
+                let userObj = JSON.parse(getLocalStorage(localStorageActionType.GET_USER_DETAILS));
+                setLocalStorage(localStorageActionType.GET_TWO_FA_STATUS, true);
                 
             } else {
                 dispatch(toggleNotificationVisibility({

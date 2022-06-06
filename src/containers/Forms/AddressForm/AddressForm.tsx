@@ -1,13 +1,9 @@
-import {FC, useState} from 'react';
-import Modal from '@mui/material/Modal';
-
-import {ModalHeader, Title, CloseIcon, ModalBody} from '../BuyTicketModal/StyledBuyTicketsModal'
-import {ModalBox, ActionBtn} from './StyledAddAddressModal'
-
-import FormBuilder from '../../../containers/FormBuilder/FormBuilder';
-import {updateFormInputState, validateForm} from '../../../Utility/Utility';
-import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement, ButtonSizeVariant, ButtonVariant, ButtonType} from '../../../Utility/InterFacesAndEnum';
+import React, {useState, FC, Fragment} from 'react';
+import FormBuilder from '../../FormBuilder/FormBuilder';
 import Button from '../../../components/UI/Buttons/Button';
+import {updateFormInputState, validateForm} from '../../../Utility/Utility';
+import {ActionBtn} from './StyledAddAddressForm';
+import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement, ButtonSizeVariant, ButtonVariant, ButtonType} from '../../../Utility/InterFacesAndEnum';
 
 interface AddAddress {
     form: FormElement[],
@@ -21,11 +17,8 @@ interface UpdateAddressForm {
     pinCode:string
 }
 
-interface AddAddressProps {
-    label: string,
-    isVisible: boolean,
-    toggleModal():void,
-    onUpdateAddress(addressObj:UpdateAddressForm):void
+interface AddAddressProps{
+    onUpdateAddress(obj:UpdateAddressForm):void
 }
 
 const AddAddressState: AddAddress = {
@@ -102,10 +95,7 @@ const AddAddressState: AddAddress = {
     isValidForm: true
 }
 
-const AddAddressModal:FC<AddAddressProps> = (props) => {
-
-    const {isVisible, label, toggleModal, onUpdateAddress} = props;
-
+const AddressForm:FC<AddAddressProps> = ({onUpdateAddress}) => {
 
     const [values, setValues] = useState<AddAddress>(AddAddressState);
 
@@ -146,32 +136,20 @@ const AddAddressModal:FC<AddAddressProps> = (props) => {
         onUpdateAddress(updateAddressObj);
     }
 
-    return <Modal open={isVisible} onClose={toggleModal}
-    aria-labelledby={label}
-    aria-describedby={label}>
-        <ModalBox>
-            <ModalHeader>
-                <Title>
-                    {label}
-                </Title>
-                <CloseIcon onClick={toggleModal}  />
-            </ModalHeader>
-            <ModalBody>
-            <FormBuilder formElements={values.form} onInputChange = {handleInputChange}  />
-                <ActionBtn>
-                <Button 
-                    disabled={false} 
-                    fullWidth={true} 
-                    size={ButtonSizeVariant.large} 
-                    variant={ButtonVariant.contained} 
-                    type={ButtonType.submit} 
-                    clicked={handleFormSubmision} >
-                        Save
-                </Button>
-                </ActionBtn>
-            </ModalBody>
-        </ModalBox>
-    </Modal>
-};
+    return <Fragment> 
+        <FormBuilder formElements={values.form} onInputChange = {handleInputChange}  />
+    <ActionBtn>
+    <Button 
+        disabled={false} 
+        fullWidth={true} 
+        size={ButtonSizeVariant.large} 
+        variant={ButtonVariant.contained} 
+        type={ButtonType.submit} 
+        clicked={handleFormSubmision} >
+            Save
+    </Button>
+    </ActionBtn>
+    </Fragment>
+}
 
-export default AddAddressModal
+export default AddressForm

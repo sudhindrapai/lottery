@@ -59,7 +59,7 @@ const TwoFA:FC = () => {
                    <Styled2FAIcon>
                        <img src={TwoFAIcon} alt={"2FA mobile"} />
                    </Styled2FAIcon>
-               A text Message with your code has been sent to +91 ********03
+               A Message with your code has been sent to your registered email id
                    </StyledSmsDetail>  
     <TwoFAForm onClickLogin={onCliclLogin} onClickResendCode={onClickResend2FA} />
     </StyledFormContainer>

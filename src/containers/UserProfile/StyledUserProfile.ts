@@ -8,6 +8,7 @@ export const Wrapper = styled.div`
 width: 100%;
 box-sizing: border-box;
 position: relative;
+height: 98vh;
 `;
 
 export const Viewheader = styled.div`
@@ -26,7 +27,7 @@ width: 100%;
 box-sizing: border-box;
 padding: 50px;
 position: absolute;
-top: 57%;
+top: 20%;
 `;
 
 export const ProfileContainer = styled.div`

@@ -2,6 +2,9 @@ import {FC, useRef} from 'react';
 import {Container, ProfileImage, UpdateImageText} from './StyledImageUploader';
 import ProfileAvtarUrl from '../../assets/profileavtar.webp'
 
+import * as localStorageActioinType from '../../localStorage/ActionTypes';
+import {getLocalStorage} from '../../localStorage/GetLocalStorage';
+
 interface ImageUploaderProps {
     url:string,
     onSelectImage(obj: any):any
@@ -12,7 +15,8 @@ const CustomImageUploader:FC<ImageUploaderProps> = (props) => {
     let fileInputRef = useRef<HTMLInputElement>(null);
 
     const createUploadFileObj = (event:any) => {
-        uploadFile(event.target.files)
+        uploadFile(event.target.files[0]);
+
     }
 
     const clickOnInput = () => {
@@ -20,20 +24,22 @@ const CustomImageUploader:FC<ImageUploaderProps> = (props) => {
       };
 
     const uploadFile = (files:any) => {
-        const data = new FormData();
+        
     
-        let productimages = [];
-        for (let i = 0; i < files.length; i++) {
-          productimages.push(files[i]);
-          let fileObj = files[i];
-          if (fileObj !== undefined) {
-            let updatedFileName = fileObj.name.split(" ").join("_");
-            data.append(updatedFileName, fileObj, updatedFileName);
-          }
-        }
-        data.append("file", data as unknown as Blob);
+        // let productimages = [];
+        // for (let i = 0; i < files.length; i++) {
+        //   productimages.push(files[i]);
+        //   let fileObj = files[i];
+        //   if (fileObj !== undefined) {
+        //     let updatedFileName = fileObj.name.split(" ").join("_");
+        //     data.append(updatedFileName, fileObj, updatedFileName);
+        //   }
+        // }
+        const formData = new FormData();
+        formData.append("image", files);
+        formData.append('publicUserId', getLocalStorage(localStorageActioinType.GET_PUBLIC_USER_ID));
     // Fixme
-    onSelectImage(data)
+    onSelectImage(formData)
       }
 
     return <Container>

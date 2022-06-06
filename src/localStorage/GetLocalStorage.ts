@@ -25,6 +25,12 @@ const getUserDetail = () => {
     }
 };
 
+const getTwoFaStatus = () => {
+    if (typeof Storage !== "undefined") {
+        return localStorage.getItem("IS_TWO_FA_ENABLED");
+    }
+};
+
 export const getLocalStorage = (type: string) => {
     switch(type){
         case localStorageActionTypes.GET_ACCESS_TOKEN:
@@ -35,6 +41,8 @@ export const getLocalStorage = (type: string) => {
             return getPublicUserId();
         case localStorageActionTypes.GET_USER_DETAILS:
             return getUserDetail(); 
+        case localStorageActionTypes.GET_TWO_FA_STATUS:
+            return getTwoFaStatus();
         default: 
         return null;
     }

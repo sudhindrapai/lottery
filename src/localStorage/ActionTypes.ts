@@ -1,12 +1,14 @@
 export const SET_ACCESS_REFRESH_TOKEN = "SET_ACCESS_REFRESH_TOKEN";
 export const SET_PUBLIC_USER_ID = "SET_PUBLIC_USER_ID";
 export const SET_USER_DETAILS = 'SET_USER_DETAILS';
+export const SET_TWO_FA_STATUS = 'SET_TWO_FA_STATUS';
 
 // action types for get
 export const GET_ACCESS_TOKEN = "GET_ACCESS_TOKEN";
 export const GET_REFRESH_TOKEN = "GET_REFRESH_TOKEN";
 export const GET_PUBLIC_USER_ID = "GET_PUBLIC_USER_ID";
 export const GET_USER_DETAILS = 'GET_USER_DETAILS';
+export const GET_TWO_FA_STATUS = 'GET_TWO_FA_STATUS';
 
 // actiontypes form remove
 export const CLEAR_LOGIN_USER_DETAIL = "CLEAR_LOGIN_USER_DETAIL";

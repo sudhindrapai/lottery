@@ -1,9 +1,9 @@
 import {FC, useState} from 'react';
-import {Container,ToggleModalBtn, AddCircleIconIcon} from './StyledAddress';
+import {Container} from './StyledAddress';
 
-import AddAddressModal from '../../../components/Modals/AddAddressModal/AddAddressModal';
+import AddressForm from '../../Forms/AddressForm/AddressForm';
 
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {updateAddress} from '../../../features/userProfileSlice';
 
 interface UpdateAddressForm {
@@ -19,20 +19,12 @@ const AddressComponent:FC = () => {
 
     const [isVisible, setModalVisibility] = useState(false);
 
-    const ToggleModalVisibility = () => {
-        setModalVisibility(!isVisible)
-    };
-
     const addNewAddress = (addressObj:UpdateAddressForm) => {
         dispatch(updateAddress(addressObj));
     }
 
     return <Container>
-        <AddAddressModal isVisible={isVisible} label={"Add Address"} 
-        toggleModal={ToggleModalVisibility} onUpdateAddress={addNewAddress} />
-        <ToggleModalBtn onClick={ToggleModalVisibility}>
-            <AddCircleIconIcon />
-        </ToggleModalBtn>
+        <AddressForm onUpdateAddress={addNewAddress} />
     </Container>
 }
 export default AddressComponent

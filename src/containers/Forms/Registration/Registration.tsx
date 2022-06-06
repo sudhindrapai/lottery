@@ -3,7 +3,8 @@ import FormBuilder from '../../FormBuilder/FormBuilder';
 import Button from '../../../components/UI/Buttons/Button';
 import {updateFormInputState, validateForm} from '../../../Utility/Utility';
 import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement, ButtonSizeVariant, ButtonVariant, ButtonType} from '../../../Utility/InterFacesAndEnum';
-import {LoginAccountContainer,LoginAccountOption} from './StyledReg'
+import {LoginAccountContainer,LoginAccountOption,TermsConditionContainer, EmptyCheckbox,
+     SelectedCheckbox, TermsText} from './StyledReg'
 
 interface RegFormState {
     form: FormElement[],
@@ -117,6 +118,8 @@ const RegistrationForm:React.FC<RegistrationProps> = ({onRegister, onSelectLogin
 
     const [values, setValues] = useState<RegFormState>(registrationFormInitalState);
 
+    const [isAgreed, setAgreeState] = useState<boolean>(false) 
+
     const handleInputChange = (event:React.ChangeEvent <HTMLTextAreaElement | HTMLInputElement>):void => {
         let updatedStateArray = updateFormInputState(event, values.form)
         setValues({
@@ -144,8 +147,18 @@ const RegistrationForm:React.FC<RegistrationProps> = ({onRegister, onSelectLogin
         onRegister(createRegMethod);
     }
 
+    const toggleAgreeState = () => {
+        setAgreeState(!isAgreed);
+    }
+
     return <form name={"Customer Registration"} html-for={"customer resgistraion"} autoComplete="off">
                 <FormBuilder formElements={values.form} onInputChange = {handleInputChange}  />
+                <TermsConditionContainer >
+                    {isAgreed ? <SelectedCheckbox onClick={toggleAgreeState} /> : <EmptyCheckbox onClick={toggleAgreeState} />}
+                    <TermsText>
+                    Agree to <span>terms and conditions</span>
+                    </TermsText>
+                </TermsConditionContainer>
                 <Button 
                     disabled={false} 
                     fullWidth={true}  
@@ -153,7 +166,7 @@ const RegistrationForm:React.FC<RegistrationProps> = ({onRegister, onSelectLogin
                     variant={ButtonVariant.contained} 
                     type={ButtonType.submit} 
                     clicked={handleFormSubmision}>
-                    Submit
+                    Create
                 </Button>
                 <LoginAccountContainer>
                     Already have an account?

@@ -37,7 +37,7 @@ export const RouterPath = {
   lotteryPaymentView: "/temp/lottery/payment",
   lotteryPaymentSuccess: '/temp/lottery/payment-success',
   userProfile:"/temp/userProfile",
-  tempRoot: "/temp",
+  tempRoot: "/",
   root: "/",
   notFound: "*"
 };
