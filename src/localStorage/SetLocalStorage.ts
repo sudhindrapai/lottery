@@ -38,6 +38,18 @@ const setTwoFAStatus = (value:string) => {
     }
 }
 
+const setSelectedLotteryObj = (value:any) => {
+    if (typeof Storage !== "undefined") {
+        localStorage.setItem("SELECTED_LOTTERY_OBJ", JSON.stringify(value));
+    }
+};
+
+const setTicketDetailObj = (value: any) => {
+    if (typeof Storage !== "undefined") {
+        localStorage.setItem("TICKET_DETAIL_OBJ",JSON.stringify(value));
+    }
+};
+
 export const setLocalStorage = (type:string, value:any) => {
     switch(type){
         case localStorageActionTypes.SET_ACCESS_REFRESH_TOKEN:
@@ -54,6 +66,12 @@ export const setLocalStorage = (type:string, value:any) => {
             break;
         case localStorageActionTypes.SET_TWO_FA_STATUS:
             setTwoFAStatus(value);
+            break;
+        case localStorageActionTypes.SET_SELECTED_LOTTERY_OBJ:
+            setSelectedLotteryObj(value);
+            break;
+        case localStorageActionTypes.SET_TICKET_DETAIL_OBJ:
+            setTicketDetailObj(value);
             break;
         default: 
         return null;

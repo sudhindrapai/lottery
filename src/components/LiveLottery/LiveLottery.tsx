@@ -1,11 +1,13 @@
 import {FC} from 'react';
 import {ButtonSizeVariant, ButtonType, ButtonVariant} from '../../Utility/InterFacesAndEnum';
 import Button from '../UI/Buttons/Button';
+import {transformDate} from '../../Utility/Utility';
 
 import LotteryCoin from '../../assets/lotteryCoin.png';
 import EntryTicketIcon from '../../assets/Entry-ticket-icon.svg';
 import UserIcon from '../../assets/User-icon.svg';
 import WinnerIcn from '../../assets/Winner-icon.svg'
+import CountdownTimer from '../CountdownTimer/CountdownTimer';
 
 import {Wrapper, 
     Container, 
@@ -19,17 +21,19 @@ import {Wrapper,
     AuctionBtnSection, FooterSection, FooterOption,FooterTitle, FooterValue, LotterCoinImg, FooterImg} from './StyledLiveLottery';
 
 interface LiveLotteryPrice {
-    lotteryPrice: number,
-    lotteryEndTime: Date,
+    id:number,
+    lotteryType: string,
+    lotteryPrice: string | number,
+    lotteryEndTime: string,
     entryPrice: number,
     usersCound: number,
-    drawDate:Date,
+    drawDate:string,
     onSelectBuy(obj: any): void,
     onSelectGoldMembership(obj: any):void
 }
 
 const LiveLottery:FC<LiveLotteryPrice> = (props) => {
-    const {lotteryPrice, lotteryEndTime, entryPrice, usersCound, drawDate, onSelectBuy, onSelectGoldMembership} = props;
+    const {lotteryPrice, lotteryEndTime, entryPrice, usersCound, lotteryType,id, drawDate, onSelectBuy, onSelectGoldMembership} = props;
 
     const redirectToLogin = () => {};
 
@@ -42,19 +46,21 @@ const LiveLottery:FC<LiveLotteryPrice> = (props) => {
                 Lottery Price
             </PriceTitle>
             <LotteryPrice>
-            &#x24; {lotteryPrice}
+            {lotteryType === "M" && <span>&#x24;</span>} {lotteryPrice}
             </LotteryPrice>
             <EndSection>
                 <EndSectinTitle>
                 Hurry Lottery Ends On:
                 </EndSectinTitle>
-                <EndSectionTime>01 : 24 : 32 :22</EndSectionTime>
+                <EndSectionTime>
+                    <CountdownTimer timestamp={new Date(lotteryEndTime)} />
+                </EndSectionTime>
             </EndSection>
             <AuctionBtnSection>
             <Button disabled={false} 
         fullWidth={false} 
         variant={ButtonVariant.contained} 
-        type={ButtonType.default} size={ButtonSizeVariant.small} clicked={onSelectBuy} >
+        type={ButtonType.default} size={ButtonSizeVariant.small} clicked={() => {onSelectBuy(id)}} >
             BUY TICKETS
         </Button>
         <Button disabled={false} 
@@ -89,7 +95,7 @@ const LiveLottery:FC<LiveLotteryPrice> = (props) => {
                     Winner will be announced on
                     </FooterTitle>
                     <FooterValue>
-                    1st April 2022 At 8PM
+                    {transformDate(new Date(lotteryEndTime))}
                     </FooterValue>
                 </FooterOption>
             </FooterSection>

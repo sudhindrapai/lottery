@@ -138,3 +138,41 @@ export const validateForm = (formElements:FormElement[]):boolean => {
 // method to add padding zero to the incoming digit 
 // incoming value 8 it will return 08
 export const addPaddingZero = (digit: number):string => digit > 9 ? `${digit}` : `0${digit}`;
+
+
+export const monthNames = (monthNumber:number): string => {
+    switch (monthNumber) {
+        case 0 :
+            return "Jan";
+        case 1:
+            return "Feb";
+        case 2:
+            return "Mar";
+        case 3:
+            return "Apr";
+        case 4:
+            return "May";
+        case 5:
+            return "Jun";
+        case 6:
+            return "Jul";
+        case 7:
+            return "Aug";
+        case 8:
+            return "Sep";
+        case 9:
+            return "Oct";
+        case 10:
+            return "Nov";
+        case 11:
+            return "Dec";
+        default:
+            return "NA";
+
+    }
+}
+
+export const transformDate = (dateObj:Date): string => {
+    let date = new Date(dateObj);
+    return `${date.getDate()} ${monthNames(date.getMonth())} ${date.getFullYear()}`
+};

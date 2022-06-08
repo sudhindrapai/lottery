@@ -7,17 +7,28 @@ import * as localStorageActionType from '../localStorage/ActionTypes';
 import {getLocalStorage} from '../localStorage/GetLocalStorage';
 
 interface LotteryObj {
-    lotteryId: number,
-    lotteryName: string,
-    lotteryDesc: string|null,
-    lotteryTypeId: number,
-    lotteryImage: null,
-    isRepeat: boolean,
-    lotteryStartDate: Date,
-    lotteryEndDate: null|Date,
-    lotteryStartDay: null|string,
-    lotteryEndDay: null|string,
-    isActive: boolean
+    lotteryGameId: number,
+      lotteryGameNo: number,
+      lotteryType: "G" | "M",
+      rewardType: string,
+      rewardAmount: number,
+      rewardGiftName: string,
+      rewardGiftDesc: string|null,
+      rewardImages: null | string[],
+      lotteryGameStartDate: string,
+      lotteryGameEndDate: string,
+      isActive: boolean,
+      isMemberLottery: boolean,
+      bronzeTicketPrice: number,
+      silverTicketPrice: number,
+      goldTicketPrice: number,
+      platinumTicketPrice: number,
+      bronzeSubTickets: number,
+      silverSubTickets: number,
+      goldSubTickets: number,
+      platinumSubTickets: number,
+      lotteryGameStatus: string,
+      noOfUsersJoined: number
 }
 
 interface lotteryState {

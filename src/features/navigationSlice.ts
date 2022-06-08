@@ -1,5 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
+import {RouterPath} from '../routes'
+
 interface NavigationState {
     data: {
         label: string,
@@ -17,25 +19,25 @@ let navigationState:NavigationState = {
     data:[ {
         label: "Home",
         key: "home",
-        navRoute:"/temp",
+        navRoute: RouterPath.root,
         isSelected: false
     },
     {
         label: "Lottery",
         key: "lottery",
-        navRoute:"/temp/lottery",
+        navRoute: RouterPath.lotteries,
         isSelected: true
     },
     {
         label: "Auction",
         key: "auction",
-        navRoute:"/temp/auction",
+        navRoute:RouterPath.root,
         isSelected: false
     },
     {
         label: "purchase",
         key:"auction",
-        navRoute:"/temp/purchase",
+        navRoute:RouterPath.root,
         isSelected: false
     }]
 }

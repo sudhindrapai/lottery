@@ -4,7 +4,8 @@ import Box from '@mui/material/Box';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 
 interface TicketType {
-    type: string
+    type: string,
+    selected: boolean
 }
 
 const bonzeBgColor = 'linear-gradient(76.64deg, #775345 5.43%, #CA9274 29.33%, #9E7C59 68.72%, #D8A58A 90.4%)';
@@ -77,9 +78,11 @@ display: flex;
 align-items: center;
 justify-content: space-between;
 flex-basis: 48%;
-height: 60px;
+height: 65px;
 padding: 10px;
 border-radius: 6px;
+cursor: pointer;
+border: ${(props:TicketType) => props.selected ? '4px solid #FCA027' : '4px solid #ffffff'};
 background: ${(props:TicketType) => {
     return props.type === "bronze" ? bonzeBgColor : props.type === 'silver' ? silverColor : props.type === 'gold' ? GoldColor : PlatinumColor;
 }};

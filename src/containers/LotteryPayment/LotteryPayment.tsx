@@ -1,4 +1,4 @@
-import {FC, Fragment} from 'react';
+import {FC, Fragment, useState, useEffect} from 'react';
 import Navigation from '../../components/Navigation/DesktopNavigation';
 import CoinImgSrc from '../../assets/lotteryCoin.png'
 import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement, ButtonSizeVariant, ButtonVariant, ButtonType} from '../../Utility/InterFacesAndEnum';
@@ -7,17 +7,76 @@ import Button from '../../components/UI/Buttons/Button';
 import {useNavigate} from 'react-router-dom';
 import {RouterPath} from '../../routes';
 
-import {ViewHeader, ContentSection, Content, 
+import CountDownTimer from '../../components/CountdownTimer/CountdownTimer';
+import * as localStorageActionType from '../../localStorage/ActionTypes';
+import {getLocalStorage} from '../../localStorage/GetLocalStorage';
+import {useSelector, useDispatch} from 'react-redux';
+import {purchaseLottery} from '../../features/purchaseLotterySlice';
+
+import {ViewHeader, ContentSection, Content,
     SectionTitle, SectionContainer,PurchaseSectionDetails,
     PurchaseSectionImg, PurchaseDetails,LotteryDetail,Label,Value, GoldTicketView, GoldMemberDetail, 
     GoldMemberCheckbox, GoldMemberDetails, GoldMemberAmount, GoldMemberTitle, GoldMemberFeatureList, Icon, Feature, 
     PaymentDetailSection, PaymentListItem, PaymentLabel, Amount, Line, TotalAmount, Wrapper} from './StyledLotteryPayment';
+import { RootState } from '../../app/store';
 
-const LotteryPayment:FC = () => {
+
+    interface PurchaseLotteryBody {
+        lotteryGameId: number,
+        userId: number,
+        paymentId: number,
+        purchaseDate: Date,
+        ticketType: "G" | "M",
+        noOfTickets:number 
+    }
+
+    const LotteryPayment:FC = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [ticketDetailObj, setTicketDetail] = useState<any>(null);
+
+    let isPurchased = useSelector((state:RootState) => state.purchaseLottery.isPurchased);
+
+    useEffect(() => {
+        if (ticketDetailObj === null) {
+            let selectedLottery = JSON.parse(getLocalStorage(localStorageActionType.GET_SELECTED_LOTTERY_OBJ));
+            let selectedTicketDetailObj = JSON.parse(getLocalStorage(localStorageActionType.GET_TICKET_DETAIL_OBJ));
+            let userDetailObj = JSON.parse(getLocalStorage(localStorageActionType.GET_USER_DETAILS));
+
+            let updatedTicketDetailObj = {
+                ...selectedLottery,
+                ...selectedTicketDetailObj,
+                ...userDetailObj
+            }
+            setTicketDetail(updatedTicketDetailObj);
+console.log(updatedTicketDetailObj)
+        }
+    },[]);
+
+    useEffect(() => {
+        if (isPurchased === true) {
+            navigate(RouterPath.lotteryPaymentSuccess);
+        }
+    },[isPurchased])
+
     const redirectToPaymentSuccess = () => {
-        navigate(RouterPath.lotteryPaymentSuccess)
+
+        let purchaseLotteryObj:PurchaseLotteryBody = {
+            "lotteryGameId": ticketDetailObj?.lotteryGameId,
+            "userId": ticketDetailObj.userId,
+            "paymentId": 2,
+            "purchaseDate": new Date(),
+            "ticketType": ticketDetailObj?.rewardType,
+            "noOfTickets": ticketDetailObj?.noOfTickets
+        };
+
+        dispatch(purchaseLottery(purchaseLotteryObj));
     };
+
+    let endDate = new Date();
+    if (ticketDetailObj !== null && Object.keys(ticketDetailObj).length > 0) {
+        endDate = new Date(parseInt(ticketDetailObj.lotteryGameEndDate));
+    }
 
     return <Wrapper>
         <Navigation />
@@ -38,7 +97,7 @@ const LotteryPayment:FC = () => {
                                     Lottery Id
                                 </Label>
                                 <Value>
-                                    1234567
+                                    {ticketDetailObj?.lotteryGameId}
                                 </Value>
                                 </LotteryDetail>
                                 <LotteryDetail>
@@ -46,7 +105,7 @@ const LotteryPayment:FC = () => {
                                     Lottery Price
                                 </Label>
                                 <Value>
-                                &#x24; 10000
+                                &#x24; {ticketDetailObj?.totalAmount}
                                 </Value>
                             </LotteryDetail>
                             <LotteryDetail>
@@ -54,7 +113,15 @@ const LotteryPayment:FC = () => {
                                     Lottery Ends on
                                 </Label>
                                 <Value>
-                                    10000
+                                    <CountDownTimer timestamp={endDate}  />
+                                </Value>
+                            </LotteryDetail>
+                            <LotteryDetail>
+                            <Label>
+                                    Total Tickets
+                                </Label>
+                                <Value>
+                                    {ticketDetailObj?.noOfTickets}
                                 </Value>
                             </LotteryDetail>
                             <LotteryDetail>
@@ -124,7 +191,7 @@ const LotteryPayment:FC = () => {
                             Ticket price
                             </PaymentLabel>
                             <Amount>
-                            &#x24; 100.00
+                            &#x24; {ticketDetailObj?.amount}
                             </Amount>
                         </PaymentListItem>
                         <PaymentListItem>
@@ -141,7 +208,7 @@ const LotteryPayment:FC = () => {
                         Total amount
                             </PaymentLabel>
                             <Amount>
-                            &#x24; 100.00
+                            &#x24; {ticketDetailObj?.totalAmount}
                             </Amount>
                         </TotalAmount>
                         <Line />
@@ -152,7 +219,7 @@ const LotteryPayment:FC = () => {
                     variant={ButtonVariant.contained} 
                     type={ButtonType.submit} 
                     clicked={redirectToPaymentSuccess} >
-                        Send Link
+                       Proceed to Payment
                 </Button>
                     </PaymentDetailSection>
                 </SectionContainer>

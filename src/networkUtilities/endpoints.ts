@@ -15,3 +15,4 @@ export const updateProfile = `${baseUrl}/kingsrings/api/v1/user/update/`; /** {{
 export const updateAddress = `${baseUrl}/kingsrings/api/v1/user/updateaddress/`; /** {{publicUserId}} */
 export const toggleTwoFA = `${baseUrl}/kingsrings/api/v1/user/enabledisable2fa/`; /**  */
 export const verifyTwoFACode = `${baseUrl}/kingsrings/api/v1/user/verifyenable2faotp`; /** {{publicUserId}} */
+export const purchaseLottery = `${baseUrl}/kingsrings/api/v1/purchaseticket/create`;

@@ -31,6 +31,18 @@ const getTwoFaStatus = () => {
     }
 };
 
+const getSelectedLotteryObj = () => {
+    if (typeof Storage !== "undefined") {
+        return localStorage.getItem("SELECTED_LOTTERY_OBJ");
+    }
+};
+
+const getTicketDtail = () => {
+    if (typeof Storage !== "undefined") {
+        return localStorage.getItem("TICKET_DETAIL_OBJ");
+    }
+}
+
 export const getLocalStorage = (type: string) => {
     switch(type){
         case localStorageActionTypes.GET_ACCESS_TOKEN:
@@ -43,6 +55,10 @@ export const getLocalStorage = (type: string) => {
             return getUserDetail(); 
         case localStorageActionTypes.GET_TWO_FA_STATUS:
             return getTwoFaStatus();
+        case localStorageActionTypes.GET_SELECTED_LOTTERY_OBJ:
+            return getSelectedLotteryObj();
+        case localStorageActionTypes.GET_TICKET_DETAIL_OBJ:
+            return getTicketDtail();
         default: 
         return null;
     }

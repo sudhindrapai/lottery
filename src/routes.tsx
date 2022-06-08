@@ -43,8 +43,8 @@ export const RouterPath = {
 };
 
 const AppRoutes = () => {
-  // const rootComponent = getLocalStorage(localStorageActionType.GET_ACCESS_TOKEN) ? <Home /> : <Signin />;
-  const rootComponent = getLocalStorage(localStorageActionType.GET_ACCESS_TOKEN) ? <Home /> : <Home />;
+  const rootComponent = getLocalStorage(localStorageActionType.GET_ACCESS_TOKEN) ? <Home /> : <Signin />;
+  // const rootComponent = getLocalStorage(localStorageActionType.GET_ACCESS_TOKEN) ? <Home /> : <Home />;
     return (
         <Routes>
             <Route path={RouterPath.profile} element={<Profile />} />
@@ -56,7 +56,7 @@ const AppRoutes = () => {
             <Route path={RouterPath.resendResetLink} element={<ResendPwdResetLink />} />
             <Route path={RouterPath.forgotPassword} element={<ForgotPassword />} />
             <Route path={RouterPath.tempRoot} element={rootComponent} />
-            <Route path={RouterPath.root} element={<ComingSoonImg />} />
+            <Route path={RouterPath.root} element={rootComponent} />
             <Route path={RouterPath.lotteries} element={<Lottery />} />
             <Route path={RouterPath.lotteryPaymentView} element={<LotteryPayment />} />
             <Route path={RouterPath.lotteryPaymentSuccess} element={<PaymentSuccess />} />

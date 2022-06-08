@@ -7,7 +7,6 @@ display: flex;
 flex-flow: column;
 align-items: center;
 justify-content: center;
-position: relative;
 `;
 
 export const ViewHeader = styled.div`
@@ -30,8 +29,16 @@ align-items: center;
 justify-content: center;
 padding: 50px;
 position: absolute;
-top: 121px;
+top: -43px;
+left: 13%;
 border-radius: 20px;
+`;
+
+export const SuccessImage = styled.img`
+object-fit: contain;
+height: 250px;
+width: 250px;
+margin-bottom: 30px;
 `;
 
 export const Title = styled.div`
@@ -56,4 +63,11 @@ margin-top: 30px;
 Button {
     padding: 16px 50px;
 }
+`;
+
+export const PurchaseSuccessWrapper = styled.div`
+width: 100%;
+box-sizing: border-box;
+position: relative;
+height: 70vh
 `;

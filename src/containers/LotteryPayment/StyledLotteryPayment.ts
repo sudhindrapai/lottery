@@ -5,6 +5,7 @@ width: 100%;
 box-sizing: border-box;
 position: relative;
 padding-bottom: 100px;
+height: 110vh;
 `;
 
 export const ViewHeader = styled.div`

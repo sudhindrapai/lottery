@@ -69,7 +69,8 @@ export const getUserProfileDetail = createAsyncThunk(
                 "state": userObj.state,
                 "country": userObj.country,
                 "pincCde": userObj.pinCode,
-                "using2FA": userObj.using2FA
+                "using2FA": userObj.using2FA,
+                "userId":userObj.userId
             };
 
             setLocalStorage(localStorageActionType.SET_TWO_FA_STATUS, userObj.using2FA.toString());
@@ -118,7 +119,8 @@ export const updatePersonalDetails = createAsyncThunk(
                 "state": userObj.state,
                 "country": userObj.country,
                 "pincCde": userObj.pinCode,
-                "using2FA": userObj.using2FA
+                "using2FA": userObj.using2FA,
+                "userId":userObj.userId
             };
             setLocalStorage(localStorageActionType.SET_USER_DETAILS, JSON.stringify(localStorageObj));
             setLocalStorage(localStorageActionType.SET_TWO_FA_STATUS, userObj.using2FA);
@@ -159,7 +161,8 @@ export const updateAddress = createAsyncThunk(
                 "state": userObj.state,
                 "country": userObj.country,
                 "pincCde": userObj.pinCode,
-                "using2FA": userObj.using2FA
+                "using2FA": userObj.using2FA,
+                "userId":userObj.userId
             };
             setLocalStorage(localStorageActionType.SET_USER_DETAILS, JSON.stringify(localStorageObj));
             setLocalStorage(localStorageActionType.SET_TWO_FA_STATUS, userObj.using2FA);

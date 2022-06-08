@@ -9,6 +9,7 @@ import Notifcation from "../features/notificationSlice";
 import Navigation from "../features/navigationSlice";
 import Lotteries from '../features/lotteriesSlice';
 import ProfileSlide from '../features/userProfileSlice';
+import PurchaseSlice from '../features/purchaseLotterySlice';
 
 const store = configureStore({
     reducer:{
@@ -21,7 +22,8 @@ const store = configureStore({
        notifcation:Notifcation,
        navigation: Navigation,
        lotteries: Lotteries,
-       userProfile: ProfileSlide
+       userProfile: ProfileSlide,
+       purchaseLottery: PurchaseSlice
     }
 })
 
