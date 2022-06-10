@@ -32,15 +32,21 @@ interface LotteryObj {
 }
 
 interface lotteryState {
-    lotteries: LotteryObj[]
+    lotteries: LotteryObj[],
+    upcomingLotteries: LotteryObj[]
 }
 
 const initalState:lotteryState = {
-    lotteries:[]
+    lotteries:[],
+    upcomingLotteries: []
 }
 
 interface getLottery {
     lotteriesList: LotteryObj[]
+}
+
+interface UpcomingLotteries {
+    upcomingLottery:LotteryObj[]
 }
 
 export const getLotteries = createAsyncThunk(
@@ -80,7 +86,39 @@ export const getLotteries = createAsyncThunk(
             }));
         })
     }
-)
+);
+
+export const getUpcomingLotteries = createAsyncThunk(
+    'get upcoming lotteries',
+    async (payload, {dispatch}) => {
+        await fetch(endpoints.getUpcomingLottery,{
+            method: 'GET',
+            headers:{
+                Authorization: `Bearer ${getLocalStorage(localStorageActionType.GET_ACCESS_TOKEN)}`,
+                "Content-type": "application/json; charset=UTF-8",
+            }
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            if (data.statusCode === 504) {
+                dispatch(setUpcomingLottery({
+                    upcomingLottery:[]
+                }));
+            } else if (data.statusCode === 200) {
+                dispatch(setUpcomingLottery({
+                    upcomingLottery: data.result
+                }));
+                dispatch(toggleNotificationVisibility({
+                    isVisible: true,
+                    status: NotificationType.success,
+                    message: data.errorMsg
+                }));
+            }
+        })
+    }
+);
 
 const LotterySlice = createSlice({
     name: 'lottery Slice',
@@ -91,9 +129,15 @@ const LotterySlice = createSlice({
                 ...state,
                 lotteries: action.payload.lotteriesList
             }
+        },
+        setUpcomingLottery: (state, action:PayloadAction<UpcomingLotteries>) => {
+            return {
+                ...state,
+                upcomingLotteries: action.payload.upcomingLottery
+            }
         }
     }
 });
 
-export const {setLotteryResponse} = LotterySlice.actions;
+export const {setLotteryResponse, setUpcomingLottery} = LotterySlice.actions;
 export default LotterySlice.reducer

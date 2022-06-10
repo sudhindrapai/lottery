@@ -10,12 +10,13 @@ import * as localStorageActionType from '../../localStorage/ActionTypes';
 import {getLocalStorage} from '../../localStorage/GetLocalStorage';
 import {setLocalStorage} from '../../localStorage/SetLocalStorage'
 import Button from '../UI/Buttons/Button';
-
+import {setNavResponse} from '../../features/navigationSlice'
 import {RouterPath} from '../../routes';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useLocation} from 'react-router-dom';
 
 const DesktopNavigation: React.FC = () => {
     const dispatch = useDispatch();
+    const location = useLocation();
     const navigate = useNavigate();
 
     let navigationData = useSelector((state: RootState) => state.navigation.data);
@@ -26,6 +27,19 @@ const DesktopNavigation: React.FC = () => {
     const redirectToLogin = (event: React.MouseEvent<HTMLButtonElement | MouseEvent>) => {
         navigate(RouterPath.signIn);
     }
+
+    useEffect(() => {
+        console.log(location.pathname,"location");
+        let updatedResponse = navigationData.map((navObj) => {
+            return {
+                ...navObj,
+                isSelected: (navObj.activeRoutes).indexOf(location.pathname) >= 0
+            }
+        });
+       dispatch(setNavResponse({
+           data:updatedResponse
+       }))
+    },[location])
 
     useEffect(() => {
         if (name === "") {

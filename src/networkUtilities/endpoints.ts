@@ -9,6 +9,7 @@ export const updatePassword = `${baseUrl}/kingsrings/api/v1/user/changepassword`
 export const forgotPassword = `${baseUrl}/kingsrings/auth/forgotpwd`; /** Method: POST */
 export const resetPassword = `${baseUrl}/kingsrings/api/v1/user/resetpwd`; /** /{{publicUserId}} Method: POST */
 export const getLotteryList = `${baseUrl}/kingsrings/api/v1/lotterygame/list?lotteryType=C`;
+export const getUpcomingLottery = `${baseUrl}/kingsrings/api/v1/lotterygame/list?lotteryType=U`;
 export const viewProfile = `${baseUrl}/kingsrings/api/v1/user/list/`; /** {{publicUserId}} */
 export const updateProfileImgae = `${baseUrl}/kingsrings/api/v1/user/uploadphoto`;
 export const updateProfile = `${baseUrl}/kingsrings/api/v1/user/update/`; /** {{publicUserId}} */

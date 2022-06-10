@@ -37,6 +37,8 @@ export const RouterPath = {
   lotteryPaymentView: "/temp/lottery/payment",
   lotteryPaymentSuccess: '/temp/lottery/payment-success',
   userProfile:"/temp/userProfile",
+  auction:"/temp/action",
+  orders:"/temp/orders",
   tempRoot: "/",
   root: "/",
   notFound: "*"
@@ -51,7 +53,7 @@ const AppRoutes = () => {
             <Route path={RouterPath.signUp} element={<Registration />} />
             <Route path={RouterPath.signIn} element={<Signin />} />
             <Route path={RouterPath.twoFA} element={<TwoFA />} />
-            <Route path= {RouterPath.updatePassword} element={<PasswordUpdate />} />
+            <Route path={RouterPath.updatePassword} element={<PasswordUpdate />} />
             <Route path={RouterPath.resetPassword} element={<ResetPassword />} />
             <Route path={RouterPath.resendResetLink} element={<ResendPwdResetLink />} />
             <Route path={RouterPath.forgotPassword} element={<ForgotPassword />} />

@@ -22,6 +22,35 @@ const ColorButton = styled(Button)<ButtonProps>(() => ({
     },
   }));
 
+  const SecondaryBtn = styled(Button)<ButtonProps>(() => ({
+    color: '#000000',
+    backgroundColor: '#FFB332',
+    padding: "16px",
+    '&:hover': {
+      backgroundColor: '#FFB332',
+    },
+  }));
+
+  const PrimaryBorder = styled(Button)<ButtonProps>(() => ({
+    color: '#3A57E8',
+    backgroundColor: '#ffffff',
+    padding: "16px",
+    border: '1px solid #3A57E8',
+    '&:hover': {
+      backgroundColor: '#ffffff',
+    },
+  }));
+
+  const SecondaryBorder = styled(Button)<ButtonProps>(() => ({
+    color: '#FFB332',
+    backgroundColor: '#ffffff',
+    padding: "16px",
+    border: '1px solid #FFB332',
+    '&:hover': {
+      backgroundColor: '#ffffff',
+    },
+  }));
+
 const ButtonComponent:React.FC<ButtonState> = ({disabled, fullWidth, href, size, variant, type, clicked, children}) => {
     return <ColorButton disabled={disabled} 
     fullWidth={fullWidth} 

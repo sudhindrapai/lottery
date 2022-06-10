@@ -1,10 +1,11 @@
 import {FC, Fragment, useEffect, useState} from 'react';
 import LiveLottery from '../../components/LiveLottery/LiveLottery';
+import UpcomingLottery from '../../components/UpcomingLottery/UpcomingLottery';
 import Navigation from '../../components/Navigation/DesktopNavigation';
-import {LotteryContainer, BannerImg} from './StyledLotteries';
+import {LotteryContainer, BannerImg, UpcomingLotteryContainer, Lottery, SectionTitle} from './StyledLotteries';
 import BannerImgUrl from '../../assets/BANNER-LOTTERY-SECTION.jpg'
 import {useSelector, useDispatch} from 'react-redux'
-import {getLotteries} from '../../features/lotteriesSlice';
+import {getLotteries,getUpcomingLotteries} from '../../features/lotteriesSlice';
 import { RootState } from '../../app/store';
 
 import * as localStorageActionType from '../../localStorage/ActionTypes';
@@ -24,9 +25,11 @@ const Lotteries:FC = () => {
     const [isBuyTicketModalVisible, setModalVisibility] = useState(false);
     const [selectedTicket, setSelectedTicket] = useState<SelectedTicket[] | []>([])
     let lotteriesList = useSelector((state:RootState) => state.lotteries.lotteries );
+    let upcomingLotteries = useSelector((state: RootState) => state.lotteries.upcomingLotteries);
 
     useEffect(() => {
         dispatch(getLotteries());
+        dispatch(getUpcomingLotteries())
     },[]);
 
     const onSelectBuyTicket = (id: number) => {
@@ -66,8 +69,6 @@ const Lotteries:FC = () => {
             lotteryGameEndDate: (new Date(selectedTicketObj.lotteryGameEndDate).getTime()).toString()
         }
 
-        console.log(updatedObj,"selectedTicketObj")
-
         setSelectedTicket(ticketsArray);
         setLocalStorage(localStorageActionType.SET_SELECTED_LOTTERY_OBJ, updatedObj);
         setModalVisibility(true);
@@ -78,11 +79,16 @@ const Lotteries:FC = () => {
     let buyModal = selectedTicket.length > 0 ? <BuyLotteryModal ticket={selectedTicket} label={"Buy tickets"} isVisible={isBuyTicketModalVisible} 
     toggleModal={() => {setModalVisibility(!isBuyTicketModalVisible)}} /> : <div>Please wait</div>
 
+    const onSelectyNotifyMe = (id: number) => {};
+
     return <Fragment>
         <Navigation />
         {buyModal}
         <BannerImg src={BannerImgUrl} />
         <LotteryContainer>
+            <SectionTitle>
+            Live lotteries
+            </SectionTitle>
         {lotteriesList.map((lotteryObj) => {
             return <LiveLottery lotteryType={lotteryObj.rewardType} 
             id={lotteryObj.lotteryGameId}
@@ -92,6 +98,21 @@ const Lotteries:FC = () => {
             lotteryEndTime = {lotteryObj.lotteryGameEndDate} 
             entryPrice={23} usersCound={1000} drawDate={lotteryObj.lotteryGameEndDate} />
         })}
+<SectionTitle>
+Upcoming lotteries
+            </SectionTitle>
+<UpcomingLotteryContainer>
+        {upcomingLotteries.map((lotteryObj) => {
+            return <Lottery>
+            <UpcomingLottery lotteryId={lotteryObj.lotteryGameId} 
+            reward={lotteryObj.rewardType === "M" ?lotteryObj.rewardAmount : lotteryObj.rewardGiftName} 
+            gameType={lotteryObj.rewardType} 
+            gameStartsOn={lotteryObj.lotteryGameStartDate} 
+            entryTicket={10} 
+            onClickNotifyMe={onSelectyNotifyMe} /> </Lottery>
+        })}
+        </UpcomingLotteryContainer>
+
         </LotteryContainer>
     </Fragment>
 };
