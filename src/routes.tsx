@@ -18,6 +18,7 @@ import Lottery from './containers/Lotteries/Lotteries';
 import LotteryPayment from "./containers/LotteryPayment/LotteryPayment";
 import UrserProfile from './containers/UserProfile/UserProfile';
 import PaymentSuccess from './containers/LotteryPaymentSuccess/PaymentSuccess';
+import Auction from './containers/Auction/AuctionList';
 
 import commingSoonImgUrl from '../src/commingSoon.png'
 const ComingSoonImg = () => {
@@ -26,22 +27,23 @@ const ComingSoonImg = () => {
 
 export const RouterPath = {
   profile: "/temp/account/profile",
-  signUp: "/temp/account/registration",
-  signIn: "/temp/account/signin",
-  twoFA: "/temp/account/2FA",
-  updatePassword: "/temp/account/password-update",
-  resetPassword: "/temp/account/reset-password",
-  resendResetLink: "/temp/account/resend-pwd-reset-link",
-  forgotPassword: "/temp/account/forgot-password",
-  lotteries: "/temp/lottery",
-  lotteryPaymentView: "/temp/lottery/payment",
-  lotteryPaymentSuccess: '/temp/lottery/payment-success',
-  userProfile:"/temp/userProfile",
-  auction:"/temp/action",
-  orders:"/temp/orders",
-  tempRoot: "/",
-  root: "/",
-  notFound: "*"
+    signUp: "/temp/account/registration",
+    signIn: "/temp/account/signin",
+    twoFA: "/temp/account/2FA",
+    updatePassword: "/temp/account/password-update",
+    resetPassword: "/temp/account/reset-password",
+    resendResetLink: "/temp/account/resend-pwd-reset-link",
+    forgotPassword: "/temp/account/forgot-password",
+    lotteries: "/temp/lottery",
+    lotteryPaymentView: "/temp/lottery/payment",
+    lotteryPaymentSuccess: '/temp/lottery/payment-success',
+    userProfile:"/temp/userProfile",
+    auction:"/temp/action",
+    orders:"/temp/orders",
+    auctionList: "temp/auction",
+    tempRoot: "/",
+    root: "/",
+    notFound: "*"
 };
 
 const AppRoutes = () => {
@@ -63,6 +65,7 @@ const AppRoutes = () => {
             <Route path={RouterPath.lotteryPaymentView} element={<LotteryPayment />} />
             <Route path={RouterPath.lotteryPaymentSuccess} element={<PaymentSuccess />} />
             <Route path={RouterPath.userProfile} element={<UrserProfile />} />
+            <Route path={RouterPath.auctionList} element={<Auction />} />
             <Route path={RouterPath.notFound} element={<h2>404</h2>} />
       </Routes>
     )

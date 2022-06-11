@@ -2,7 +2,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 // import {RouterPath} from '../routes'
 
-export const RouterPath = {
+const RouterPath = {
     profile: "/temp/account/profile",
     signUp: "/temp/account/registration",
     signIn: "/temp/account/signin",
@@ -17,6 +17,7 @@ export const RouterPath = {
     userProfile:"/temp/userProfile",
     auction:"/temp/action",
     orders:"/temp/orders",
+    auctionList: "/temp/auction",
     tempRoot: "/",
     root: "/",
     notFound: "*"
@@ -36,33 +37,34 @@ interface ToggleSelectionStatus {
     key: string
 }
 
+
 let navigationState:NavigationState = {
     data:[ {
         label: "Home",
         key: "home",
-        activeRoutes:[RouterPath?.root, RouterPath?.userProfile],
-        navRoute: RouterPath.root,
+        activeRoutes: RouterPath? [RouterPath?.root, RouterPath?.userProfile]: [""],
+        navRoute: RouterPath?.root,
         isSelected: false
     },
     {
         label: "Lottery",
         key: "lottery",
         activeRoutes:[RouterPath?.lotteries,RouterPath?.lotteryPaymentView, RouterPath?.lotteryPaymentSuccess],
-        navRoute: RouterPath.lotteries,
+        navRoute: RouterPath?.lotteries,
         isSelected: true
     },
     {
         label: "Auction",
         key: "auction",
-        activeRoutes:[RouterPath?.auction],
-        navRoute:RouterPath.auction,
+        activeRoutes:[RouterPath?.auctionList],
+        navRoute:RouterPath?.auctionList,
         isSelected: false
     },
     {
         label: "purchase",
         key:"auction",
         activeRoutes:[RouterPath?.orders],
-        navRoute:RouterPath.orders,
+        navRoute:RouterPath?.orders,
         isSelected: false
     }]
 }
