@@ -6,6 +6,9 @@ import ProgressBar from '../ProgressBar/ProgressBar'
 import {Wrapper,DetailWrapper, AuctionImage, Title, AuctinProductType, ProgressBarContainer,
      TicketDetailWrapper, Detail, DetailTitle, Value, Action} from './StyledAuctionCards';
 
+import {useNavigate} from 'react-router-dom';
+import {RouterPath} from '../../routes';
+
 interface AuctionCardsProps {
     auctionId: number
     imgUrl: string,
@@ -19,7 +22,14 @@ interface AuctionCardsProps {
 }
 
 const AuctionCards:FC<AuctionCardsProps> = (props) => {
+    const navigate = useNavigate();
     const {auctionId,imgUrl, title, auctionProduct, totalUsers, engagedUsers, entryTicket, drawDate, onSelectBuy} = props;
+
+    const redirectToMoreDetail = (auctionId:number) => {
+        console.log(auctionId);
+        navigate(`/temp/auction/detail/${auctionId}`)
+    };
+
     return <Wrapper>
         <AuctionImage src={imgUrl} />
         <DetailWrapper>
@@ -54,7 +64,7 @@ const AuctionCards:FC<AuctionCardsProps> = (props) => {
         <Button disabled={false} 
         fullWidth={false} 
         variant={ButtonVariant.contained} 
-        type={ButtonType.default} size={ButtonSizeVariant.small} clicked={() => {onSelectBuy(auctionId)}} >
+        type={ButtonType.default} size={ButtonSizeVariant.small} clicked={() => {redirectToMoreDetail(auctionId)}} >
             More Detail
         </Button>
         <Button disabled={false} 

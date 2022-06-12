@@ -2,7 +2,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 // import {RouterPath} from '../routes'
 
-const RouterPath = {
+export const AppRoutePath = {
     profile: "/temp/account/profile",
     signUp: "/temp/account/registration",
     signIn: "/temp/account/signin",
@@ -18,6 +18,7 @@ const RouterPath = {
     auction:"/temp/action",
     orders:"/temp/orders",
     auctionList: "/temp/auction",
+    auctionDetail: "/temp/auction/detail/:auctionId",
     tempRoot: "/",
     root: "/",
     notFound: "*"
@@ -42,29 +43,29 @@ let navigationState:NavigationState = {
     data:[ {
         label: "Home",
         key: "home",
-        activeRoutes: RouterPath? [RouterPath?.root, RouterPath?.userProfile]: [""],
-        navRoute: RouterPath?.root,
+        activeRoutes: [AppRoutePath?.root, AppRoutePath?.userProfile],
+        navRoute: AppRoutePath?.root,
         isSelected: false
     },
     {
         label: "Lottery",
         key: "lottery",
-        activeRoutes:[RouterPath?.lotteries,RouterPath?.lotteryPaymentView, RouterPath?.lotteryPaymentSuccess],
-        navRoute: RouterPath?.lotteries,
+        activeRoutes:[AppRoutePath?.lotteries,AppRoutePath?.lotteryPaymentView, AppRoutePath?.lotteryPaymentSuccess],
+        navRoute: AppRoutePath?.lotteries,
         isSelected: true
     },
     {
         label: "Auction",
         key: "auction",
-        activeRoutes:[RouterPath?.auctionList],
-        navRoute:RouterPath?.auctionList,
+        activeRoutes:[AppRoutePath?.auctionList, AppRoutePath.auctionDetail],
+        navRoute:AppRoutePath?.auctionList,
         isSelected: false
     },
     {
         label: "purchase",
         key:"auction",
-        activeRoutes:[RouterPath?.orders],
-        navRoute:RouterPath?.orders,
+        activeRoutes:[AppRoutePath?.orders],
+        navRoute:AppRoutePath?.orders,
         isSelected: false
     }]
 }

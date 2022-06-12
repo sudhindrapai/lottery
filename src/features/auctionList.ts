@@ -8,7 +8,13 @@ interface AuctionItem{
     engagedUsers: number,
     entryTicket: number,
     drawDate: Date | string,
-    id: number
+    id: number,
+    ownerName: string,
+    imgUrl: string,
+    streat: string,
+    city: string,
+    state: string,
+    country: string,
 }
 
 interface AuctionState{
@@ -24,7 +30,13 @@ const auctionInitialState:AuctionState = {
     engagedUsers: 1290,
     entryTicket: 10,
     drawDate: new Date(),
-    id: 12
+    id: 12,
+    ownerName: "Sudhindra",
+    imgUrl: "https://picsum.photos/450/420",
+    streat: "Strat Name",
+    city: "Kundapura",
+    state: "Kerala",
+    country: "India",
     }, 
     {
         images:["https://picsum.photos/450/420", "https://picsum.photos/450/420"],
@@ -34,7 +46,13 @@ const auctionInitialState:AuctionState = {
     engagedUsers: 1290,
     entryTicket: 10,
     drawDate: new Date(),
-    id: 12
+    id: 12,
+    ownerName: "Sudhindra",
+    imgUrl: "https://picsum.photos/450/420",
+    streat: "Strat Name",
+    city: "Kundapura",
+    state: "Kerala",
+    country: "India",
     },
     {
         images:["https://picsum.photos/450/420", "https://picsum.photos/450/420"],
@@ -44,7 +62,13 @@ const auctionInitialState:AuctionState = {
     engagedUsers: 1290,
     entryTicket: 10,
     drawDate: new Date(),
-    id: 12
+    id: 12,
+    ownerName: "Sudhindra",
+    imgUrl: "https://picsum.photos/450/420",
+    streat: "Strat Name",
+    city: "Kundapura",
+    state: "Kerala",
+    country: "India",
     },
     {
         images:["https://picsum.photos/450/420", "https://picsum.photos/450/420"],
@@ -54,7 +78,13 @@ const auctionInitialState:AuctionState = {
     engagedUsers: 1290,
     entryTicket: 10,
     drawDate: new Date(),
-    id: 12
+    id: 12,
+    ownerName: "Sudhindra",
+    imgUrl: "https://picsum.photos/450/420",
+    streat: "Strat Name",
+    city: "Kundapura",
+    state: "Kerala",
+    country: "India",
     }, {
         images:["https://picsum.photos/450/420", "https://picsum.photos/450/420"],
     title: "Duke Bike 2020 Model",
@@ -63,7 +93,13 @@ const auctionInitialState:AuctionState = {
     engagedUsers: 1290,
     entryTicket: 10,
     drawDate: new Date(),
-    id: 12
+    id: 12,
+    ownerName: "Sudhindra",
+    imgUrl: "https://picsum.photos/450/420",
+    streat: "Strat Name",
+    city: "Kundapura",
+    state: "Kerala",
+    country: "India",
     }]
 }
 

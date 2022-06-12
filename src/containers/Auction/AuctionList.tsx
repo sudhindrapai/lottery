@@ -52,7 +52,8 @@ const Auction = () => {
             </BannerSection>
             <AuctionList>
                 {auctionList.map((auctionItem) => {
-                    return <AuctionListItem><AuctionItem 
+                    return <AuctionListItem>
+                        <AuctionItem 
                     auctionId={auctionItem.id} 
                     imgUrl={auctionItem.images[0]} 
                     title={auctionItem.title} 
