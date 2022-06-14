@@ -7,16 +7,20 @@ import 'swiper/css';
 import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../../app/store';
 
-const SimilarProducts:FC = () => {
+interface SimilarProductsProps {
+  isTitleRequired?:boolean
+}
+
+const SimilarProducts:FC<SimilarProductsProps> = ({isTitleRequired}) => {
     const dispatch = useDispatch();
     const auctionProducts = useSelector((state:RootState) => state.auction.auctionList);
 
     const buySimilarProduct = (id:number) => {};
 
     return <Wrapper>
-        <Title>
+        {isTitleRequired && <Title>
         Similar Auctions
-        </Title>
+        </Title>}
         <Swiper
       spaceBetween={10}
       loop={true}

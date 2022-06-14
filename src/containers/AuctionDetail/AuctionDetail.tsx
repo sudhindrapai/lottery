@@ -133,7 +133,7 @@ const AuctionDetail:FC = () => {
             </DetailSection>
         </Container>
         <SimilarProductContainer>
-        <SimilarProducts />
+        <SimilarProducts isTitleRequired={true} />
         </SimilarProductContainer>
     </Wrapper>
 };
