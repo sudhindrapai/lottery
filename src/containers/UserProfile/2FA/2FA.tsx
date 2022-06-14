@@ -1,5 +1,5 @@
 import {FC, useState, useEffect} from 'react';
-import {ButtonSizeVariant, ButtonVariant, ButtonType} from '../../../Utility/InterFacesAndEnum';
+import {ButtonSizeVariant, ButtonVariant, ButtonType, AppButtonType} from '../../../Utility/InterFacesAndEnum';
 import Button from '../../../components/UI/Buttons/Button';
 import MobileImgSrc from '../../../assets/2FactorIcon.svg'
 import TwoFAModal from '../../../components/Modals/TwoFAModal/TwoFaModal'
@@ -75,7 +75,8 @@ const TwoFa:FC = () => {
                 You can enter a verification code, use a security key by receiving the email OTP.
                 </li>
             </TwoFASteps>
-            <Button 
+            <Button
+            appBtnType={AppButtonType.primaryBtn} 
         disabled={false} 
         fullWidth={false} 
         size={ButtonSizeVariant.medium} 

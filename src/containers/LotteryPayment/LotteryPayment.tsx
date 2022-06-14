@@ -1,7 +1,8 @@
 import {FC, Fragment, useState, useEffect} from 'react';
 import Navigation from '../../components/Navigation/DesktopNavigation';
 import CoinImgSrc from '../../assets/lotteryCoin.png'
-import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement, ButtonSizeVariant, ButtonVariant, ButtonType} from '../../Utility/InterFacesAndEnum';
+import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement,
+     ButtonSizeVariant, ButtonVariant, ButtonType, AppButtonType} from '../../Utility/InterFacesAndEnum';
 import {updateFormInputState, validateForm} from '../../Utility/Utility';
 import Button from '../../components/UI/Buttons/Button';
 import {useNavigate} from 'react-router-dom';
@@ -213,6 +214,7 @@ console.log(updatedTicketDetailObj)
                         </TotalAmount>
                         <Line />
                         <Button 
+                        appBtnType={AppButtonType.primaryBtn}
                     disabled={false} 
                     fullWidth={true} 
                     size={ButtonSizeVariant.medium} 

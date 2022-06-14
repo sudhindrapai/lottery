@@ -3,7 +3,8 @@ import FormBuilder from '../../FormBuilder/FormBuilder';
 import Button from '../../../components/UI/Buttons/Button';
 import {updateFormInputState, validateForm} from '../../../Utility/Utility';
 import {ForgotPassword, CreateAccountContainer, CreateAccountOption} from './StyledLogin'
-import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement, ButtonSizeVariant, ButtonVariant, ButtonType} from '../../../Utility/InterFacesAndEnum';
+import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement,
+     ButtonSizeVariant, ButtonVariant, ButtonType, AppButtonType} from '../../../Utility/InterFacesAndEnum';
 
 interface SigninFormState {
     form: FormElement[],
@@ -96,6 +97,7 @@ const SigninForm:React.FC<SigninProps> = ({onClickSignin, onClickForgotPassword,
                     Forgot Password?
                 </ForgotPassword>
                 <Button 
+                appBtnType={AppButtonType.primaryBtn}
                     disabled={false} 
                     fullWidth={true} 
                     size={ButtonSizeVariant.medium} 

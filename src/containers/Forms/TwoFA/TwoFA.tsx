@@ -2,7 +2,8 @@ import {useState, FC} from 'react';
 import FormBuilder from '../../FormBuilder/FormBuilder';
 import Button from '../../../components/UI/Buttons/Button';
 import {updateFormInputState, validateForm} from '../../../Utility/Utility';
-import {FormElement, FormElementType, ButtonSizeVariant,ButtonType, ButtonVariant, InputVariant, InputTypes, customValidationType} from '../../../Utility/InterFacesAndEnum';
+import {FormElement, FormElementType, ButtonSizeVariant,ButtonType,
+     ButtonVariant, InputVariant, InputTypes, customValidationType, AppButtonType} from '../../../Utility/InterFacesAndEnum';
 import CountdownTimer from '../../../components/Timer/Timer';
 import {ButtonWrapper} from './StyledTwoFA';
 
@@ -81,6 +82,7 @@ const TwoFA:FC<TwoFAProps> = ({onClickLogin, onClickResendCode}) => {
         restartCounter={onClickRestart} />
         <ButtonWrapper>
         <Button 
+        appBtnType={AppButtonType.primaryBtn}
                     disabled={false} 
                     fullWidth={true} 
                     size={ButtonSizeVariant.medium} 

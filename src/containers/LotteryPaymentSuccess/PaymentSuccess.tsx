@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {Wrapper, ViewHeader, Container, Title, Subtitle, ActionSection, PurchaseSuccessWrapper, SuccessImage} from './StyledPaymentSuccess';
-import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement, ButtonSizeVariant, ButtonVariant, ButtonType} from '../../Utility/InterFacesAndEnum';
+import {ButtonSizeVariant, ButtonVariant, ButtonType, AppButtonType} from '../../Utility/InterFacesAndEnum';
 import Button from '../../components/UI/Buttons/Button';
 
 import successSrc from '../../assets/success.svg';
@@ -26,6 +26,7 @@ const PaymentSuccess:FC = () => {
                 </Subtitle>
                 <ActionSection>
                 <Button 
+                appBtnType={AppButtonType.primaryBtn}
                     disabled={false} 
                     fullWidth={false} 
                     size={ButtonSizeVariant.large} 

@@ -2,7 +2,8 @@ import {FC, useState, useEffect, useRef} from 'react';
 
 import FormBuilder from '../../FormBuilder/FormBuilder';
 import {updateFormInputState, validateForm} from '../../../Utility/Utility';
-import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement, ButtonSizeVariant, ButtonVariant, ButtonType} from '../../../Utility/InterFacesAndEnum';
+import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement,
+     ButtonSizeVariant, ButtonVariant, ButtonType, AppButtonType} from '../../../Utility/InterFacesAndEnum';
 import Button from '../../../components/UI/Buttons/Button';
 import ImageUploader from '../../../components/ImageUploader/CustomImageUploader';
 
@@ -166,6 +167,7 @@ const PersonalInfo:FC = () => {
         <FormSection>
     <FormBuilder formElements={values.form} onInputChange = {handleInputChange} onDateSelect={() => {}}  />
     <Button 
+    appBtnType={AppButtonType.primaryBtn}
         disabled={false} 
         fullWidth={true} 
         size={ButtonSizeVariant.medium} 

@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import FormBuilder from '../../FormBuilder/FormBuilder';
 import {updateFormInputState, validateForm} from '../../../Utility/Utility';
-import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement, ButtonSizeVariant, ButtonVariant, ButtonType} from '../../../Utility/InterFacesAndEnum';
+import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement,
+     ButtonSizeVariant, ButtonVariant, ButtonType, AppButtonType} from '../../../Utility/InterFacesAndEnum';
 import Button from '../../../components/UI/Buttons/Button';
 
 interface ResetPasswordFormState {
@@ -88,6 +89,7 @@ const ResetPassword:React.FC<ResetPasswordProps> = ({onResetPassword}) => {
     return <form name={"Customer password update"} html-for={"customer password update"} autoComplete="off">
                 <FormBuilder formElements={values.form} onInputChange = {handleInputChange}  />
                 <Button 
+                    appBtnType={AppButtonType.primaryBtn}
                     disabled={false} 
                     fullWidth={true} 
                     size={ButtonSizeVariant.medium} 

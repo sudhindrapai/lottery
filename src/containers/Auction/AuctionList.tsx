@@ -1,6 +1,6 @@
 import {FC, Fragment} from 'react';
 import DesktopNavigation from '../../components/Navigation/DesktopNavigation';
-import {ButtonSizeVariant, ButtonType, ButtonVariant} from '../../Utility/InterFacesAndEnum';
+import {ButtonSizeVariant, ButtonType, ButtonVariant,AppButtonType} from '../../Utility/InterFacesAndEnum';
 import Button from '../../components/UI/Buttons/Button';
 import AuctionItem from '../../components/AuctionCards/AuctionCards';
 import {useSelector, useDispatch} from 'react-redux';
@@ -37,6 +37,7 @@ const Auction = () => {
                         </CardDescription>
                         <CardAction>
                         <Button disabled={false} 
+                        appBtnType={AppButtonType.primaryBtn}
         fullWidth={false} 
         variant={ButtonVariant.contained} 
         type={ButtonType.default} size={ButtonSizeVariant.small} clicked={() => {buyTickets(1)}} >

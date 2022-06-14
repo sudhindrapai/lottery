@@ -1,15 +1,21 @@
 import {FC} from 'react';
 import Navigation from '../../components/Navigation/DesktopNavigation';
-
+import {useNavigate} from 'react-router-dom';
+import {RouterPath} from '../../routes';
 import MainLottery from '../../components/MainLottery/MainLottery';
 import UpcomingLotteries from '../../components/HP-UpcomingLotteries/UpcomingLotterites';
 import LotteryWinners from '../../components/HP-TopLotteriesWinners/TopLotteryWinners';
 import SimilarProducts from '../AuctionSimilarProducts/SimilarProducts';
 import AuctionWinners from '../../components/HP-TopAuctionWinners/AuctionWinners'
 import {MainPageWrapper, SectionTwo, Section, Title, AuctionSection, TitelWrapper,
-     MoreAuction, AuctionWinnerSection} from './StyledHome';
+     MoreAuction, AuctionWinnerSection, MoreLotteries} from './StyledHome';
 
 const Home:FC = () => {
+    const navigate = useNavigate();
+    const navigateToView = (url:string) => {
+        navigate(url);
+    }
+
     return <div>
         <Navigation />
         <MainPageWrapper>
@@ -27,6 +33,9 @@ const Home:FC = () => {
         More Upcoming lotteries
                 </Title>
         <UpcomingLotteries />
+        <MoreLotteries onClick={() => {navigateToView(RouterPath.lotteries)}}>
+        More lotteries games
+        </MoreLotteries>
         </Section>
         </SectionTwo>
         <AuctionSection>
@@ -34,7 +43,7 @@ const Home:FC = () => {
                 <Title>
                     Auctions
                 </Title>
-                <MoreAuction>
+                <MoreAuction onClick={() => {navigateToView(RouterPath.auctionList)}}>
                     More auctions
                 </MoreAuction>
                 </TitelWrapper>

@@ -3,7 +3,8 @@ import FormBuilder from '../../FormBuilder/FormBuilder';
 import Button from '../../../components/UI/Buttons/Button';
 import {updateFormInputState, validateForm} from '../../../Utility/Utility';
 import {ActionBtn} from './StyledAddAddressForm';
-import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement, ButtonSizeVariant, ButtonVariant, ButtonType} from '../../../Utility/InterFacesAndEnum';
+import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement,
+     ButtonSizeVariant, ButtonVariant, ButtonType, AppButtonType} from '../../../Utility/InterFacesAndEnum';
 
 interface AddAddress {
     form: FormElement[],
@@ -140,6 +141,7 @@ const AddressForm:FC<AddAddressProps> = ({onUpdateAddress}) => {
         <FormBuilder formElements={values.form} onInputChange = {handleInputChange}  />
     <ActionBtn>
     <Button 
+    appBtnType={AppButtonType.primaryBtn}
         disabled={false} 
         fullWidth={true} 
         size={ButtonSizeVariant.large} 

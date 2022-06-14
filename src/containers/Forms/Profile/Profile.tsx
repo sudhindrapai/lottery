@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import FormBuilder from '../../FormBuilder/FormBuilder';
 import {updateFormInputState, validateForm} from '../../../Utility/Utility';
-import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement, ButtonSizeVariant, ButtonVariant, ButtonType} from '../../../Utility/InterFacesAndEnum';
+import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement,
+     ButtonSizeVariant, ButtonVariant, ButtonType, AppButtonType} from '../../../Utility/InterFacesAndEnum';
 import Button from '../../../components/UI/Buttons/Button'
 
 interface SigninFormState {
@@ -185,6 +186,7 @@ const SigninForm:React.FC<ProfileProps> = ({onUpdateProfile}) => {
     return <form name={"Customer Registration"} html-for={"customer resgistraion"} autoComplete="off">
                 <FormBuilder formElements={values.form} onInputChange = {handleInputChange} onDateSelect={onDateSelect}  />
                 <Button 
+                    appBtnType={AppButtonType.primaryBtn}
                     disabled={false} 
                     fullWidth={true} 
                     size={ButtonSizeVariant.medium} 

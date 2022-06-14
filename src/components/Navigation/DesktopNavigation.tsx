@@ -3,7 +3,7 @@ import headerLogo from '../../assets/headerLogo.svg';
 
 import {StyledDesktopNavContainer, LogoSection, NavSection, ActionSection, NavItem, SelectedNavItem, 
     WalletContainer, WalletIcon, Amount, ProfileOption, ProfielWapper, DropdownContainer, DropdownOption, RedirectionBtns} from './StyledDesktopNavigation';
-import {ButtonSizeVariant, ButtonType, ButtonVariant} from '../../Utility/InterFacesAndEnum';
+import {ButtonSizeVariant, ButtonType, ButtonVariant, AppButtonType} from '../../Utility/InterFacesAndEnum';
 import {RootState} from '../../app/store';
 import {useSelector, useDispatch} from 'react-redux';
 import * as localStorageActionType from '../../localStorage/ActionTypes';
@@ -84,10 +84,12 @@ const DesktopNavigation: React.FC = () => {
     if (!accessToken) {
         buttons = <RedirectionBtns>
             <Button disabled={false} 
+            appBtnType = {AppButtonType.primaryBordered}
         fullWidth={false} 
         variant={ButtonVariant.contained} 
         type={ButtonType.default} size={ButtonSizeVariant.small} clicked={() => {redirectToView(RouterPath.signIn)}} >login</Button>
         <Button disabled={false} 
+        appBtnType = {AppButtonType.primaryBtn}
         fullWidth={false} 
         variant={ButtonVariant.contained} 
         type={ButtonType.default} size={ButtonSizeVariant.small} clicked={() => {redirectToView(RouterPath.signUp)}} >Signup</Button>

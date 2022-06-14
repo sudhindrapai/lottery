@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {ButtonSizeVariant, ButtonType, ButtonVariant} from '../../Utility/InterFacesAndEnum';
+import {ButtonSizeVariant, ButtonType, ButtonVariant, AppButtonType} from '../../Utility/InterFacesAndEnum';
 import Button from '../UI/Buttons/Button';
 import {transformDate} from '../../Utility/Utility';
 
@@ -58,12 +58,14 @@ const LiveLottery:FC<LiveLotteryPrice> = (props) => {
             </EndSection>
             <AuctionBtnSection>
             <Button disabled={false} 
+            appBtnType = {AppButtonType.primaryBtn}
         fullWidth={false} 
         variant={ButtonVariant.contained} 
         type={ButtonType.default} size={ButtonSizeVariant.small} clicked={() => {onSelectBuy(id)}} >
             BUY TICKETS
         </Button>
         <Button disabled={false} 
+        appBtnType = {AppButtonType.secondary}
         fullWidth={false} 
         variant={ButtonVariant.contained} 
         type={ButtonType.default} size={ButtonSizeVariant.small} clicked={onSelectGoldMembership} >

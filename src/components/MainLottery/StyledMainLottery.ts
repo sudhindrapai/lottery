@@ -86,6 +86,11 @@ flex-flow:row nowrap;
 align-items: center;
 justify-content: center;
 margin-bottom: 30px;
+Button{
+    min-width: 220px;
+    width: auto;
+    height: 51px;
+};
 Button:first-child {
     margin-right: 15px;
 }

@@ -3,7 +3,7 @@ import Navigation from '../../components/Navigation/DesktopNavigation';
 import {transformDate} from '../../Utility/Utility'
 import ImageComponent from '../../components/AuctionImage/AuctionImage';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
-import {ButtonSizeVariant, ButtonType, ButtonVariant} from '../../Utility/InterFacesAndEnum';
+import {ButtonSizeVariant, ButtonType, ButtonVariant,AppButtonType} from '../../Utility/InterFacesAndEnum';
 import Button from '../../components/UI/Buttons/Button';
 import SimilarProducts from '../AuctionSimilarProducts/SimilarProducts';
 
@@ -61,6 +61,7 @@ const AuctionDetail:FC = () => {
                 </ProgressBarContainer>
                 <ActionDetail>
                 <Button disabled={false} 
+                appBtnType={AppButtonType.primaryBtn}
         fullWidth={false} 
         variant={ButtonVariant.contained} 
         type={ButtonType.default} size={ButtonSizeVariant.large} clicked={() => {}} >

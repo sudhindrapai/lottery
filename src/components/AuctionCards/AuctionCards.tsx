@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {transformDate} from '../../Utility/Utility';
-import {ButtonSizeVariant, ButtonType, ButtonVariant} from '../../Utility/InterFacesAndEnum';
+import {AppButtonType, ButtonSizeVariant, ButtonType, ButtonVariant} from '../../Utility/InterFacesAndEnum';
 import Button from '../UI/Buttons/Button';
 import ProgressBar from '../ProgressBar/ProgressBar'
 import {Wrapper,DetailWrapper, AuctionImage, Title, AuctinProductType, ProgressBarContainer,
@@ -62,12 +62,14 @@ const AuctionCards:FC<AuctionCardsProps> = (props) => {
         </TicketDetailWrapper>
         <Action>
         <Button disabled={false} 
+        appBtnType = {AppButtonType.primaryBordered}
         fullWidth={false} 
         variant={ButtonVariant.contained} 
         type={ButtonType.default} size={ButtonSizeVariant.small} clicked={() => {redirectToMoreDetail(auctionId)}} >
             More Detail
         </Button>
         <Button disabled={false} 
+        appBtnType = {AppButtonType.primaryBtn}
         fullWidth={false} 
         variant={ButtonVariant.contained} 
         type={ButtonType.default} size={ButtonSizeVariant.small} clicked={() => {onSelectBuy(auctionId)}} >

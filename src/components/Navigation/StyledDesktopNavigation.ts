@@ -131,6 +131,8 @@ cursor: pointer;
 
 export const RedirectionBtns = styled.div`
 Button {
+    width: 140px;
+    height: 40px;
     margin-right: 10px;
 }
 `;

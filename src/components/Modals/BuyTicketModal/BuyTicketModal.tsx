@@ -3,8 +3,9 @@ import {useNavigate} from 'react-router-dom';
 import Modal from '@mui/material/Modal';
 import FormBuilder from '../../../containers/FormBuilder/FormBuilder';
 
-import {updateFormInputState, validateForm} from '../../../Utility/Utility';
-import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement, ButtonSizeVariant, ButtonVariant, ButtonType} from '../../../Utility/InterFacesAndEnum';
+import {updateFormInputState} from '../../../Utility/Utility';
+import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement,
+     ButtonSizeVariant, ButtonVariant, ButtonType, AppButtonType} from '../../../Utility/InterFacesAndEnum';
 import Button from '../../../components/UI/Buttons/Button';
 
 import * as localStorageActionType from '../../../localStorage/ActionTypes';
@@ -161,6 +162,7 @@ const BuyTicketModal:FC<BuyTicketModalProps> = (props) => {
                 </SummarySection>
                 <ActionSection>
                 <Button 
+                appBtnType={AppButtonType.secondaryBordered}
                     disabled={false} 
                     fullWidth={false} 
                     size={ButtonSizeVariant.large} 
@@ -170,6 +172,7 @@ const BuyTicketModal:FC<BuyTicketModalProps> = (props) => {
                         Buy Gold Membership
                 </Button>
                 <Button 
+                appBtnType={AppButtonType.primaryBtn}
                     disabled={false} 
                     fullWidth={false} 
                     size={ButtonSizeVariant.large} 

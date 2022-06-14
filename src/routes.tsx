@@ -54,8 +54,8 @@ export const RouterPath = {
 }
 
 const AppRoutes = () => {
-  const rootComponent = getLocalStorage(localStorageActionType.GET_ACCESS_TOKEN) ? <Home /> : <Signin />;
-  // const rootComponent = getLocalStorage(localStorageActionType.GET_ACCESS_TOKEN) ? <Home /> : <Home />;
+  // const rootComponent = getLocalStorage(localStorageActionType.GET_ACCESS_TOKEN) ? <Home /> : <Signin />;
+  const rootComponent = getLocalStorage(localStorageActionType.GET_ACCESS_TOKEN) ? <Home /> : <Home />;
     return (
         <Routes>
             <Route path={RouterPath.profile} element={<Profile />} />

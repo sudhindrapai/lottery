@@ -90,4 +90,8 @@ width: 100%;
 box-sizing: border-box;
 text-align: left;
 margin-top: 30px;
+Button{
+    height: 41px;
+    width: 150px;
+};
 `;

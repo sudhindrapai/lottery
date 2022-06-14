@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import FormBuilder from '../../FormBuilder/FormBuilder';
 import {updateFormInputState, validateForm} from '../../../Utility/Utility';
-import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement, ButtonSizeVariant, ButtonVariant, ButtonType} from '../../../Utility/InterFacesAndEnum';
+import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement,
+     ButtonSizeVariant, ButtonVariant, ButtonType, AppButtonType} from '../../../Utility/InterFacesAndEnum';
 import Button from '../../../components/UI/Buttons/Button'
 
 interface ForgotPasswordFormState {
@@ -68,6 +69,7 @@ const ForgotPassword:React.FC<ForgotPasswordProps> = ({onClickSendLink}) => {
     return <form name={"Forgot Password"} html-for={"Forgot Password"} autoComplete="off">
                 <FormBuilder formElements={values.form} onInputChange = {handleInputChange}  />
                 <Button 
+                appBtnType={AppButtonType.primaryBtn}
                     disabled={false} 
                     fullWidth={true} 
                     size={ButtonSizeVariant.medium} 

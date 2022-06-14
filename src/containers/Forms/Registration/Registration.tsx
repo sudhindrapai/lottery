@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import FormBuilder from '../../FormBuilder/FormBuilder';
 import Button from '../../../components/UI/Buttons/Button';
 import {updateFormInputState, validateForm} from '../../../Utility/Utility';
-import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement, ButtonSizeVariant, ButtonVariant, ButtonType} from '../../../Utility/InterFacesAndEnum';
+import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement, 
+    ButtonSizeVariant, ButtonVariant, ButtonType, AppButtonType} from '../../../Utility/InterFacesAndEnum';
 import {LoginAccountContainer,LoginAccountOption,TermsConditionContainer, EmptyCheckbox,
      SelectedCheckbox, TermsText} from './StyledReg'
 
@@ -160,6 +161,7 @@ const RegistrationForm:React.FC<RegistrationProps> = ({onRegister, onSelectLogin
                     </TermsText>
                 </TermsConditionContainer>
                 <Button 
+                appBtnType={AppButtonType.primaryBtn}
                     disabled={false} 
                     fullWidth={true}  
                     size={ButtonSizeVariant.medium} 

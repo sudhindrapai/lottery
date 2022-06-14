@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {ButtonSizeVariant, ButtonType, ButtonVariant} from '../../Utility/InterFacesAndEnum';
+import {ButtonSizeVariant, ButtonType, ButtonVariant, AppButtonType} from '../../Utility/InterFacesAndEnum';
 import Button from '../UI/Buttons/Button';
 import {transformDate} from '../../Utility/Utility';
 
@@ -56,10 +56,11 @@ const UpcomingLottery:FC<UpcomingLotteryProps> = (props) => {
                 </TicketDetails>
                 <Actions>
                 <Button disabled={false} 
+                appBtnType={AppButtonType.secondary}
         fullWidth={false} 
         variant={ButtonVariant.contained} 
         type={ButtonType.default} size={ButtonSizeVariant.small} clicked={() => {onClickNotifyMe(lotteryId)}} >
-            BUY TICKETS
+            Notify Me
         </Button>
                 </Actions>
             </LotteryDetail>

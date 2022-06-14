@@ -6,7 +6,8 @@ import {ModalBox, ActionBtn, AccountDetails, MobileIcon, Descriptions, ModalBody
 
 import FormBuilder from '../../../containers/FormBuilder/FormBuilder';
 import {updateFormInputState, validateForm} from '../../../Utility/Utility';
-import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement, ButtonSizeVariant, ButtonVariant, ButtonType} from '../../../Utility/InterFacesAndEnum';
+import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement,
+     ButtonSizeVariant, ButtonVariant, ButtonType, AppButtonType} from '../../../Utility/InterFacesAndEnum';
 import Button from '../../../components/UI/Buttons/Button';
 
 import CountdownTimer from '../../Timer/Timer';
@@ -102,6 +103,7 @@ kir ********001.com
         restartCounter={onClickRestart} />
                 <ActionBtn>
                 <Button 
+                appBtnType={AppButtonType.primaryBtn}
                     disabled={false} 
                     fullWidth={true} 
                     size={ButtonSizeVariant.large} 

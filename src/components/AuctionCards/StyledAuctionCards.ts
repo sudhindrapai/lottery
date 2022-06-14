@@ -88,6 +88,7 @@ align-items: flex-start;
 justify-content: flex-start;
 Button{
     width: 100%;
+    height: 41px;
 };
 Button:first-child{
     margin-right: 10px;

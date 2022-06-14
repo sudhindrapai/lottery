@@ -2,7 +2,7 @@ import {FC} from 'react';
 import {Wrapper, Container,CoinsSection, Coin, CoinLabel,
     MainLotterySection, MainLotteryImg, RewardDetail, LotteryDrawWrapper, DrawLabel, AuctionBtns, FooterSection} from './StyledMainLottery';
 
-import {ButtonSizeVariant, ButtonType, ButtonVariant} from '../../Utility/InterFacesAndEnum';
+import {ButtonSizeVariant, ButtonType, ButtonVariant, AppButtonType} from '../../Utility/InterFacesAndEnum';
 import Button from '../UI/Buttons/Button';
 import LotteryCoin from '../../assets/lotteryCoin.png';
 import EntryTicketIcon from '../../assets/Entry-ticket-icon.svg';
@@ -37,7 +37,7 @@ const MainLottery = () => {
             <MainLotterySection>
                 <MainLotteryImg src={LotteryCoin} />
                 <RewardDetail>
-                        100,00
+                        $ 100,00
                 </RewardDetail>
                     <LotteryDrawWrapper>
                         <DrawLabel>
@@ -47,16 +47,18 @@ const MainLottery = () => {
                     </LotteryDrawWrapper>
                     <AuctionBtns>
                     <Button disabled={false} 
+                    appBtnType={AppButtonType.primaryBtn}
         fullWidth={false} 
         variant={ButtonVariant.contained} 
         type={ButtonType.default} size={ButtonSizeVariant.small} clicked={() => {}} >
             BUY TICKETS
         </Button>
         <Button disabled={false} 
+        appBtnType={AppButtonType.secondary}
         fullWidth={false} 
         variant={ButtonVariant.contained} 
         type={ButtonType.default} size={ButtonSizeVariant.small} clicked={() => {}} >
-            BUY TICKETS
+            BUY GOLD MEMBERSHIP
         </Button>
                     </AuctionBtns>
             </MainLotterySection>

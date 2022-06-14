@@ -42,6 +42,13 @@ export enum FormElementType {
     textArea = 'textarea'
 }
 
+export enum AppButtonType {
+    primaryBtn = 'primaryBtn',
+    secondary = 'secondary',
+    primaryBordered = 'primaryBordered',
+    secondaryBordered = 'secondaryBordered',
+}
+
 export enum customValidationType {
     emailValidation = 'emailValidation',
     mobileValidation = 'mobileValidation',

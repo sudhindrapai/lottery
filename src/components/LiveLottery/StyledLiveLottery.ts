@@ -82,9 +82,12 @@ flex-flow: row nowrap;
 align-items: center;
 justify-content: flex-start;
 margin-bottom: 20px;
-Button: first-child {
+Button{
+    height: 41px;
+};
+Button:first-child {
     margin-right: 10px;
-}
+};
 `;
 
 export const FooterOption = styled.div`

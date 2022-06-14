@@ -79,3 +79,13 @@ margin-top: 2px;
 padding: 40px 50px 70px 50px;
 border-bottom: 1px solid #D4D8E2;
 `;
+
+export const MoreLotteries = styled.div`
+font-weight: 400;
+font-size: 18px;
+line-height: 22px;
+text-align: right;
+color: #200E32;
+cursor:pointer;
+padding-top: 40px;
+`;
