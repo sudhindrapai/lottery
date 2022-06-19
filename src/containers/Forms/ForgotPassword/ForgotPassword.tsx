@@ -35,6 +35,8 @@ const ForgotPasswordFormInitalState: ForgotPasswordFormState = {
             errorMessage:"",
             label:"Your Registered Email Id",
             radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden:true
         }
     ],
@@ -67,7 +69,8 @@ const ForgotPassword:React.FC<ForgotPasswordProps> = ({onClickSendLink}) => {
     }
 
     return <form name={"Forgot Password"} html-for={"Forgot Password"} autoComplete="off">
-                <FormBuilder formElements={values.form} onInputChange = {handleInputChange}  />
+                <FormBuilder formElements={values.form} onInputChange = {handleInputChange}  onChangeDate={() => {}}
+                onSelectValueChange={() => {}} />
                 <Button 
                 appBtnType={AppButtonType.primaryBtn}
                     disabled={false} 

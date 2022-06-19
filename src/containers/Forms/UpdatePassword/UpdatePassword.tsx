@@ -37,6 +37,8 @@ const UpdatePasswordFormInitalState: UpdatePasswordFormState = {
             errorMessage:"",
             label:"Your Old Password",
             radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden:true
         },
         {
@@ -54,6 +56,8 @@ const UpdatePasswordFormInitalState: UpdatePasswordFormState = {
             errorMessage:"",
             label:"New Password",
             radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden:true
         },
         {
@@ -71,6 +75,8 @@ const UpdatePasswordFormInitalState: UpdatePasswordFormState = {
             errorMessage:"",
             label:"Confirm Password",
             radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden:true
         }
     ],
@@ -107,7 +113,9 @@ const UpdatePassword:React.FC<UpdatePasswordProps> = ({onUpdatePassword}) => {
     }
 
     return <form name={"Customer password update"} html-for={"customer password update"} autoComplete="off">
-                <FormBuilder formElements={values.form} onInputChange = {handleInputChange}  />
+                <FormBuilder formElements={values.form} onInputChange = {handleInputChange}
+                onChangeDate={() => {}}
+                 onSelectValueChange={() => {}} />
                 <Button 
                 appBtnType={AppButtonType.primaryBtn}
                     disabled={false} 

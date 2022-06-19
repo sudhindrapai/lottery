@@ -37,6 +37,8 @@ const passwordUpdateState:PasswordUpdate  = {
             errorMessage:"",
             label:"Old Password",
             radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden:true
         },
         {
@@ -54,6 +56,8 @@ const passwordUpdateState:PasswordUpdate  = {
             errorMessage:"",
             label:"New Password",
             radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden:true
         },
         {
@@ -71,6 +75,8 @@ const passwordUpdateState:PasswordUpdate  = {
             errorMessage:"",
             label:"Confirm Password",
             radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden:true
         },
     ],
@@ -117,7 +123,9 @@ const PersonalInfo = () => {
     }
 
     return <form name={"Customer Registration"} html-for={"customer resgistraion"} autoComplete="off">
-    <FormBuilder formElements={values.form} onInputChange = {handleInputChange} onDateSelect={() => {}}  />
+    <FormBuilder formElements={values.form} onInputChange = {handleInputChange}
+     onChangeDate={() => {}}
+     onDateSelect={() => {}} onSelectValueChange={() => {}} />
     <Button 
         appBtnType={AppButtonType.primaryBtn}
         disabled={false} 

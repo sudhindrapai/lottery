@@ -37,6 +37,8 @@ const PersonalInfoState:PersonalInfo  = {
             errorMessage:"",
             label:"First Name",
             radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden:true
         },
         {
@@ -54,6 +56,8 @@ const PersonalInfoState:PersonalInfo  = {
             errorMessage:"",
             label:"Last Name",
             radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden:true
         },
         {
@@ -71,6 +75,8 @@ const PersonalInfoState:PersonalInfo  = {
             errorMessage:"",
             label:"Mobile Number",
             radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden:true
         },
     ],
@@ -165,7 +171,10 @@ const PersonalInfo:FC = () => {
         <Container>
         <ImageUploader url={""} onSelectImage={onSelectProfileImage} />
         <FormSection>
-    <FormBuilder formElements={values.form} onInputChange = {handleInputChange} onDateSelect={() => {}}  />
+    <FormBuilder formElements={values.form} onInputChange = {handleInputChange}
+    onChangeDate={() => {}}
+    onSelectValueChange={() => {}}
+     onDateSelect={() => {}}  />
     <Button 
     appBtnType={AppButtonType.primaryBtn}
         disabled={false} 

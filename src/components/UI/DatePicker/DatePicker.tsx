@@ -1,33 +1,31 @@
-import { TextFieldProps, TextField } from '@mui/material';
+import TextField from '@mui/material/TextField';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+
 import React from 'react';
-
-import DateAdapter from '@mui/lab/AdapterMoment';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DatePicker from '@mui/lab/DatePicker';
-
 
 interface DatepickerProps {
     label:string,
     name:string,
-    value: Date | undefined,
-    onDateChange(date: Date, name: string):void| undefined
+    value: Date | null,
+    onChangeDate(date: Date|null, name: string):void
 }
 
-const DatePickerComponent:React.FC<DatepickerProps> = ({label, name, value, onDateChange}) => {
+const DatePickerComponent:React.FC<DatepickerProps> = ({label, name, value, onChangeDate}) => {
 
-    const testFunction = (a: any):void => {
-      onDateChange(new Date(a._d), name)
-        console.log(new Date(a._d),"dfdfadfadsfdf")
-    }
+  const handleChange = (newValue: Date | null) => {
+    onChangeDate(newValue, name);
+  };
 
-    return<LocalizationProvider dateAdapter={DateAdapter}>
-    <DatePicker
-      label={label}
-      inputFormat={"MM/dd/yyyy"}
-      value={value}
-      onChange={(newValue: any) => testFunction(newValue)}
-      renderInput={(params: JSX.IntrinsicAttributes & TextFieldProps) => <TextField {...params} />}
-    />
+    return<LocalizationProvider dateAdapter={AdapterMoment}>
+    <DateTimePicker
+          label={label}
+          inputFormat="DD/mm/yy hh:mm"
+          value={value}
+          onChange={handleChange}
+          renderInput={(params:any) => <TextField {...params} fullWidth={true} />}
+        />
   </LocalizationProvider>
 };
 

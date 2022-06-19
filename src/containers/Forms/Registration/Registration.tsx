@@ -41,6 +41,8 @@ const registrationFormInitalState: RegFormState = {
             errorMessage:"",
             label:"First Name",
             radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden:true
         },
         {
@@ -58,6 +60,8 @@ const registrationFormInitalState: RegFormState = {
             errorMessage:"",
             label:"Last Name",
             radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden:true
         },
         {
@@ -75,6 +79,8 @@ const registrationFormInitalState: RegFormState = {
             errorMessage:"",
             label:"Mobile Number",
             radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden:true
         },
         {
@@ -92,6 +98,8 @@ const registrationFormInitalState: RegFormState = {
             errorMessage:"",
             label:"Email Id",
             radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden:true
         },
         {
@@ -109,6 +117,8 @@ const registrationFormInitalState: RegFormState = {
             errorMessage:"",
             label:"Password",
             radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden:true
         }
     ],
@@ -153,7 +163,9 @@ const RegistrationForm:React.FC<RegistrationProps> = ({onRegister, onSelectLogin
     }
 
     return <form name={"Customer Registration"} html-for={"customer resgistraion"} autoComplete="off">
-                <FormBuilder formElements={values.form} onInputChange = {handleInputChange}  />
+                <FormBuilder formElements={values.form} onInputChange = {handleInputChange}
+                onChangeDate={() => {}}
+                 onSelectValueChange={() => {}}  />
                 <TermsConditionContainer >
                     {isAgreed ? <SelectedCheckbox onClick={toggleAgreeState} /> : <EmptyCheckbox onClick={toggleAgreeState} />}
                     <TermsText>

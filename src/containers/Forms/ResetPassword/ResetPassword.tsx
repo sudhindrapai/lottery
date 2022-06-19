@@ -37,6 +37,8 @@ const ResetPasswordFormInitalState: ResetPasswordFormState = {
             errorMessage:"",
             label:"New Password",
             radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden:true
         },
         {
@@ -54,6 +56,8 @@ const ResetPasswordFormInitalState: ResetPasswordFormState = {
             errorMessage:"",
             label:"Confirm Password",
             radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden:true
         }
     ],
@@ -87,7 +91,9 @@ const ResetPassword:React.FC<ResetPasswordProps> = ({onResetPassword}) => {
     }
 
     return <form name={"Customer password update"} html-for={"customer password update"} autoComplete="off">
-                <FormBuilder formElements={values.form} onInputChange = {handleInputChange}  />
+                <FormBuilder formElements={values.form} onInputChange = {handleInputChange}
+                onChangeDate={() => {}}
+                 onSelectValueChange={() => {}} />
                 <Button 
                     appBtnType={AppButtonType.primaryBtn}
                     disabled={false} 

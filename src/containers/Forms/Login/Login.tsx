@@ -40,6 +40,8 @@ const signinFormInitalState: SigninFormState = {
             errorMessage:"",
             label:"Email Id",
             radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden:true
         },
         {
@@ -57,6 +59,8 @@ const signinFormInitalState: SigninFormState = {
             errorMessage:"",
             label:"Password",
             radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden:true
         }
     ],
@@ -92,7 +96,7 @@ const SigninForm:React.FC<SigninProps> = ({onClickSignin, onClickForgotPassword,
     }
 
     return <form name={"Customer Registration"} html-for={"customer resgistraion"} autoComplete="off">
-                <FormBuilder formElements={values.form} onInputChange = {handleInputChange}  />
+                <FormBuilder formElements={values.form} onInputChange = {handleInputChange} onChangeDate={() => {}}  onSelectValueChange={() => {}}  />
                 <ForgotPassword onClick={onClickForgotPassword}>
                     Forgot Password?
                 </ForgotPassword>

@@ -38,6 +38,8 @@ const twoFAState:TwoFAFormState = {
             errorMessage: "",
             label: "Enter verification code",
             radioGroupValues: [],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden: true
         }
     ],
@@ -71,7 +73,9 @@ const TwoFA:FC<TwoFAProps> = ({onClickLogin, onClickResendCode}) => {
     }
 
     return <form name={"Customer Registration"} html-for={"customer resgistraion"} autoComplete="off">
-        <FormBuilder formElements={values.form} onInputChange = {handleInputChange}  />
+        <FormBuilder formElements={values.form} onInputChange = {handleInputChange}
+        onChangeDate={() => {}}
+         onSelectValueChange={() => {}}  />
         <CountdownTimer totalDuration={180} 
         restartCounterText = {"Resend Code"}
         onReachEnd={toggleResendOption} 

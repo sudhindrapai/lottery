@@ -77,6 +77,57 @@ export const updateFormInputState =
     return updatedArry
 };
 
+export const updateFormSelectState = (selectedValue:string, name:string, formValues:FormElement[]):FormElement[] => {
+    let updatedArray = formValues.map((formObj) => {
+        if (formObj.id === name) {
+        let obj = Object.assign(formObj);
+        let validatedObj:ValidatedFormObj = validateFormElement(obj.customValidationType, selectedValue, obj.isRequired, formObj.isCustomValidationRequred);
+        obj["value"] = validatedObj.value;
+        obj["isTouched"] = true;
+        obj["errorMessage"] = validatedObj.errorMessage;
+        obj["isValidInput"] = validatedObj.isValidInput;
+        return obj;
+        } else {
+            return formObj;
+        }
+    });
+    return updatedArray
+}
+
+export const updateFormTimeState = (date: Date|null, name: string, formValues:FormElement[]):FormElement[] => {
+    let updatedArray = formValues.map((formObj) => {
+        if (formObj.id === name) {
+            let obj = Object.assign(formObj);
+            obj["value"] = obj.value;
+            obj["isTouched"] = true;
+            obj["errorMessage"] = "";
+            obj["selectedTime"] = date;
+            obj["isValidInput"] = "";
+            return obj;
+        } else {
+            return formObj;
+        }
+    });
+    return updatedArray;
+}
+
+export const updateFormDate = (date: Date|null, name: string, formValues:FormElement[]):FormElement[] => {
+    let updatedArray = formValues.map((formObj) => {
+        if (formObj.id === name) {
+            let obj = Object.assign(formObj);
+            obj["value"] = date;
+            obj["isTouched"] = true;
+            obj["errorMessage"] = "";
+            obj["slectedDate"] = date;
+            obj["isValidInput"] = "";
+            return obj;
+        } else {
+            return formObj;
+        }
+    });
+    return updatedArray;
+}
+
 // method will validate the input with empty and custom validation
 const validateFormElement = (validationType:customValidationType, value:string, isRequired:boolean, customValidationRequired:boolean):ValidatedFormObj => {
     let updatedValue = value;

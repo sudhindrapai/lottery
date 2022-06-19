@@ -40,6 +40,8 @@ const signinFormInitalState: SigninFormState = {
             errorMessage:"",
             label:"Email Id",
             radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden:true
         },
         {
@@ -57,6 +59,8 @@ const signinFormInitalState: SigninFormState = {
             errorMessage:"",
             label:"First Name",
             radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden:true
         },
         {
@@ -74,6 +78,8 @@ const signinFormInitalState: SigninFormState = {
             errorMessage:"",
             label:"Last Name",
             radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden:true
         },
         {
@@ -90,6 +96,7 @@ const signinFormInitalState: SigninFormState = {
             isTouched:false,
             errorMessage:"",
             label:"Gendar",
+            dropdownValues:[],
             radioGroupValues:[
                 {
                     title:"Male",
@@ -104,6 +111,7 @@ const signinFormInitalState: SigninFormState = {
                     value:"other"
                 }
             ],
+            slectedDate:null,
             isPasswordHidden:true
         },
         {
@@ -121,7 +129,9 @@ const signinFormInitalState: SigninFormState = {
             errorMessage:"",
             label:"Address",
             radioGroupValues:[],
+            dropdownValues:[],
             isPasswordHidden:true,
+            slectedDate:null,
             row:3
         },
         {
@@ -139,6 +149,8 @@ const signinFormInitalState: SigninFormState = {
             errorMessage:"",
             label:"Mobile Number",
             radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden:true
         },
     ],
@@ -184,7 +196,10 @@ const SigninForm:React.FC<ProfileProps> = ({onUpdateProfile}) => {
     const onDateSelect = (date: Date, name: string) => {}
 
     return <form name={"Customer Registration"} html-for={"customer resgistraion"} autoComplete="off">
-                <FormBuilder formElements={values.form} onInputChange = {handleInputChange} onDateSelect={onDateSelect}  />
+                <FormBuilder formElements={values.form} onInputChange = {handleInputChange} 
+                onChangeDate={() => {}}
+                onSelectValueChange={() => {}}
+                onDateSelect={onDateSelect}  />
                 <Button 
                     appBtnType={AppButtonType.primaryBtn}
                     disabled={false} 

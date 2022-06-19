@@ -5,6 +5,7 @@ import Input from '../../components/UI/Input/Input';
 import Textarea from '../../components/UI/TextArea/TextArea'
 import RadioGroup from '../../components/UI/RadioGroup/RadioGroup';
 import PasswordIput from '../../components/UI/Password/Password';
+import Select from '../../components/UI/Select/Select'
 import DatePicker from '../../components/UI/DatePicker/DatePicker'
 
 import {FormElementType, FormElement, InputVariant} from '../../Utility/InterFacesAndEnum';
@@ -12,11 +13,13 @@ import {FormElementType, FormElement, InputVariant} from '../../Utility/InterFac
 interface FormbuilderProps {
     formElements:FormElement[],
     onInputChange(event:React.ChangeEvent <HTMLTextAreaElement | HTMLInputElement>):void,
-    onDateSelect?(date: Date, name:string):any
+    onDateSelect?(date: Date, name:string):any,
+    onChangeDate(date: Date|null, name:string):void,
+    onSelectValueChange(value: string, id: string):void,
 }
 
 const FormBuilder:React.FC<FormbuilderProps> = (props) => {
-    const {formElements, onInputChange, onDateSelect} = props;
+    const {formElements, onInputChange, onChangeDate, onSelectValueChange} = props;
 
     let FormElement = formElements.map((formElement, index) => {
         let element = null;
@@ -77,16 +80,31 @@ const FormBuilder:React.FC<FormbuilderProps> = (props) => {
                         handleInputChange={onInputChange} /> 
                         </StyledFormElement>
                         break;
-                    case FormElementType.datePicker:
+                        case FormElementType.select:
                         element = <StyledFormElement key={`${formElement.id}_${index}`} >
-                            {/* <DatePicker 
+                            <Select 
+                            fullWidth={formElement.fullWidth} 
+                            required={formElement.isRequired} 
+                            value={formElement.value} 
                             label={formElement.label} 
+                            id={formElement.id} 
                             name={formElement.id} 
-                            value={formElement.dobDate} 
-                            onDateChange={onDateSelect}
-                             /> */}
-                             <div>Date Picker</div>
+                            error={formElement.isValidInput} 
+                            dropdownValues={formElement.dropdownValues} 
+                            handleInputChange={onSelectValueChange} />
                         </StyledFormElement>
+                        break;
+                    case FormElementType.datePicker:
+                        case FormElementType.datePicker:
+                            element = <StyledFormElement key={`${formElement.id}_${index}`} >
+                                <DatePicker 
+                                label={formElement.label} 
+                                name={formElement.id} 
+                                value={formElement.slectedDate? formElement.slectedDate : null} 
+                                onChangeDate={onChangeDate}
+                                 />
+                            </StyledFormElement>
+                        break;
                     break;
                 default:
                     element = null;

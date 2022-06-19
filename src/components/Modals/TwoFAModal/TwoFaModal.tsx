@@ -43,6 +43,8 @@ const AddAddressState: AddAddress = {
             errorMessage:"",
             label:"Enter Verification Code",
             radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden:true
         }
     ],
@@ -92,7 +94,9 @@ const AddAddressModal:FC<AddAddressProps> = (props) => {
 kir ********001.com
                     </Descriptions>
                 </AccountDetails>
-            <FormBuilder formElements={values.form} onInputChange = {handleInputChange}  />
+            <FormBuilder formElements={values.form} onInputChange = {handleInputChange}
+            onChangeDate={() => {}}
+             onSelectValueChange={() => {}} />
             <CountdownTimer totalDuration={180} 
         restartCounterText = {"Resend Code"}
         onReachEnd={toggleResendOption} 

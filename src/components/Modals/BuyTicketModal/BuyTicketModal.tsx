@@ -52,6 +52,8 @@ const buyTicketForm:BuyTicketFormState = {
             errorMessage:"",
             label:"Enter Number of Tickets",
             radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden:true
         }
     ],
@@ -156,7 +158,8 @@ const BuyTicketModal:FC<BuyTicketModalProps> = (props) => {
                 <TicketsLists>
                     {tickets}
                 </TicketsLists>
-                <FormBuilder formElements={values.form} onInputChange = {handleInputChange}  />
+                <FormBuilder formElements={values.form} onInputChange = {handleInputChange}  onChangeDate={() => {}}
+                 onSelectValueChange={() => {}} />
                 <SummarySection>
                     Total Cost <span>$ {isNaN(totalValue) ? 0 : totalValue}</span>
                 </SummarySection>

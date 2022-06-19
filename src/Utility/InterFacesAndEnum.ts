@@ -82,7 +82,9 @@ export interface FormElement {
     radioGroupValues:RadioItem[],
     isPasswordHidden: boolean,
     dobDate?: Date,
-    row?:number
+    row?:number,
+    slectedDate: Date | null,
+    dropdownValues:string[]
 }
 
 export enum NotificationType {

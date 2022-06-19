@@ -39,6 +39,8 @@ const AddAddressState: AddAddress = {
             errorMessage:"",
             label:"Address",
             radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden:true
         },
         {
@@ -56,6 +58,8 @@ const AddAddressState: AddAddress = {
             errorMessage:"",
             label:"State",
             radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden:true
         },
         {
@@ -73,6 +77,8 @@ const AddAddressState: AddAddress = {
             errorMessage:"",
             label:"Country",
             radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden:true
         },
         {
@@ -90,6 +96,8 @@ const AddAddressState: AddAddress = {
             errorMessage:"",
             label:"Pincode/Zipcode",
             radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
             isPasswordHidden:true
         },
     ],
@@ -114,9 +122,9 @@ const AddressForm:FC<AddAddressProps> = ({onUpdateAddress}) => {
         event.preventDefault();
         let updateAddressObj:UpdateAddressForm = {
             "address":"",
-        "country":"",
-        "state":"",
-        "pinCode":""
+            "country":"",
+            "state":"",
+            "pinCode":""
         };
 
         for (let formObj of values.form) {
@@ -138,7 +146,9 @@ const AddressForm:FC<AddAddressProps> = ({onUpdateAddress}) => {
     }
 
     return <Fragment> 
-        <FormBuilder formElements={values.form} onInputChange = {handleInputChange}  />
+        <FormBuilder formElements={values.form} onInputChange = {handleInputChange} 
+        onChangeDate={() => {}}
+        onSelectValueChange={() => {}}  />
     <ActionBtn>
     <Button 
     appBtnType={AppButtonType.primaryBtn}

@@ -20,34 +20,8 @@ import UrserProfile from './containers/UserProfile/UserProfile';
 import PaymentSuccess from './containers/LotteryPaymentSuccess/PaymentSuccess';
 import Auction from './containers/Auction/AuctionList';
 import AuctionDetail from './containers/AuctionDetail/AuctionDetail';
-
+import CreateAuction from './containers/CreateAuction/CreateAuction';
 import {AppRoutePath} from './features/navigationSlice';
-
-import commingSoonImgUrl from '../src/commingSoon.png'
-const ComingSoonImg = () => {
-  return <img src={commingSoonImgUrl} style={{maxHeight: "100%", maxWidth: "100%", height: "99vh", objectFit: "contain"}} />
-}
-
-// export const RouterPath = {
-//   profile: "/temp/account/profile",
-//     signUp: "/temp/account/registration",
-//     signIn: "/temp/account/signin",
-//     twoFA: "/temp/account/2FA",
-//     updatePassword: "/temp/account/password-update",
-//     resetPassword: "/temp/account/reset-password",
-//     resendResetLink: "/temp/account/resend-pwd-reset-link",
-//     forgotPassword: "/temp/account/forgot-password",
-//     lotteries: "/temp/lottery",
-//     lotteryPaymentView: "/temp/lottery/payment",
-//     lotteryPaymentSuccess: '/temp/lottery/payment-success',
-//     userProfile:"/temp/userProfile",
-//     auction:"/temp/action",
-//     orders:"/temp/orders",
-//     auctionList: "temp/auction",
-//     tempRoot: "/",
-//     root: "/",
-//     notFound: "*"
-// };
 
 export const RouterPath = {
   ...AppRoutePath
@@ -75,6 +49,7 @@ const AppRoutes = () => {
             <Route path={RouterPath.auctionList} element={<Auction />} />
             <Route path={RouterPath.notFound} element={<h2>404</h2>} />
             <Route path={RouterPath.auctionDetail} element={<AuctionDetail />} />
+            <Route path={RouterPath.createAuction} element={<CreateAuction />} />
       </Routes>
     )
 }
