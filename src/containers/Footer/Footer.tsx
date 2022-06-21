@@ -2,7 +2,7 @@ import {FC} from 'react';
 import LogoSrc from '../../assets/headerLogo.svg'
 import {FooterWrapper,FooterTop, FooterLogoSection, LogoImg, LogoDesc, FooterItems, FooterItemTitle, 
     FooterItmValue, FooterBottom, CopyRight, FollowUsContainer, FollowUsTitle, Twitter} from './StyledFooter';
-const Footer = () => {
+const Footer:FC = () => {
     return <FooterWrapper>
         <FooterTop>
             <FooterLogoSection>

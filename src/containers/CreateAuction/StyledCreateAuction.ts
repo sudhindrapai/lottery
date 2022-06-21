@@ -5,6 +5,31 @@ width: 100%;
 box-sizing: border-box;
 `;
 
+export const BreadCrumb = styled.div`
+width: 100%;
+box-sizing: border-box;
+height: 67px;
+display: flex;
+align-items: center;
+justify-content: flex-start;
+font-weight: 400;
+font-size: 16px;
+line-height: 19px;
+display: flex;
+align-items: center;
+text-transform: capitalize;
+color: #200E32;
+background-color: #ffffff;
+padding:0 30px;
+margin-top: 2px;
+`;
+
+export const BreadCrumbItem = styled.div`
+    color: #200E32;
+    padding: 0 4px;
+    cursor: pointer;
+`;
+
 export const Container = styled.div`
 width:100%;
 box-sizing: border-box;

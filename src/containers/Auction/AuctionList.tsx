@@ -5,16 +5,25 @@ import Button from '../../components/UI/Buttons/Button';
 import AuctionItem from '../../components/AuctionCards/AuctionCards';
 import {useSelector, useDispatch} from 'react-redux';
 
+import {useNavigate} from 'react-router-dom';
+import {RouterPath} from '../../routes'
 import {Wrapper, BannerSection,BannerContainer, CardContainer,
-     CardFooter, CardDescription, CardTitle, CardProduct, CardAction, AuctionList, AuctionListItem} from './StyledAuctionList'
+     CardFooter, CardDescription, CardTitle, CardProduct, CardAction, AuctionList,
+      AuctionListItem, ListTitle, ActionSection} from './StyledAuctionList'
 import { RootState } from '../../app/store';
-const Auction = () => {
+const Auction:FC = () => {
 
     const dispatch = useDispatch();
+
+    const navigate = useNavigate();
     
     const auctionList = useSelector((state:RootState) => state.auction.auctionList);
 
     const buyTickets = (id: number) => {};
+
+    const redirectToView = (path: string) => {
+        navigate(path);
+    }
 
     return <Fragment>
         <DesktopNavigation />
@@ -51,6 +60,19 @@ const Auction = () => {
                 <img src={"https://picsum.photos/450/520"} />
                 </BannerContainer>
             </BannerSection>
+            <ListTitle>
+                showing {auctionList.length} auctions
+            </ListTitle>
+            <ActionSection>
+            <Button disabled={false} 
+                        appBtnType={AppButtonType.primaryBtn}
+        fullWidth={false} 
+        variant={ButtonVariant.contained} 
+        type={ButtonType.default} size={ButtonSizeVariant.small} 
+        clicked={() => {redirectToView(RouterPath.createAuction)}} >
+            + List your product in auction
+        </Button>
+            </ActionSection>
             <AuctionList>
                 {auctionList.map((auctionItem) => {
                     return <AuctionListItem>

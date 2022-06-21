@@ -7,7 +7,11 @@ import {updateFormInputState, validateForm, updateFormSelectState, updateFormDat
 import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement,
     ButtonSizeVariant, ButtonVariant, ButtonType, AppButtonType} from '../../Utility/InterFacesAndEnum'
 
-import {Wrapper, Container, FormSection, TwoSectionForm, Title, FormBody, CardWrapper, Content,Amount} from './StyledCreateAuction';
+import {Wrapper, Container, FormSection, TwoSectionForm, Title, FormBody, CardWrapper, Content,Amount,
+     BreadCrumb, BreadCrumbItem} from './StyledCreateAuction';
+
+import {RouterPath} from '../../routes';
+import {useNavigate} from 'react-router-dom';
 
 interface CreateAuction {
     form: FormElement[],
@@ -294,11 +298,17 @@ const ProductDetail: CreateAuction = {
 
 const CreateAuction:FC = () => {
 
+    const navigate = useNavigate();
+
     const [auctionDetail, setAuctionDetail] = useState<CreateAuction>(AuctonDetails);
     const [scheduleDays, setScheduleDaysDetail] = useState<CreateAuction>(ScheduleDays);
     const [address, setAddressDetail] = useState<CreateAuction>(AddressForm);
     const [userDetail, setUserDetail] = useState<CreateAuction>(UserDetail);
     const [productDetails, setProductDetail] = useState<CreateAuction>(ProductDetail);
+
+    const redirectToView = (path:string) => {
+        navigate(path)
+    };
 
     //  --------- Auction detail ----------
     const handleAuctionDetailInputChange = (event:React.ChangeEvent <HTMLTextAreaElement | HTMLInputElement>):void => {
@@ -386,6 +396,11 @@ const CreateAuction:FC = () => {
 
     return <Wrapper>
         <Navigation />
+        <BreadCrumb>
+        <BreadCrumbItem onClick={() => {redirectToView(RouterPath.root)}}>Home</BreadCrumbItem> / 
+        <BreadCrumbItem onClick={() => {redirectToView(RouterPath.auctionList)}} >Auction</BreadCrumbItem> / 
+        <BreadCrumbItem onClick={() => {redirectToView(RouterPath.createAuction)}} >List your product in auction</BreadCrumbItem>
+        </BreadCrumb>
         <Container>
             <FormSection>
                 <Title>

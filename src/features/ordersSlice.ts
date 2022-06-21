@@ -1,0 +1,46 @@
+import {createSlice, createAsyncThunk, PayloadAction} from '@reduxjs/toolkit';
+import * as endpoint from '../networkUtilities/endpoints';
+
+import * as localStorageActionType from '../localStorage/ActionTypes';
+import {getLocalStorage} from '../localStorage/GetLocalStorage';
+
+const ordersInitialState = {
+    orders:[],
+    page:1
+}
+
+export const getOrders = createAsyncThunk(
+    'get users order list',
+    async (payload, {dispatch}) => {
+        let userObj = JSON.parse(getLocalStorage(localStorageActionType.GET_USER_DETAILS));
+
+        await fetch(`${endpoint.getOrdersList}?userId=${userObj.userId}`,{
+            method: 'GET',
+            headers:{
+                Authorization: `Bearer ${getLocalStorage(localStorageActionType.GET_ACCESS_TOKEN)}`,
+                "Content-type": "application/json; charset=UTF-8",
+            }
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((response) => {
+            console.log(response.data);
+        })
+    }
+)
+
+const ordersSlice = createSlice({
+    name: 'Orders Slice',
+    initialState: ordersInitialState,
+    reducers: {
+        setOrders: (state, action:PayloadAction<any>) => {
+            return {
+                ...state
+            }
+        }
+    }
+});
+
+export const {setOrders} = ordersSlice.actions;
+export default ordersSlice.reducer;

@@ -11,6 +11,7 @@ import Lotteries from '../features/lotteriesSlice';
 import ProfileSlide from '../features/userProfileSlice';
 import PurchaseSlice from '../features/purchaseLotterySlice';
 import AuctionSlice from '../features/auctionList';
+import OrdersSlice from '../features/ordersSlice';
 
 const store = configureStore({
     reducer:{
@@ -25,7 +26,8 @@ const store = configureStore({
        lotteries: Lotteries,
        userProfile: ProfileSlide,
        purchaseLottery: PurchaseSlice,
-       auction: AuctionSlice
+       auction: AuctionSlice,
+       orders:OrdersSlice
     }
 })
 

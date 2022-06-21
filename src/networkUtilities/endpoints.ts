@@ -17,3 +17,4 @@ export const updateAddress = `${baseUrl}/kingsrings/api/v1/user/updateaddress/`;
 export const toggleTwoFA = `${baseUrl}/kingsrings/api/v1/user/enabledisable2fa/`; /**  */
 export const verifyTwoFACode = `${baseUrl}/kingsrings/api/v1/user/verifyenable2faotp`; /** {{publicUserId}} */
 export const purchaseLottery = `${baseUrl}/kingsrings/api/v1/purchaseticket/create`;
+export const getOrdersList = `${baseUrl}/kingsrings/api/v1/purchaseticket/list`; /** ?userId=3 */

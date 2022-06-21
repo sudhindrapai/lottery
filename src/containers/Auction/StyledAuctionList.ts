@@ -92,3 +92,26 @@ export const AuctionListItem = styled.div`
 display: flex;
 flex-basis: 23%;
 `;
+
+
+export const ListTitle = styled.div`
+width: 100%;
+box-sizing: border-box;
+font-weight: 600;
+font-size: 20px;
+line-height: 24px;
+text-transform: capitalize;
+color: #000000;
+margin: 50px 0 30px 0;
+text-align: left;
+`;
+
+export const ActionSection = styled.div`
+width: 100%;
+box-sizing: border-box;
+display: flex;
+flex-flow: row nowrap;
+align-items: center;
+justify-content: flex-start;
+margin-bottom: 30px;
+`;
