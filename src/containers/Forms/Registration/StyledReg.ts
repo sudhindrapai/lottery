@@ -22,6 +22,7 @@ line-height: 18px;
 cursor: pointer;
 color: #000000;
 margin-left: 5px;
+color: #3674bf;
 `;
 
 export const TermsConditionContainer = styled.div`

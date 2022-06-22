@@ -27,7 +27,7 @@ const AuctionCards:FC<AuctionCardsProps> = (props) => {
 
     const redirectToMoreDetail = (auctionId:number) => {
         console.log(auctionId);
-        navigate(`/temp/auction/detail/${auctionId}`)
+        navigate(`/auction/detail/${auctionId}`)
     };
 
     return <Wrapper>
