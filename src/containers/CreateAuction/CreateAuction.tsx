@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, useState, useEffect} from 'react';
 
 import Navigation from '../../components/Navigation/DesktopNavigation'
 import FormBuilder from '../FormBuilder/FormBuilder';
@@ -8,10 +8,14 @@ import {FormElementType, customValidationType, InputVariant, InputTypes, FormEle
     ButtonSizeVariant, ButtonVariant, ButtonType, AppButtonType} from '../../Utility/InterFacesAndEnum'
 
 import {Wrapper, Container, FormSection, TwoSectionForm, Title, FormBody, CardWrapper, Content,Amount,
-     BreadCrumb, BreadCrumbItem} from './StyledCreateAuction';
+     BreadCrumb, BreadCrumbItem, AuctionSection} from './StyledCreateAuction';
 
 import {RouterPath} from '../../routes';
 import {useNavigate} from 'react-router-dom';
+
+import {createAuctionRequest,toggleCreateAuctionState} from '../../features/auctionList';
+import {useSelector, useDispatch} from 'react-redux';
+import { RootState } from '../../app/store';
 
 interface CreateAuction {
     form: FormElement[],
@@ -23,7 +27,7 @@ const AuctonDetails: CreateAuction = {
         {
             elementType: FormElementType.input,
             value:"",
-            id:"title",
+            id:"auctionTitle",
             isRequired:true,
             fullWidth: true,
             isCustomValidationRequred: false,
@@ -42,7 +46,7 @@ const AuctonDetails: CreateAuction = {
         {
             elementType: FormElementType.input,
             value:"",
-            id:"description",
+            id:"auctionDesc",
             isRequired:false,
             fullWidth: true,
             isCustomValidationRequred: false,
@@ -61,7 +65,7 @@ const AuctonDetails: CreateAuction = {
         {
             elementType: FormElementType.input,
             value:"",
-            id:"Amount",
+            id:"auctionProposedPrice",
             isRequired:true,
             fullWidth: true,
             isCustomValidationRequred: true,
@@ -86,7 +90,7 @@ const ScheduleDays:CreateAuction ={
         {
             elementType: FormElementType.datePicker,
             value:"",
-            id:"startDate",
+            id:"auctionStartDate",
             isRequired:true,
             fullWidth: true,
             isCustomValidationRequred: false,
@@ -105,7 +109,7 @@ const ScheduleDays:CreateAuction ={
         {
             elementType: FormElementType.datePicker,
             value:"",
-            id:"endDate",
+            id:"auctionEndDate",
             isRequired:false,
             fullWidth: true,
             isCustomValidationRequred: false,
@@ -130,7 +134,7 @@ const AddressForm: CreateAuction = {
         {
             elementType: FormElementType.input,
             value:"",
-            id:"location",
+            id:"address",
             isRequired:true,
             fullWidth: true,
             isCustomValidationRequred: false,
@@ -168,6 +172,25 @@ const AddressForm: CreateAuction = {
         {
             elementType: FormElementType.input,
             value:"",
+            id:"city",
+            isRequired:false,
+            fullWidth: true,
+            isCustomValidationRequred: false,
+            inputVariant: InputVariant.outlined,
+            inputType: InputTypes.text,
+            customValidationType: customValidationType.null,
+            isValidInput:false,
+            isTouched:false,
+            errorMessage:"",
+            label:"City",
+            radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
+            isPasswordHidden:true
+        },
+        {
+            elementType: FormElementType.input,
+            value:"",
             id:"country",
             isRequired:true,
             fullWidth: true,
@@ -183,6 +206,25 @@ const AddressForm: CreateAuction = {
             dropdownValues:[],
             slectedDate:null,
             isPasswordHidden:true
+        },
+        {
+            elementType: FormElementType.input,
+            value:"",
+            id:"pincode",
+            isRequired:true,
+            fullWidth: true,
+            isCustomValidationRequred: false,
+            inputVariant: InputVariant.outlined,
+            inputType: InputTypes.number,
+            customValidationType: customValidationType.null,
+            isValidInput:false,
+            isTouched:false,
+            errorMessage:"",
+            label:"Pin/zip code",
+            radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
+            isPasswordHidden:true
         }
     ],
     isValidForm: true
@@ -193,7 +235,7 @@ const UserDetail: CreateAuction = {
         {
             elementType: FormElementType.input,
             value:"",
-            id:"name",
+            id:"userName",
             isRequired:true,
             fullWidth: true,
             isCustomValidationRequred: false,
@@ -212,7 +254,7 @@ const UserDetail: CreateAuction = {
         {
             elementType: FormElementType.input,
             value:"",
-            id:"mobile",
+            id:"userMobile",
             isRequired:false,
             fullWidth: true,
             isCustomValidationRequred: true,
@@ -231,7 +273,7 @@ const UserDetail: CreateAuction = {
         {
             elementType: FormElementType.input,
             value:"",
-            id:"email",
+            id:"userEmailId",
             isRequired:true,
             fullWidth: true,
             isCustomValidationRequred: true,
@@ -256,7 +298,7 @@ const ProductDetail: CreateAuction = {
         {
             elementType: FormElementType.select,
             value:"select",
-            id:"type",
+            id:"productType",
             isRequired:true,
             fullWidth: true,
             isCustomValidationRequred: false,
@@ -267,7 +309,7 @@ const ProductDetail: CreateAuction = {
             isTouched:false,
             errorMessage:"",
             label:"Type",
-            dropdownValues:["select","type one"],
+            dropdownValues:["select","Vehicle"],
             radioGroupValues:[],
             slectedDate:null,
             isPasswordHidden:true
@@ -275,19 +317,19 @@ const ProductDetail: CreateAuction = {
         {
             elementType: FormElementType.select,
             value:"select",
-            id:"category",
+            id:"productCategory",
             isRequired:false,
             fullWidth: true,
-            isCustomValidationRequred: true,
+            isCustomValidationRequred: false,
             inputVariant: InputVariant.outlined,
             inputType: InputTypes.number,
-            customValidationType: customValidationType.mobileValidation,
+            customValidationType: customValidationType.null,
             isValidInput:false,
             isTouched:false,
             errorMessage:"",
-            label:"Categoryr",
+            label:"Category",
             radioGroupValues:[],
-            dropdownValues:["select","category one"],
+            dropdownValues:["select","Car"],
             slectedDate:null,
             isPasswordHidden:true
         }
@@ -299,6 +341,7 @@ const ProductDetail: CreateAuction = {
 const CreateAuction:FC = () => {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [auctionDetail, setAuctionDetail] = useState<CreateAuction>(AuctonDetails);
     const [scheduleDays, setScheduleDaysDetail] = useState<CreateAuction>(ScheduleDays);
@@ -306,9 +349,24 @@ const CreateAuction:FC = () => {
     const [userDetail, setUserDetail] = useState<CreateAuction>(UserDetail);
     const [productDetails, setProductDetail] = useState<CreateAuction>(ProductDetail);
 
+    let isRequested = useSelector((state:RootState) => state.auction.isAuctionCreated)
+
     const redirectToView = (path:string) => {
-        navigate(path)
+        navigate(path);
     };
+
+    useEffect(() => {
+        if (isRequested === true) {
+            redirectToView(RouterPath.auctionList);
+        }
+
+        return () => {
+            dispatch(toggleCreateAuctionState({
+                isCreated: false
+            }));
+        }
+
+    },[isRequested])
 
     //  --------- Auction detail ----------
     const handleAuctionDetailInputChange = (event:React.ChangeEvent <HTMLTextAreaElement | HTMLInputElement>):void => {
@@ -339,8 +397,6 @@ const CreateAuction:FC = () => {
             ...scheduleDays,
             form:updatedArray
         });
-        let selectedDate = new Date(date)
-        
     };
 
     const scheduleDaysView = <FormBuilder formElements={scheduleDays.form} 
@@ -393,6 +449,25 @@ const CreateAuction:FC = () => {
     onInputChange = {handleUserDetailInputChange} onSelectValueChange={updateSettingsFormState} />;
 
     // ---------- end product detail ------------
+
+    const createRequest = () => {
+
+    let formElementsArray = [
+        ...auctionDetail.form,
+        ...scheduleDays.form,
+        ...address.form,
+        ...userDetail.form,
+        ...productDetails.form
+    ]
+
+    let requestObj:any = {};
+
+    for (let formElement of formElementsArray){
+        let value = formElement.value;
+        requestObj[formElement.id] = value
+    }
+dispatch(createAuctionRequest(requestObj));
+    };
 
     return <Wrapper>
         <Navigation />
@@ -459,6 +534,18 @@ const CreateAuction:FC = () => {
                 </CardWrapper>
                 </FormBody>
             </FormSection>
+            <AuctionSection>
+            <Button 
+    appBtnType={AppButtonType.primaryBtn}
+        disabled={false} 
+        fullWidth={false} 
+        size={ButtonSizeVariant.large} 
+        variant={ButtonVariant.contained} 
+        type={ButtonType.submit} 
+        clicked={createRequest} >
+            Create Request
+    </Button>
+            </AuctionSection>
         </Container>
     </Wrapper>
 };

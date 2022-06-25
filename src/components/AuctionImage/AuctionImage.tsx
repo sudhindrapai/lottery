@@ -18,7 +18,7 @@ const AuctionImage:FC<AuctionImageProps> = ({images}) => {
     const [FeatureImgUrl, setFeatuerImgurl] = useState("")
 
     useEffect(() => {
-        if (imagesArray.length === 0) {
+        if (imagesArray.length === 0 && images !== null && images.length > 0) {
             let i = 0;
             let tempArray = [];
             for (let imgUrl of images) {

@@ -15,13 +15,15 @@ interface DatepickerProps {
 const DatePickerComponent:React.FC<DatepickerProps> = ({label, name, value, onChangeDate}) => {
 
   const handleChange = (newValue: Date | null) => {
-    onChangeDate(newValue, name);
+    const { _d } = newValue
+    console.log(new Date(_d),'newValue')
+    onChangeDate(new Date(_d), name);
   };
 
     return<LocalizationProvider dateAdapter={AdapterMoment}>
     <DateTimePicker
           label={label}
-          inputFormat="DD/mm/yy hh:mm"
+          inputFormat="DD/mm/yy h:mm a"
           value={value}
           onChange={handleChange}
           renderInput={(params:any) => <TextField {...params} fullWidth={true} />}

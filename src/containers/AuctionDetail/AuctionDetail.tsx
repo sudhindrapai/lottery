@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useEffect} from 'react';
 import Navigation from '../../components/Navigation/DesktopNavigation';
 import {transformDate} from '../../Utility/Utility'
 import ImageComponent from '../../components/AuctionImage/AuctionImage';
@@ -7,55 +7,64 @@ import {ButtonSizeVariant, ButtonType, ButtonVariant,AppButtonType} from '../../
 import Button from '../../components/UI/Buttons/Button';
 import SimilarProducts from '../AuctionSimilarProducts/SimilarProducts';
 
+import {useSelector, useDispatch} from 'react-redux';
+import {getAuctionDetail} from '../../features/auctionList';
+import {RootState} from '../../app/store';
+import {RouterPath} from '../../routes';
+import {useParams, useNavigate} from 'react-router-dom';
+
 import {Wrapper, Container, ImageSection, DetailSection,
      Title, ProductType, Description, ProgressBarContainer, ProgressBarDetail,
       EngagedUrsers, TotalUsers, ActionDetail, TicketDetail, Label, Value, Line,
        SellerSectionTitle, SellerDetailWrapper ,ProfileImg, SellerDetail, SellerName,
-       ItemDetails, ItemDetailLabel, SimilarProductContainer} from './StyledAuctionDetail'
+       ItemDetails, ItemDetailLabel, SimilarProductContainer, BreadCrumb, BreadCrumbItem} from './StyledAuctionDetail'
 
 const AuctionDetail:FC = () => {
-    const detail = {
-        images:["https://picsum.photos/450/420", "https://picsum.photos/450/420"],
-    title: "Duke Bike 2020 Model",
-    type: "Bike",
-    totalUsers: 2000,
-    engagedUsers: 1290,
-    entryTicket: 10,
-    drawDate: new Date(),
-    id: 12,
-    ownerName: "Sudhindra",
-    imgUrl: "https://picsum.photos/450/420",
-    streat: "Strat Name",
-    city: "Kundapura",
-    state: "Kerala",
-    country: "India",
+    
+    const {auctionId} = useParams();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    let auctionDetail = useSelector((state:RootState) => state.auction.auctionDetail);
+
+    useEffect(() => {
+        if (auctionId !== null && auctionId !== undefined) {
+            dispatch(getAuctionDetail(auctionId.toString()));
+        }
+    },[]);
+
+    const redirectToView = (path:string) => {
+        navigate(path)
     }
+
     return <Wrapper>
         <Navigation />
+        <BreadCrumb>
+        <BreadCrumbItem onClick={() => {redirectToView(RouterPath.root)}}>Home</BreadCrumbItem> / 
+        <BreadCrumbItem onClick={() => {redirectToView(RouterPath.auctionList)}} >Auction</BreadCrumbItem> / 
+        <BreadCrumbItem onClick={() => {redirectToView(RouterPath.createAuction)}} >{auctionDetail.auctionTitle}</BreadCrumbItem>
+        </BreadCrumb>
         <Container>
             <ImageSection>
-                <ImageComponent images={detail.images} />
+                <ImageComponent images={auctionDetail.auctionImageUrls} />
             </ImageSection>
             <DetailSection>
                 <Title>
-                    {detail.title}
+                    {auctionDetail.auctionTitle}
                 </Title>
                 <ProductType>
-                    {detail.type}
+                    {auctionDetail.auctionType}
                 </ProductType>
                 <Description>
-                orem Ipsum Dolor Simut Ignus, Fraks Logik Donor Lits. Lorem Ipsum Dolor Simut Ignus, Fraks Logik Donor Lits.
-                 Lorem Ipsum Dolor Simut Ignus, Fraks Logik Donor Lits. Lorem Ipsum Dolor Simut Ignus, Fraks Logik Donor Lits.
-                 Lorem Ipsum Dolor Simut Ignus, Fraks Logik Donor Lits. Lorem Ipsum Dolor Simut Ignus, Fraks Logik Donor Lits.
+                {auctionDetail.auctionDesc}
                 </Description>
                 <ProgressBarContainer>
-                    <ProgressBar completed={detail.engagedUsers} total={detail.totalUsers} />
+                    <ProgressBar completed={auctionDetail.engagedUsers} total={auctionDetail.totalUsers} />
                     <ProgressBarDetail>
                         <EngagedUrsers>
-                            {detail.totalUsers - detail.engagedUsers} users to join
+                            {10 - auctionDetail.engagedUsers} users to join
                         </EngagedUrsers>
                         <TotalUsers>
-                            {detail.totalUsers} users
+                            {100} users
                         </TotalUsers>
                     </ProgressBarDetail>
                 </ProgressBarContainer>
@@ -73,7 +82,7 @@ const AuctionDetail:FC = () => {
                     Entry Ticket:
                     </Label>
                     <Value>
-                    &#x24; {detail.entryTicket}
+                    &#x24; {10}
                     </Value>
                 </TicketDetail>
                 <TicketDetail>
@@ -81,7 +90,7 @@ const AuctionDetail:FC = () => {
                     Draw Date:
                     </Label>
                     <Value>
-                    {transformDate(detail.drawDate)}
+                    {transformDate(auctionDetail.auctionEndDate)}
                     </Value>
                 </TicketDetail>
                 <Line />
@@ -89,10 +98,10 @@ const AuctionDetail:FC = () => {
                 Seller Details:
                 </SellerSectionTitle>
                 <SellerDetailWrapper>
-                    <ProfileImg src={detail.imgUrl} />
+                    <ProfileImg src={""} />
                     <SellerDetail>
                         <SellerName>
-                            Sudhindra Pai
+                            {auctionDetail.userName}
                         </SellerName>
                     </SellerDetail>
                 </SellerDetailWrapper>
@@ -101,10 +110,10 @@ const AuctionDetail:FC = () => {
                 </SellerSectionTitle>
                 <ItemDetails>
                     <ItemDetailLabel>
-                    Street
+                    State
                     </ItemDetailLabel>
                     <Value>
-                        {detail.streat}
+                        {auctionDetail.state}
                     </Value>
                 </ItemDetails>
                 <ItemDetails>
@@ -112,15 +121,7 @@ const AuctionDetail:FC = () => {
                     City
                     </ItemDetailLabel>
                     <Value>
-                        {detail.city}
-                    </Value>
-                </ItemDetails>
-                <ItemDetails>
-                    <ItemDetailLabel>
-                    State
-                    </ItemDetailLabel>
-                    <Value>
-                        {detail.state}
+                        {auctionDetail.city}
                     </Value>
                 </ItemDetails>
                 <ItemDetails>
@@ -128,7 +129,7 @@ const AuctionDetail:FC = () => {
                     Country
                     </ItemDetailLabel>
                     <Value>
-                        {detail.country}
+                        {auctionDetail.country}
                     </Value>
                 </ItemDetails>
             </DetailSection>

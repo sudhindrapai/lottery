@@ -1,8 +1,9 @@
-import {FC, Fragment} from 'react';
+import {FC, Fragment, useEffect} from 'react';
 import DesktopNavigation from '../../components/Navigation/DesktopNavigation';
 import {ButtonSizeVariant, ButtonType, ButtonVariant,AppButtonType} from '../../Utility/InterFacesAndEnum';
 import Button from '../../components/UI/Buttons/Button';
 import AuctionItem from '../../components/AuctionCards/AuctionCards';
+import {getAuctionList} from '../../features/auctionList';
 import {useSelector, useDispatch} from 'react-redux';
 
 import {useNavigate} from 'react-router-dom';
@@ -24,6 +25,10 @@ const Auction:FC = () => {
     const redirectToView = (path: string) => {
         navigate(path);
     }
+
+    useEffect(() => {
+        dispatch(getAuctionList("auctionStatus=U"))
+    },[])
 
     return <Fragment>
         <DesktopNavigation />
@@ -75,16 +80,18 @@ const Auction:FC = () => {
             </ActionSection>
             <AuctionList>
                 {auctionList.map((auctionItem) => {
+                    let auctionUrl = auctionItem.imageUrls? auctionItem.imageUrls[0] : "https://picsum.photos/450/420";
+                    let engagedUsersCount = auctionItem.noOfUsersJoined ? auctionItem.noOfUsersJoined : 0
                     return <AuctionListItem>
                         <AuctionItem 
-                    auctionId={auctionItem.id} 
-                    imgUrl={auctionItem.images[0]} 
-                    title={auctionItem.title} 
-                    totalUsers={auctionItem.totalUsers} 
-                    engagedUsers={auctionItem.engagedUsers} 
-                    auctionProduct={auctionItem.type} 
-                    entryTicket={auctionItem.entryTicket} 
-                    drawDate={auctionItem.drawDate} 
+                    auctionId={auctionItem.auctionId} 
+                    imgUrl={auctionUrl} 
+                    title={auctionItem.auctionTitle} 
+                    totalUsers={100} 
+                    engagedUsers={engagedUsersCount} 
+                    auctionProduct={auctionItem.productType} 
+                    entryTicket={auctionItem.auctionPrice} 
+                    drawDate={auctionItem.auctionEndDate} 
                     onSelectBuy={buyTickets} />
                     </AuctionListItem>
                 })}

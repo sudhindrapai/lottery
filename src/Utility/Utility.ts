@@ -115,6 +115,7 @@ export const updateFormDate = (date: Date|null, name: string, formValues:FormEle
     let updatedArray = formValues.map((formObj) => {
         if (formObj.id === name) {
             let obj = Object.assign(formObj);
+            // console.log(date?date[_d],"date")
             obj["value"] = date;
             obj["isTouched"] = true;
             obj["errorMessage"] = "";

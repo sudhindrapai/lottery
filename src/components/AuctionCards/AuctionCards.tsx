@@ -56,7 +56,7 @@ const AuctionCards:FC<AuctionCardsProps> = (props) => {
                 Draw Date
                 </DetailTitle>
                 <Value>
-                    {transformDate(new Date(drawDate))}
+                    {transformDate(new Date(drawDate)).toString()}
                 </Value>
             </Detail>
         </TicketDetailWrapper>

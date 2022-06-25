@@ -29,7 +29,7 @@ const DesktopNavigation: React.FC = () => {
     }
 
     useEffect(() => {
-        console.log(location.pathname,"location");
+        
         let updatedResponse = navigationData.map((navObj) => {
             return {
                 ...navObj,
@@ -43,8 +43,12 @@ const DesktopNavigation: React.FC = () => {
 
     useEffect(() => {
         if (name === "") {
-            let userObj = JSON.parse(getLocalStorage(localStorageActionType.GET_USER_DETAILS));
-            setName(userObj.firstName);
+            let useerDetailObj = getLocalStorage(localStorageActionType.GET_USER_DETAILS);
+            // console.log(Object.keys(useerDetailObj).length > 0,"useerDetailObj")
+            if (useerDetailObj !== null && Object.keys(useerDetailObj).length > 0) {
+                let userObj = JSON.parse(getLocalStorage(localStorageActionType.GET_USER_DETAILS));
+                setName(userObj.firstName);
+            }
         }
     },[])
 
