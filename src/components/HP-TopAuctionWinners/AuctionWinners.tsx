@@ -1,6 +1,10 @@
-import {FC} from 'react';
-import {Wrapper, Table} from './StyledAuctionWinners';
+import {FC, useEffect} from 'react';
+import {Wrapper, Table, EmptyView} from './StyledAuctionWinners';
 import {transformDate} from '../../Utility/Utility';
+
+import {RootState} from '../../app/store';
+import {getAuctionWinnerList} from '../../features/auctionList'
+import {useSelector, useDispatch} from 'react-redux';
 
 let auctionWinnersList = [
     {
@@ -41,8 +45,19 @@ let auctionWinnersList = [
 ]
 
 const AuctionWinners = () => {
+
+    const dispatch = useDispatch();
+
+    const winnerList = useSelector((state:RootState) => state.auction.auctionWinnerList);
+
+    useEffect(() => {
+        if (winnerList.length === 0) {
+            dispatch(getAuctionWinnerList(""));
+        }
+    },[])
+
     return <Wrapper>
-        <Table>
+        {winnerList.length > 0 && <Table>
             <thead>
                 <tr>
                     <td>
@@ -64,7 +79,7 @@ const AuctionWinners = () => {
             </thead>
             <tbody>
                     {
-                        auctionWinnersList.map((bodyObj) => {
+                        winnerList.length > 0 && winnerList.map((bodyObj:any) => {
                             return <tr>
                                 <td>
                                     <img src={bodyObj.imgUrl} />
@@ -85,7 +100,10 @@ const AuctionWinners = () => {
                         })
                     }
                 </tbody>
-        </Table>
+        </Table>}
+        <EmptyView>
+            No Winner Records Found
+        </EmptyView>
     </Wrapper>
 };
 

@@ -5,8 +5,11 @@ import AuctionCards from '../../components/AuctionCards/AuctionCards';
 import 'swiper/css';
 
 import {useSelector, useDispatch} from 'react-redux';
-import {getAuctionList} from '../../features/auctionList';
+import {getAuctionList, purchaseAuction, toggleAuctionPurchase} from '../../features/auctionList';
 import {RootState} from '../../app/store';
+
+import {RouterPath} from '../../routes'
+import {useNavigate} from 'react-router-dom';
 
 interface SimilarProductsProps {
   isTitleRequired?:boolean
@@ -14,15 +17,33 @@ interface SimilarProductsProps {
 
 const SimilarProducts:FC<SimilarProductsProps> = ({isTitleRequired}) => {
     const dispatch = useDispatch();
+    const navigage = useNavigate();
+
     const auctionProducts = useSelector((state:RootState) => state.auction.auctionList);
+    const isAuctionPurchased = useSelector((state:RootState) => state.auction.isAuctionPurchased);
 
     useEffect(() => {
       if (auctionProducts.length === 0) {
         dispatch(getAuctionList("auctionStatus=U"));
       }
-    },[])
+    },[]);
 
-    const buySimilarProduct = (id:number) => {};
+    useEffect(() => {
+      if (isAuctionPurchased === true) {
+        navigage(RouterPath.lotteryPaymentSuccess);
+      }
+      return () => {
+        dispatch(toggleAuctionPurchase({
+          isPurchased: false
+        }))
+      }
+    },[isAuctionPurchased])
+
+    const buySimilarProduct = (id:number) => {
+      dispatch(purchaseAuction({
+        auctionId: id
+    }));
+    };
 
     return <Wrapper>
         {isTitleRequired && <Title>

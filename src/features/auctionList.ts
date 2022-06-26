@@ -5,6 +5,7 @@ import {NotificationType} from '../Utility/InterFacesAndEnum';
 
 import * as localStorageActionType from '../localStorage/ActionTypes';
 import {getLocalStorage} from '../localStorage/GetLocalStorage'; 
+import exp from 'constants';
 
 interface AuctionItem{
     auctionDesc: string
@@ -70,7 +71,9 @@ interface CreateAuctionRequest {
 interface AuctionState{
     auctionList: [] | AuctionItem[],
     isAuctionCreated: boolean,
-    auctionDetail: any
+    auctionDetail: any,
+    isAuctionPurchased:boolean,
+    auctionWinnerList:any
 }
 
 interface ToggleCreateAuctionProps {
@@ -84,11 +87,21 @@ interface SetAuctionDetailProps {
 const auctionInitialState:AuctionState = {
     auctionList:[],
     isAuctionCreated: false,
-    auctionDetail:{auctionImageUrls:""}
+    auctionDetail:{auctionImageUrls:""},
+    isAuctionPurchased:false,
+    auctionWinnerList:[]
 }
 
 interface SetAuctionList {
     data: AuctionItem[]
+}
+
+interface AuctionPurchaseState {
+    isPurchased: boolean
+}
+
+interface SetWinnerList {
+    data: any
 }
 
 export const createAuctionRequest = createAsyncThunk(
@@ -175,6 +188,74 @@ export const getAuctionDetail = createAsyncThunk(
     }
 );
 
+export const purchaseAuction = createAsyncThunk(
+    'Purchase Auction',
+    async (payload: any, {dispatch}) => {
+        let localStorageUserObj = getLocalStorage(localStorageActionType.GET_USER_DETAILS);
+        let userObj = JSON.parse(localStorageUserObj);
+        let userId = userObj.userId;
+        let bodyObj = {
+            ...payload,
+            userId: userId,
+            paymentId: 2,
+            purchaseDate: new Date(),
+            ticketType: "G",
+            noOfTickets: 3
+        }
+        await fetch (endpoints.purchaseAuction, {
+            method: 'POST',
+            headers:{
+                Authorization: `Bearer ${getLocalStorage(localStorageActionType.GET_ACCESS_TOKEN)}`,
+                "Content-type": "application/json; charset=UTF-8",
+            },
+            body: JSON.stringify(bodyObj)
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((response) => {
+            if (response.statusCode === 200){
+                dispatch(toggleNotificationVisibility({
+                    isVisible: true,
+                    status: NotificationType.success,
+                    message: response.errorMsg
+                }));
+                dispatch(toggleAuctionPurchase({
+                    isPurchased: true
+                }));
+            }
+        })
+    }
+);
+
+
+export const getAuctionWinnerList = createAsyncThunk(
+    'get auction winner list',
+    async (payload: string, {dispatch}) => {
+        await fetch (endpoints.getAuctionWinnerList, {
+            method: 'GET',
+            headers:{
+                Authorization: `Bearer ${getLocalStorage(localStorageActionType.GET_ACCESS_TOKEN)}`,
+                "Content-type": "application/json; charset=UTF-8",
+            },
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((response) => {
+            if (response.statusCode === 200) {
+                dispatch(setWinnerList({
+                    data: response.result
+                }))
+            } else if (response.statusCode === 504){
+                dispatch(setWinnerList({
+                    data: []
+                }))
+            }
+        })
+    }
+);
+
 const auctionSlice = createSlice({
     name: 'auction slice',
     initialState: auctionInitialState,
@@ -196,9 +277,21 @@ const auctionSlice = createSlice({
                 ...state,
                 auctionDetail: action.payload.data
             }
+        },
+        toggleAuctionPurchase: (state, action:PayloadAction<AuctionPurchaseState>) => {
+            return{
+                ...state,
+                isAuctionPurchased: action.payload.isPurchased
+            }
+        },
+        setWinnerList: (state, action:PayloadAction<SetWinnerList>) => {
+            return{
+                ...state,
+                auctionWinnerList:action.payload.data
+            }
         }
     }
 });
 
-export const {setAuctionList, toggleCreateAuctionState, setAuctionDetail} = auctionSlice.actions;
+export const {setAuctionList, toggleCreateAuctionState, setAuctionDetail, toggleAuctionPurchase, setWinnerList} = auctionSlice.actions;
 export default auctionSlice.reducer;

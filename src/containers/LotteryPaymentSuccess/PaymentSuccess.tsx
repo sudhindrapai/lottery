@@ -21,9 +21,9 @@ const PaymentSuccess:FC = () => {
                 <Title>
                 Ticket  purchased Successfully
                 </Title>
-                <Subtitle>
+                {/* <Subtitle>
                 Total {totalNoOfTickets} entries created to the lottery, your ticket will be sent to your registered email address
-                </Subtitle>
+                </Subtitle> */}
                 <ActionSection>
                 <Button 
                 appBtnType={AppButtonType.primaryBtn}

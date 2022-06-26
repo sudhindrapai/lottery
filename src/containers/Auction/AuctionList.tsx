@@ -3,7 +3,7 @@ import DesktopNavigation from '../../components/Navigation/DesktopNavigation';
 import {ButtonSizeVariant, ButtonType, ButtonVariant,AppButtonType} from '../../Utility/InterFacesAndEnum';
 import Button from '../../components/UI/Buttons/Button';
 import AuctionItem from '../../components/AuctionCards/AuctionCards';
-import {getAuctionList} from '../../features/auctionList';
+import {getAuctionList,purchaseAuction, toggleAuctionPurchase} from '../../features/auctionList';
 import {useSelector, useDispatch} from 'react-redux';
 
 import {useNavigate} from 'react-router-dom';
@@ -19,16 +19,39 @@ const Auction:FC = () => {
     const navigate = useNavigate();
     
     const auctionList = useSelector((state:RootState) => state.auction.auctionList);
+    const isAuctionPurchased = useSelector((state:RootState) => state.auction.isAuctionPurchased )
 
-    const buyTickets = (id: number) => {};
+    const buyTickets = (id: number) => {
+        dispatch(purchaseAuction({
+            auctionId: id
+        }));
+    };
 
     const redirectToView = (path: string) => {
         navigate(path);
     }
 
     useEffect(() => {
-        dispatch(getAuctionList("auctionStatus=U"))
-    },[])
+        dispatch(getAuctionList("auctionStatus=U"));
+        return () => {
+            dispatch(toggleAuctionPurchase({
+                isPurchased:false
+            }))
+        }
+    },[]);
+
+    useEffect(() => {
+        if (isAuctionPurchased === true) {
+            navigate(RouterPath.lotteryPaymentSuccess);
+        }
+
+        return () => {
+            dispatch(toggleAuctionPurchase({
+                isPurchased:false
+            }))
+        }
+
+    },[isAuctionPurchased]); 
 
     return <Fragment>
         <DesktopNavigation />

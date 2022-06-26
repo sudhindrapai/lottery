@@ -8,7 +8,7 @@ import Button from '../../components/UI/Buttons/Button';
 import SimilarProducts from '../AuctionSimilarProducts/SimilarProducts';
 
 import {useSelector, useDispatch} from 'react-redux';
-import {getAuctionDetail} from '../../features/auctionList';
+import {getAuctionDetail, purchaseAuction, toggleAuctionPurchase} from '../../features/auctionList';
 import {RootState} from '../../app/store';
 import {RouterPath} from '../../routes';
 import {useParams, useNavigate} from 'react-router-dom';
@@ -25,15 +25,38 @@ const AuctionDetail:FC = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     let auctionDetail = useSelector((state:RootState) => state.auction.auctionDetail);
+    let isAuctionPurchased = useSelector((state:RootState) => state.auction.isAuctionPurchased);
 
     useEffect(() => {
         if (auctionId !== null && auctionId !== undefined) {
             dispatch(getAuctionDetail(auctionId.toString()));
         }
+        return () => {
+            dispatch(toggleAuctionPurchase({
+                isPurchased: false
+            }));
+        }
     },[]);
+
+    useEffect(() => {
+        if (isAuctionPurchased === true){
+            redirectToView(RouterPath.lotteryPaymentSuccess);
+        }
+        return () => {
+            dispatch(toggleAuctionPurchase({
+                isPurchased: false
+            }));
+        }
+    },[isAuctionPurchased]);
 
     const redirectToView = (path:string) => {
         navigate(path)
+    }
+
+    const purchaseTicket = (id: number) => {
+        dispatch(purchaseAuction({
+            auctionId: auctionId
+        }));
     }
 
     return <Wrapper>
@@ -73,7 +96,7 @@ const AuctionDetail:FC = () => {
                 appBtnType={AppButtonType.primaryBtn}
         fullWidth={false} 
         variant={ButtonVariant.contained} 
-        type={ButtonType.default} size={ButtonSizeVariant.large} clicked={() => {}} >
+        type={ButtonType.default} size={ButtonSizeVariant.large} clicked={() => {purchaseTicket(auctionDetail.auctionId)}} >
             BUY TICKETS
         </Button>
                 </ActionDetail>

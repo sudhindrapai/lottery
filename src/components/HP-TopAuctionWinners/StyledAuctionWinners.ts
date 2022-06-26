@@ -26,3 +26,12 @@ line-height: 19px;
 color: #200E32;
 }
 `;
+
+export const EmptyView = styled.div`
+width: 100%;
+box-sizing: border-box;
+text-align: center;
+padding: 100px 0;
+color: #200E32;
+font-size: 18px;
+`;
