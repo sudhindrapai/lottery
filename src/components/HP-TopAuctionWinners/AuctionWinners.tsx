@@ -54,7 +54,7 @@ const AuctionWinners = () => {
         if (winnerList.length === 0) {
             dispatch(getAuctionWinnerList(""));
         }
-    },[])
+    },[]);
 
     return <Wrapper>
         {winnerList.length > 0 && <Table>

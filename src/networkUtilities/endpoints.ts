@@ -22,4 +22,5 @@ export const createAuctionRequest = `${baseUrl}/kingsrings/api/v1/auction/create
 export const getAuctionList = `${baseUrl}/kingsrings/api/v1/auction/list`; /** ?auctionStatus=U */
 export const getAuctionDetailById = `${baseUrl}/kingsrings/api/v1/auction/list/`; /** 6 */
 export const purchaseAuction = `${baseUrl}/kingsrings/api/v1/purchaseauctionticket/create`;
+export const uploadImage = `${baseUrl}/kingsrings/api/v1/file/upload`;
 export const getAuctionWinnerList = `${baseUrl}/kingsrings/api/v1/auction/winnerslist`;

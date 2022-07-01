@@ -3,6 +3,7 @@ import {FC, useState, useEffect} from 'react';
 import Navigation from '../../components/Navigation/DesktopNavigation'
 import FormBuilder from '../FormBuilder/FormBuilder';
 import Button from '../../components/UI/Buttons/Button';
+import ImageUploader from '../../components/FormImageUploader/ImageUploader';
 import {updateFormInputState, validateForm, updateFormSelectState, updateFormDate} from '../../Utility/Utility';
 import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement,
     ButtonSizeVariant, ButtonVariant, ButtonType, AppButtonType} from '../../Utility/InterFacesAndEnum'
@@ -477,6 +478,7 @@ dispatch(createAuctionRequest(requestObj));
         <BreadCrumbItem onClick={() => {redirectToView(RouterPath.createAuction)}} >List your product in auction</BreadCrumbItem>
         </BreadCrumb>
         <Container>
+        <TwoSectionForm>
             <FormSection>
                 <Title>
                 Auction Details
@@ -493,6 +495,8 @@ dispatch(createAuctionRequest(requestObj));
                     {scheduleDaysView}
                 </FormBody>
             </FormSection>
+            </TwoSectionForm>
+            <TwoSectionForm>
             <FormSection>
                 <Title>
                 Address
@@ -501,18 +505,24 @@ dispatch(createAuctionRequest(requestObj));
                     {addressView}
                 </FormBody>
             </FormSection>
-            <TwoSectionForm>
+            <FormSection>
             <FormSection>
                 <Title>
-                Address
+                User Details
                 </Title>
                 <FormBody>
                     {userView}
                 </FormBody>
             </FormSection>
+            </FormSection>
+            </TwoSectionForm>
+            <TwoSectionForm>
+            <FormSection>
+            <ImageUploader />
+            </FormSection>
             <FormSection>
                 <Title>
-                Address
+                Product Details
                 </Title>
                 <FormBody>
                     {productDetailView}

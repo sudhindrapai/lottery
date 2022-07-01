@@ -12,6 +12,7 @@ import ProfileSlide from '../features/userProfileSlice';
 import PurchaseSlice from '../features/purchaseLotterySlice';
 import AuctionSlice from '../features/auctionList';
 import OrdersSlice from '../features/ordersSlice';
+import ImageUploader from '../features/imageUploaderSlice'
 
 const store = configureStore({
     reducer:{
@@ -27,7 +28,8 @@ const store = configureStore({
        userProfile: ProfileSlide,
        purchaseLottery: PurchaseSlice,
        auction: AuctionSlice,
-       orders:OrdersSlice
+       orders:OrdersSlice,
+       images:ImageUploader
     }
 })
 
