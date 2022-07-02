@@ -38,6 +38,7 @@ const FormBuilder:React.FC<FormbuilderProps> = (props) => {
                     fullWidth={formElement.fullWidth} 
                     helperText={formElement.errorMessage} 
                     error={formElement.isTouched && formElement.errorMessage.length > 0} 
+                    isCurrencySymbolVisible={formElement.isCurrencySymbolVisible}
                     handleInputChange={onInputChange} /> 
                     </StyledFormElement>;
                 break;

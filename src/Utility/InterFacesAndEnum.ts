@@ -85,7 +85,8 @@ export interface FormElement {
     dobDate?: Date,
     row?:number,
     slectedDate: Date | null,
-    dropdownValues:string[]
+    dropdownValues:string[],
+    isCurrencySymbolVisible?: boolean
 }
 
 export enum NotificationType {

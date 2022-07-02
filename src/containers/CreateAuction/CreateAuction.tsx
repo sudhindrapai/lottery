@@ -82,6 +82,7 @@ const AuctonDetails: CreateAuction = {
             radioGroupValues:[],
             dropdownValues:[],
             slectedDate:null,
+            isCurrencySymbolVisible:true,
             isPasswordHidden:true
         }
     ],
