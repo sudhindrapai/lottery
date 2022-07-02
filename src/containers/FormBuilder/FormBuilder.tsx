@@ -5,8 +5,9 @@ import Input from '../../components/UI/Input/Input';
 import Textarea from '../../components/UI/TextArea/TextArea'
 import RadioGroup from '../../components/UI/RadioGroup/RadioGroup';
 import PasswordIput from '../../components/UI/Password/Password';
-import Select from '../../components/UI/Select/Select'
-import DatePicker from '../../components/UI/DatePicker/DatePicker'
+import Select from '../../components/UI/Select/Select';
+import DatePicker from '../../components/UI/DatePicker/DatePicker';
+import Multiselection from '../../components/UI/MultiSelection/MultiSelection';
 
 import {FormElementType, FormElement, InputVariant} from '../../Utility/InterFacesAndEnum';
 
@@ -95,7 +96,6 @@ const FormBuilder:React.FC<FormbuilderProps> = (props) => {
                         </StyledFormElement>
                         break;
                     case FormElementType.datePicker:
-                        case FormElementType.datePicker:
                             element = <StyledFormElement key={`${formElement.id}_${index}`} >
                                 <DatePicker 
                                 label={formElement.label} 
@@ -105,7 +105,19 @@ const FormBuilder:React.FC<FormbuilderProps> = (props) => {
                                  />
                             </StyledFormElement>
                         break;
-                    break;
+                    case FormElementType.multiSelection:
+                        element = <StyledFormElement key={`${formElement.id}_${index}`} >
+                            <Multiselection fullWidth={formElement.fullWidth} 
+                            required={formElement.isRequired} 
+                            value={formElement.value} 
+                            label={formElement.label} 
+                            id={formElement.id} 
+                            name={formElement.id} 
+                            error={formElement.isValidInput} 
+                            dropdownValues={formElement.dropdownValues} 
+                            handleInputChange={onSelectValueChange} />
+                        </StyledFormElement>;
+                        break;
                 default:
                     element = null;
         }

@@ -22,7 +22,8 @@ import Auction from './containers/Auction/AuctionList';
 import AuctionDetail from './containers/AuctionDetail/AuctionDetail';
 import CreateAuction from './containers/CreateAuction/CreateAuction';
 import {AppRoutePath} from './features/navigationSlice';
-import Purchases from './containers/Purchases/Purchases'
+import Purchases from './containers/Purchases/Purchases';
+import AuctionPaymentSuccess from './containers/AuctionPaymentSuccess/PaymentSuccess'
 
 export const RouterPath = {
   ...AppRoutePath
@@ -52,6 +53,7 @@ const AppRoutes = () => {
             <Route path={RouterPath.auctionDetail} element={<AuctionDetail />} />
             <Route path={RouterPath.createAuction} element={<CreateAuction />} />
             <Route path={RouterPath.orders} element={<Purchases />} />
+            <Route path={RouterPath.auctionPaymentSuccess} element={<AuctionPaymentSuccess />} />
       </Routes>
     )
 }

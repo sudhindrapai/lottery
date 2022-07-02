@@ -83,7 +83,7 @@ const BuyTicketModal:FC<BuyTicketModalProps> = (props) => {
 
     useEffect(() => {
         if (ticketsList.length === 0) {
-            console.log(JSON.stringify(ticket),"ticketticketticketticket")
+            console.log(ticket,"ticketticketticketticket")
             setTickets(ticket);
             calculateTotalValue(ticket);
         }
@@ -137,9 +137,11 @@ const BuyTicketModal:FC<BuyTicketModalProps> = (props) => {
             totalAmount:totalValue
         };
 
-        setLocalStorage(localStorageActionType.SET_TICKET_DETAIL_OBJ,ticketDetailObj);
+        // Fixme
+        // setLocalStorage(localStorageActionType.SET_TICKET_DETAIL_OBJ,ticketDetailObj);
 
-        navigate(RouterPath.lotteryPaymentView);
+        // Fixme
+        navigate(RouterPath.auctionPaymentSuccess);
     };
 
     return <Modal open={isVisible} onClose={toggleModal}

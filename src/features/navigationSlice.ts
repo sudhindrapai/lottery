@@ -20,6 +20,7 @@ export const AppRoutePath = {
     auctionList: "/auction",
     auctionDetail: "/auction/detail/:auctionId",
     createAuction: "/auction/create",
+    auctionPaymentSuccess: "/auction/payment-success",
     tempRoot: "/",
     root: "/",
     notFound: "*"

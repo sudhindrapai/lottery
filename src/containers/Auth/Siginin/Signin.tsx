@@ -44,7 +44,7 @@ const Login:FC = () => {
         if (isLoggedIn) {
             if (isAuthenticated) {
                 dispatch(getUserProfileDetail());
-                navigate(RouterPath.lotteries);
+                navigate(RouterPath.root);
             } else if (isAuthenticated === false) {
                 navigate(RouterPath.twoFA);
             }

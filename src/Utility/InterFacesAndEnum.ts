@@ -39,7 +39,8 @@ export enum FormElementType {
     datePicker = 'datePicker',
     select = 'select',
     checkbox = 'checkbox',
-    textArea = 'textarea'
+    textArea = 'textarea',
+    multiSelection = 'multiSelection'
 }
 
 export enum AppButtonType {

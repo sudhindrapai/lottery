@@ -1,25 +1,80 @@
-import {FC, Fragment, useEffect} from 'react';
+import {FC, Fragment, useEffect, useState} from 'react';
 import DesktopNavigation from '../../components/Navigation/DesktopNavigation';
 import {ButtonSizeVariant, ButtonType, ButtonVariant,AppButtonType} from '../../Utility/InterFacesAndEnum';
 import Button from '../../components/UI/Buttons/Button';
 import AuctionItem from '../../components/AuctionCards/AuctionCards';
 import {getAuctionList,purchaseAuction, toggleAuctionPurchase} from '../../features/auctionList';
 import {useSelector, useDispatch} from 'react-redux';
+import AuctionBuyBtn from '../../components/AuctionBuyButton/AuctionBuyButton';
 
 import {useNavigate} from 'react-router-dom';
 import {RouterPath} from '../../routes'
 import {Wrapper, BannerSection,BannerContainer, CardContainer,
      CardFooter, CardDescription, CardTitle, CardProduct, CardAction, AuctionList,
-      AuctionListItem, ListTitle, ActionSection} from './StyledAuctionList'
+      AuctionListItem, ListTitle, ActionSection, FilterViewSection, FormView} from './StyledAuctionList'
 import { RootState } from '../../app/store';
+
+
+import FormBuilder from '../FormBuilder/FormBuilder';
+import {updateFormInputState, updateFormSelectState} from '../../Utility/Utility';
+import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement} from '../../Utility/InterFacesAndEnum';
+import {countryNames} from '../../assets/DropdownValues/DropdownValues';
+
+
+interface FormState {
+    form: FormElement[],
+    isValidForm: boolean
+}
+
+const FileterForm: FormState = {
+    form:[
+        {
+            elementType: FormElementType.multiSelection,
+            value:"",
+            id:"country",
+            isRequired:true,
+            fullWidth: true,
+            isCustomValidationRequred: false,
+            inputVariant: InputVariant.outlined,
+            inputType: InputTypes.text,
+            customValidationType: customValidationType.null,
+            isValidInput:false,
+            isTouched:false,
+            errorMessage:"",
+            label:"Country",
+            radioGroupValues:[],
+            dropdownValues:[...countryNames],
+            slectedDate:null,
+            isPasswordHidden:true
+        }
+    ],
+    isValidForm: true
+}
+
 const Auction:FC = () => {
 
     const dispatch = useDispatch();
 
     const navigate = useNavigate();
+
+    const [fileterState, setFilterState] = useState(FileterForm)
     
     const auctionList = useSelector((state:RootState) => state.auction.auctionList);
-    const isAuctionPurchased = useSelector((state:RootState) => state.auction.isAuctionPurchased )
+    const isAuctionPurchased = useSelector((state:RootState) => state.auction.isAuctionPurchased );
+
+
+    const handleCountryDropdownValueChange = (value:string, name:string) => {
+        let updatedArray = updateFormSelectState(value, name, fileterState.form);
+        setFilterState({
+            ...fileterState,
+            form:updatedArray
+        });
+    };
+
+    const filterView = <FormBuilder formElements={fileterState.form} 
+    onChangeDate={() => {}}
+    onInputChange = {() => {}} onSelectValueChange={handleCountryDropdownValueChange} />;
+
 
     const buyTickets = (id: number) => {
         dispatch(purchaseAuction({
@@ -73,13 +128,7 @@ const Auction:FC = () => {
                             </CardProduct>
                         </CardDescription>
                         <CardAction>
-                        <Button disabled={false} 
-                        appBtnType={AppButtonType.primaryBtn}
-        fullWidth={false} 
-        variant={ButtonVariant.contained} 
-        type={ButtonType.default} size={ButtonSizeVariant.small} clicked={() => {buyTickets(1)}} >
-            BUY TICKETS
-        </Button>
+                        <AuctionBuyBtn auctionObj={{}} />
                         </CardAction>
                     </CardFooter>
                     </CardContainer>
@@ -92,6 +141,10 @@ const Auction:FC = () => {
                 showing {auctionList.length} auctions
             </ListTitle>
             <ActionSection>
+                <FilterViewSection>
+                    <FormView>
+                        {filterView}
+                    </FormView>
             <Button disabled={false} 
                         appBtnType={AppButtonType.primaryBtn}
         fullWidth={false} 
@@ -100,6 +153,7 @@ const Auction:FC = () => {
         clicked={() => {redirectToView(RouterPath.createAuction)}} >
             + List your product in auction
         </Button>
+        </FilterViewSection>
             </ActionSection>
             <AuctionList>
                 {auctionList.map((auctionItem) => {
@@ -107,6 +161,7 @@ const Auction:FC = () => {
                     let engagedUsersCount = auctionItem.noOfUsersJoined ? auctionItem.noOfUsersJoined : 0
                     return <AuctionListItem>
                         <AuctionItem 
+                        auctionObj={auctionItem}
                     auctionId={auctionItem.auctionId} 
                     imgUrl={auctionUrl} 
                     title={auctionItem.auctionTitle} 

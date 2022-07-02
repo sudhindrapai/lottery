@@ -5,6 +5,7 @@ import ImageComponent from '../../components/AuctionImage/AuctionImage';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import {ButtonSizeVariant, ButtonType, ButtonVariant,AppButtonType} from '../../Utility/InterFacesAndEnum';
 import Button from '../../components/UI/Buttons/Button';
+import AuctionBuyBtn from '../../components/AuctionBuyButton/AuctionBuyButton'
 import SimilarProducts from '../AuctionSimilarProducts/SimilarProducts';
 
 import {useSelector, useDispatch} from 'react-redux';
@@ -92,13 +93,7 @@ const AuctionDetail:FC = () => {
                     </ProgressBarDetail>
                 </ProgressBarContainer>
                 <ActionDetail>
-                <Button disabled={false} 
-                appBtnType={AppButtonType.primaryBtn}
-        fullWidth={false} 
-        variant={ButtonVariant.contained} 
-        type={ButtonType.default} size={ButtonSizeVariant.large} clicked={() => {purchaseTicket(auctionDetail.auctionId)}} >
-            BUY TICKETS
-        </Button>
+                <AuctionBuyBtn auctionObj={auctionDetail} />
                 </ActionDetail>
                 <TicketDetail>
                     <Label>

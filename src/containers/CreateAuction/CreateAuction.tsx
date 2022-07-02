@@ -18,6 +18,8 @@ import {createAuctionRequest,toggleCreateAuctionState} from '../../features/auct
 import {useSelector, useDispatch} from 'react-redux';
 import { RootState } from '../../app/store';
 
+import {countryNames} from '../../assets/DropdownValues/DropdownValues';
+
 interface CreateAuction {
     form: FormElement[],
     isValidForm: boolean
@@ -190,7 +192,7 @@ const AddressForm: CreateAuction = {
             isPasswordHidden:true
         },
         {
-            elementType: FormElementType.input,
+            elementType: FormElementType.multiSelection,
             value:"",
             id:"country",
             isRequired:true,
@@ -204,7 +206,7 @@ const AddressForm: CreateAuction = {
             errorMessage:"",
             label:"Country",
             radioGroupValues:[],
-            dropdownValues:[],
+            dropdownValues:[...countryNames],
             slectedDate:null,
             isPasswordHidden:true
         },
@@ -409,16 +411,24 @@ const CreateAuction:FC = () => {
 
     //  ----------- address ----------------------
     const handleAddressInputChange = (event:React.ChangeEvent <HTMLTextAreaElement | HTMLInputElement>):void => {
-        let updatedStateArray = updateFormInputState(event, address.form)
+        let updatedStateArray = updateFormInputState(event, address.form);
         setAddressDetail({
             ...address,
             form: updatedStateArray
         });
     }
 
+    const handleCountryDropdownValueChange = (value:string, name:string) => {
+        let updatedArray = updateFormSelectState(value, name, address.form);
+        setAddressDetail({
+            ...address,
+            form:updatedArray
+        });
+    };
+
     const addressView = <FormBuilder formElements={address.form} 
     onChangeDate={() => {}}
-    onInputChange = {handleAddressInputChange} onSelectValueChange={() => {}} />;
+    onInputChange = {handleAddressInputChange} onSelectValueChange={handleCountryDropdownValueChange} />;
     //  ----------- end address ------------------
 
 

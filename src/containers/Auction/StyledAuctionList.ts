@@ -115,3 +115,17 @@ align-items: center;
 justify-content: flex-start;
 margin-bottom: 30px;
 `;
+
+export const FilterViewSection = styled.div`
+width: 100%;
+box-sizing: border-box;
+display: flex;
+flex-flow: row nowrap;
+align-items: center;
+justify-content:flex-start;
+column-gap: 15px;
+`;
+
+export const FormView = styled.div`
+width: 200px;
+`;
