@@ -1,10 +1,15 @@
 import styled from 'styled-components';
 
+import * as UIConstants from '../../UIConstants'
+
 export const LotteryContainer = styled.div`
 width: 100%;
 box-sizing: border-box;
 background-color: #F5F5F5;
 padding: 0 70px 50px 70px;
+${UIConstants.mobileView}{
+padding: 15px;
+}
 `;
 
 export const BannerImg = styled.img `
@@ -33,4 +38,8 @@ font-weight: 600;
 color: #000000;
 text-align: left;
 margin: 70px 0 24px 0;
+${UIConstants.mobileView}{
+margin: 25px 0;
+font-size: 18px
+}
 `;

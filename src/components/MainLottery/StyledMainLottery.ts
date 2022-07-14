@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import {FooterOption} from '../LiveLottery/StyledLiveLottery';
+import * as UIConstants from '../../UIConstants';
 
 export const Wrapper = styled.div`
 width: 100%;
@@ -16,6 +18,10 @@ display: flex;
 flex-flow: row nowrap;
 align-items: flex-start;
 justify-content: flex-start;
+${UIConstants.mobileView}{
+    flex-flow: column wrap;
+    align-items: center;
+};
 `;
 
 export const CoinsSection = styled.div`
@@ -25,6 +31,9 @@ display: flex;
 flex-flow: column;
 align-items: center;
 justify-content: center;
+${UIConstants.mobileView}{
+    display: none
+}
 `;
 
 export const Coin = styled.img`
@@ -44,11 +53,18 @@ margin-bottom: 16px;
 export const MainLotterySection = styled.div`
 display: flex;
 flex-flow: column;
+${UIConstants.mobileView}{
+    align-items: center;
+    justify-content: center;
+}
 `;
 
 export const MainLotteryImg = styled.img`
 width: 350px;
 object-fit: contain;
+${UIConstants.mobileView}{
+    height: 200px;
+}
 `;
 
 export const RewardDetail = styled.div`
@@ -57,6 +73,10 @@ font-size: 72px;
 line-height: 87px;
 color: #200E32;
 margin-bottom: 8px;
+${UIConstants.mobileView}{
+    font-size: 40px;
+    line-height: 51px;
+}
 `;
 
 export const LotteryDrawWrapper = styled.div`
@@ -68,6 +88,9 @@ color: #200E32;
 align-items: center;
 justify-content:center;
 margin-bottom: 16px;
+${UIConstants.mobileView}{
+    flex-flow: column;
+}
 `;
 
 export const DrawLabel = styled.div`
@@ -90,6 +113,9 @@ Button{
     min-width: 220px;
     width: auto;
     height: 51px;
+    ${UIConstants.mobileView}{
+        min-width: 50%;
+    }
 };
 Button:first-child {
     margin-right: 15px;
@@ -103,4 +129,13 @@ display: flex;
 flex-flow: row nowrap;
 align-items: center;
 justify-content:center;
+${FooterOption} {
+    margin-bottom: 15px;
+}
+${UIConstants.mobileView}{
+    flex-flow: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin-bottom: 12px;
+}
 `;

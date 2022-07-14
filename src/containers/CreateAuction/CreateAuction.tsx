@@ -1,6 +1,5 @@
 import {FC, useState, useEffect} from 'react';
 
-import Navigation from '../../components/Navigation/DesktopNavigation'
 import FormBuilder from '../FormBuilder/FormBuilder';
 import Button from '../../components/UI/Buttons/Button';
 import ImageUploader from '../../components/FormImageUploader/ImageUploader';
@@ -482,7 +481,6 @@ dispatch(createAuctionRequest(requestObj));
     };
 
     return <Wrapper>
-        <Navigation />
         <BreadCrumb>
         <BreadCrumbItem onClick={() => {redirectToView(RouterPath.root)}}>Home</BreadCrumbItem> / 
         <BreadCrumbItem onClick={() => {redirectToView(RouterPath.auctionList)}} >Auction</BreadCrumbItem> / 

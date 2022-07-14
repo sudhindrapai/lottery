@@ -1,7 +1,6 @@
 import {FC, Fragment, useEffect, useState} from 'react';
 import LiveLottery from '../../components/LiveLottery/LiveLottery';
 import UpcomingLottery from '../../components/UpcomingLottery/UpcomingLottery';
-import Navigation from '../../components/Navigation/DesktopNavigation';
 import {LotteryContainer, BannerImg, UpcomingLotteryContainer, Lottery, SectionTitle} from './StyledLotteries';
 import BannerImgUrl from '../../assets/BANNER-LOTTERY-SECTION.jpg'
 import {useSelector, useDispatch} from 'react-redux'
@@ -82,7 +81,7 @@ const Lotteries:FC = () => {
     const onSelectyNotifyMe = (id: number) => {};
 
     return <Fragment>
-        <Navigation />
+        {/* <Navigation /> */}
         {buyModal}
         <BannerImg src={BannerImgUrl} />
         <LotteryContainer>

@@ -16,7 +16,7 @@ import {transformDate} from '../../Utility/Utility';
 
 import * as LiveLotteryStyle from '../LiveLottery/StyledLiveLottery'
 
-const MainLottery = () => {
+const MainLottery:FC = () => {
     return<Wrapper>
         <Container>
             <CoinsSection>

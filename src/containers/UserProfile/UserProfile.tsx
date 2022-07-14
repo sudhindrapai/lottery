@@ -72,7 +72,6 @@ const UserProfile:FC = () => {
     }
 
     return <Wrapper>
-        <Navigation />
         <Viewheader >
             Home / Profile
         </Viewheader>

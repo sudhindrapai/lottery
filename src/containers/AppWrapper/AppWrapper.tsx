@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import {Wrapper, FooterWapper} from './StyledAppWrapper';
+import Navigation from '../../components/Navigation/Navigation';
 import Notification from '../../components/Notification/Notification';
 import Footer from '../../containers/Footer/Footer';
 import {RouterPath} from '../../routes';
@@ -21,6 +22,7 @@ const AppWrapper:React.FC = ({children}) => {
 
     return <Wrapper>
         <Notification />
+        <Navigation />
         {children}
         {FooterView}
     </Wrapper>

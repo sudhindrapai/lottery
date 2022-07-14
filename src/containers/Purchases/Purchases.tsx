@@ -13,7 +13,6 @@ const Purchases:FC = () => {
     },[])
 
     return <Wrapper>
-        <Navigation />
         <Viewheader>
                 Home / Purchases
             </Viewheader>

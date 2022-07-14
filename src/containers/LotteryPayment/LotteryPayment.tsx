@@ -80,7 +80,6 @@ console.log(updatedTicketDetailObj)
     }
 
     return <Wrapper>
-        <Navigation />
         <ViewHeader />
         <ContentSection>
             <Content>

@@ -1,5 +1,4 @@
 import {FC} from 'react';
-import Navigation from '../../components/Navigation/DesktopNavigation';
 import {useNavigate} from 'react-router-dom';
 import {RouterPath} from '../../routes';
 import MainLottery from '../../components/MainLottery/MainLottery';
@@ -8,7 +7,7 @@ import LotteryWinners from '../../components/HP-TopLotteriesWinners/TopLotteryWi
 import SimilarProducts from '../AuctionSimilarProducts/SimilarProducts';
 import AuctionWinners from '../../components/HP-TopAuctionWinners/AuctionWinners'
 import {MainPageWrapper, SectionTwo, Section, Title, AuctionSection, TitelWrapper,
-     MoreAuction, AuctionWinnerSection, MoreLotteries} from './StyledHome';
+     MoreAuction, AuctionWinnerSection, MoreLotteries, SectionWrapper} from './StyledHome';
 
 const Home:FC = () => {
     const navigate = useNavigate();
@@ -17,7 +16,6 @@ const Home:FC = () => {
     }
 
     return <div>
-        <Navigation />
         <MainPageWrapper>
         <MainLottery />
         </MainPageWrapper>
@@ -38,6 +36,7 @@ const Home:FC = () => {
         </MoreLotteries>
         </Section>
         </SectionTwo>
+        <SectionWrapper>
         <AuctionSection>
             <TitelWrapper>
                 <Title>
@@ -49,12 +48,13 @@ const Home:FC = () => {
                 </TitelWrapper>
             <SimilarProducts isTitleRequired={false} />
         </AuctionSection>
-        <AuctionWinnerSection>
+        </SectionWrapper>
+        <AuctionSection>
         <Title>
         Top Auction winners
                 </Title>
         <AuctionWinners />
-        </AuctionWinnerSection>
+        </AuctionSection>
     </div>
 }
 

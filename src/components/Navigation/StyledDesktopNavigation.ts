@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
+
+interface ResponsiveMenuProps {
+    isExpanded: boolean
+}
 
 export const StyledDesktopNavContainer = styled.div`
 width: 100%;
@@ -135,4 +141,90 @@ Button {
     height: 40px;
     margin-right: 10px;
 }
+`;
+
+// mobile navigation 
+
+export const M_Wrapper = styled.div`
+    position: relative;
+`;
+
+export const M_Container = styled.div`
+    border-right: 1px solid #f2f4f9;
+    width: 320px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    transition: transform .2s ease-out;
+    z-index: 100;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 0 8px 10px 0 rgb(183 192 206 / 20%);
+    overflow-y: scroll;
+    /* transform: translateX(0); */
+    transform: ${(props:ResponsiveMenuProps) => props.isExpanded ? 'translateX(0)' : 'translateX(-100%)'};
+`;
+
+export const NavBar = styled.div`
+width: 100%;
+box-sizing: border-box;
+display: flex;
+flex-flow: row nowrap;
+align-items: center;
+justify-content: flex-start;
+height: 56px;
+background-color: #FFC839;
+`;
+
+export const ToggleIcon = styled(MenuIcon)`
+color: #000000;
+`;
+
+export const ToggleButton = styled.div`
+width: 20%;
+text-align: center;
+`;
+
+export const LogoLabel = styled.div`
+font-size: 18px;
+width: 60%;
+color: #000000;
+`;
+
+export const Action = styled.div`
+text-align: right;
+`;
+
+export const CloseSection = styled.div`
+width: 100%;
+box-sizing: border-box;
+text-align: right;
+padding: 10px;
+border-bottom: 1px solid #ededed;
+display: flex;
+flex-flow: row nowrap;
+align-items: center;
+justify-content: space-between;
+cursor: pointer;
+margin-bottom: 20px;
+`;
+
+export const Close = styled(CloseIcon)`
+width: 24px;
+height: 24px;
+color: #000000;
+`;
+
+export const Name = styled.div`
+width: content;
+box-sizing: border-box;
+font-size: 14px;
+color: #000000;
+text-transform: capitalize;
+`;
+
+export const NavMenuSection = styled.div`
+width: 100%;
+box-sizing: border-box;
+margin-bottom: 15px;
 `;

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import TwitterIcon from '@mui/icons-material/Twitter';
+import * as UIConstants from '../../UIConstants'
 
 export const FooterWrapper = styled.div`
 width: 100%;
@@ -20,6 +21,11 @@ align-items: flex-start;
 justify-content: flex-start;
 gap: 30px;
 padding: 60px;
+${UIConstants.mobileView}{
+    flex-flow: column;
+    padding: 15px;
+    gap: 15px;
+}
 `;
 
 export const FooterLogoSection = styled.div`
@@ -73,6 +79,10 @@ flex-flow: row wrap;
 align-items: center;
 justify-content: flex-start;
 padding: 0 60px;
+${UIConstants.mobileView}{
+    flex-flow: row;
+    padding: 15px;
+}
 `;
 
 export const CopyRight = styled.div`

@@ -109,7 +109,6 @@ const Auction:FC = () => {
     },[isAuctionPurchased]); 
 
     return <Fragment>
-        <DesktopNavigation />
         <Wrapper>
             <BannerSection>
                 <BannerContainer>

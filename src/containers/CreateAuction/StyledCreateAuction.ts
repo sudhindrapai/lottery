@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import * as UIConstants from '../../UIConstants';
 
 export const Wrapper = styled.div`
 width: 100%;
@@ -38,6 +39,9 @@ flex-flow: column nowrap;
 align-items: center;
 justify-content: flex-start;
 padding: 50px 150px;
+${UIConstants.mobileView}{
+    padding: 15px;
+}
 `;
 
 export const FormSection = styled.div`
@@ -59,6 +63,9 @@ box-sizing: border-box;
 display: flex;
 flex-flow: row nowrap;
 justify-content: space-between;
+${UIConstants.mobileView}{
+    flex-flow: column;
+}
 ${FormSection}{
     flex: 1;
     flex-basis: 50%;
@@ -75,6 +82,9 @@ padding: 24px;
 border-bottom: 1px solid #E9EDF5;
 color:#000000;
 text-align: left;
+${UIConstants.mobileView}{
+    padding: 18px 14px;
+}
 `;
 
 export const FormBody = styled.div`
@@ -86,6 +96,9 @@ align-items: flex-start;
 justify-content: flex-start;
 padding: 24px;
 color: #000000;
+${UIConstants.mobileView}{
+    padding: 14px;
+}
 `;
 
 export const CardWrapper = styled.div`
@@ -99,6 +112,12 @@ background: linear-gradient(76.64deg, #EFDFA3 5.43%, #CE8631 29.33%, #C1A053 47.
 border-radius: 6px;
 padding: 24px 56px;
 max-width: 80%;
+${UIConstants.mobileView}{
+    padding: 15px;
+    max-width: 100%;
+    flex-flow: column-reverse;
+    align-items: flex-start;
+}
 `;
 
 export const Content = styled.div`

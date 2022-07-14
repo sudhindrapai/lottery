@@ -61,7 +61,7 @@ const AuctionDetail:FC = () => {
     }
 
     return <Wrapper>
-        <Navigation />
+        {/* <Navigation /> */}
         <BreadCrumb>
         <BreadCrumbItem onClick={() => {redirectToView(RouterPath.root)}}>Home</BreadCrumbItem> / 
         <BreadCrumbItem onClick={() => {redirectToView(RouterPath.auctionList)}} >Auction</BreadCrumbItem> / 

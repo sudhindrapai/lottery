@@ -39,7 +39,7 @@ const DesktopNavigation: React.FC = () => {
        dispatch(setNavResponse({
            data:updatedResponse
        }))
-    },[location])
+    },[location]);
 
     useEffect(() => {
         if (name === "") {

@@ -2,6 +2,7 @@ import {FC, useEffect} from 'react';
 import {Wrapper, Title} from './StyledSimilarProducts';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import AuctionCards from '../../components/AuctionCards/AuctionCards';
+import * as UIConstants from '../../UIConstants'
 import 'swiper/css';
 
 import {useSelector, useDispatch} from 'react-redux';
@@ -52,7 +53,7 @@ const SimilarProducts:FC<SimilarProductsProps> = ({isTitleRequired}) => {
         <Swiper
       spaceBetween={10}
       loop={true}
-      slidesPerView={4}
+      slidesPerView={window.innerWidth <= UIConstants.mobileWidth? 1 : 4}
       onSlideChange={() => console.log('slide change')}
       onSwiper={(swiper) => console.log(swiper)}
     >
@@ -62,7 +63,9 @@ let auctionUrl = auctionItem.imageUrls? auctionItem.imageUrls[0] : "https://pics
                     let engagedUsersCount = auctionItem.noOfUsersJoined ? auctionItem.noOfUsersJoined : 0;
 
           return <SwiperSlide>
-<AuctionCards auctionId={auctionItem.auctionId} 
+<AuctionCards 
+auctionObj={auctionItem}
+auctionId={auctionItem.auctionId} 
 imgUrl={auctionUrl} 
 title={auctionItem.auctionTitle} 
 auctionProduct={auctionItem.productType} 

@@ -1,10 +1,19 @@
 
 import styled from 'styled-components';
 
+import * as UIConstants from '../../UIConstants';
+
 export const Wrapper = styled.div`
 width: 100%;
 box-sizing: border-box;
 padding: 30px;
+${UIConstants.mobileView}{
+    img{
+        width: 100%;
+        object-fit: contain;
+    }
+    padding: 15px;
+}
 `;
 
 export const BannerSection = styled.div`
@@ -15,6 +24,10 @@ flex-flow: row nowrap;
 align-items: flex-start;
 justify-content: flex-start;
 gap: 30px;
+${UIConstants.mobileView}{
+    flex-flow: column;
+    gap: 15px;
+}
 `;
 
 export const BannerContainer = styled.div`
@@ -25,6 +38,11 @@ align-items: flex-start;
 justify-content:flex-start;
 border-radius: 8px;
 overflow: hidden;
+${UIConstants.mobileView}{
+    flex-flow: column;
+    gap: 15px;
+    flex-basis: 100%;
+}
 `;
 
 export const CardContainer = styled.div`
@@ -86,11 +104,17 @@ flex-flow: row wrap;
 align-items: flex-start;
 justify-content: flex-start;
 gap: 33px;
+${UIConstants.mobileView}{
+    gap: 15px;
+}
 `;
 
 export const AuctionListItem = styled.div`
 display: flex;
 flex-basis: 23%;
+${UIConstants.mobileView}{
+    flex-basis: 100%;
+}
 `;
 
 
