@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import * as UIConstants from '../../UIConstants';
+
 export const Wrapper = styled.div`
 width: 100%;
 box-sizing: border-box;
@@ -14,11 +16,21 @@ align-items: flex-start;
 justify-content: flex-start;
 gap: 30px;
 padding: 30px;
+${UIConstants.mobileView}{
+    flex-flow: column;
+    gap: 15px;
+    padding: 15px;
+}
 `;
 
 export const ImageSection = styled.div`
 display: flex;
 flex-basis: 49%;
+${UIConstants.mobileView}{
+    flex-basis: 100%;
+    width: 100%;
+    box-sizing: border-box;
+}
 `;
 
 export const DetailSection = styled.div`
@@ -26,6 +38,11 @@ display: flex;
 flex-basis: 49%;
 flex-flow: column;
 text-align: left;
+${UIConstants.mobileView}{
+    flex-basis: 100%;
+    width: 100%;
+    box-sizing: border-box;
+}
 `;
 
 export const Title = styled.div`
@@ -34,6 +51,10 @@ font-size: 41px;
 line-height: 50px;
 color: #000000;
 margin-bottom: 8px;
+${UIConstants.mobileView}{
+    font-size: 28px;
+    line-height: 27px;
+}
 `;
 
 export const ProductType = styled.div`
@@ -50,6 +71,9 @@ font-size: 18px;
 line-height: 36px;
 color: #000000;
 margin-bottom: 30px;
+${UIConstants.mobileView}{
+    margin-bottom: 16px;
+}
 `;
 
 export const ProgressBarContainer = styled.div`
@@ -94,6 +118,14 @@ margin: 50px 0 30px 0;
 Button{
     width: 270px
 }
+
+${UIConstants.mobileView}{
+    margin: 30px 0;
+    Button{
+    width: 100%;
+}
+}
+
 `;
 
 export const TicketDetail = styled.div`

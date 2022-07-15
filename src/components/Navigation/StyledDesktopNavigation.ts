@@ -145,8 +145,30 @@ Button {
 
 // mobile navigation 
 
+export const LoginDiv = styled.div`
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+    color: #000000;
+`;
+
 export const M_Wrapper = styled.div`
     position: relative;
+    ${WalletContainer}{
+        width: 100%;
+        box-sizing: border-box;
+        margin-left: 0;
+        width: 112px;
+        background-color: #3A57E8;
+
+        ${WalletIcon}{
+            color: #ffffff;
+        }
+
+        ${Amount}{
+            color: #ffffff;
+        }
+    }
 `;
 
 export const M_Container = styled.div`
@@ -174,6 +196,7 @@ align-items: center;
 justify-content: flex-start;
 height: 56px;
 background-color: #FFC839;
+padding-right: 5px;
 `;
 
 export const ToggleIcon = styled(MenuIcon)`
@@ -227,4 +250,19 @@ export const NavMenuSection = styled.div`
 width: 100%;
 box-sizing: border-box;
 margin-bottom: 15px;
+`;
+
+export const ProfileSection = styled.div`
+width: 100%;
+box-sizing: border-box;
+border-top: 1px solid #cccccc;
+margin-top: 30px;
+`;
+
+export const ProfileItem = styled.div`
+width: 100%;
+box-sizing: border-box;
+color: #000000;
+padding: 8px 16px;
+border-bottom: 1px solid #f7f7f7;
 `;

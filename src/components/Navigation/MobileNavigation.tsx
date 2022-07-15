@@ -1,4 +1,4 @@
-import {FC, useState, useEffect} from 'react';
+import {FC, useState, useEffect, Fragment} from 'react';
 import Backdrop from '../Backdrop/Backdrop';
 import headerLogo from '../../assets/headerLogo.svg';
 import {ButtonSizeVariant, ButtonType, ButtonVariant, AppButtonType} from '../../Utility/InterFacesAndEnum';
@@ -13,8 +13,9 @@ import {RouterPath} from '../../routes';
 import {useNavigate, useLocation} from 'react-router-dom';
 
 import {M_Wrapper, M_Container, NavBar, ToggleButton, 
-    LogoLabel, Action, CloseSection, Name, SelectedNavItem, NavItem, NavMenuSection} from './StyledDesktopNavigation';
-import {ToggleIcon, Close} from './StyledDesktopNavigation';
+    LogoLabel, Action, CloseSection, Name, SelectedNavItem, NavItem, 
+    NavMenuSection, ProfileSection, ProfileItem, WalletContainer, Amount, LoginDiv} from './StyledDesktopNavigation';
+import {ToggleIcon, Close, WalletIcon} from './StyledDesktopNavigation';
 
 const ResponsiveMenu = () => {
     const dispatch = useDispatch();
@@ -56,16 +57,35 @@ const ResponsiveMenu = () => {
 
     const createLogout = () => {
         setLocalStorage(localStorageActionType.CLEAR_LOGIN_USER_DETAIL, "");
-        redirectToView(RouterPath.tempRoot);
+        navigate(RouterPath.tempRoot);
+        navigate(RouterPath.signIn);
         window.location.reload();
     }
+
+    const redirectToLogin = () => {
+        navigate(RouterPath.signIn);
+    };
 
     const redirectToView = (url:string) => {
         navigate(url);
         toggleMenuExpantion();
     };
 
-    const walletandLoginView = <div>L/w</div>;
+    let walletandLoginView = <div>loading...</div>;
+
+    if (!accessToken) {
+        walletandLoginView = <Fragment>
+            <LoginDiv
+        onClick={() => {redirectToLogin()}} >login</LoginDiv>
+        </Fragment>
+    } else {
+        walletandLoginView = <WalletContainer>
+        <WalletIcon />
+        <Amount>
+        &#x24; 0.00
+        </Amount>
+    </WalletContainer>
+    }
 
     let navView = navigationData.map((navObj):JSX.Element => {
         let Item = navObj.isSelected ? SelectedNavItem : NavItem;
@@ -94,6 +114,16 @@ const ResponsiveMenu = () => {
             <NavMenuSection>
             {navView}
             </NavMenuSection>
+            {accessToken && <ProfileSection>
+                <ProfileItem onClick={() => {
+                    redirectToView(RouterPath.userProfile)
+                }}>
+                    Profile
+                </ProfileItem>
+                <ProfileItem onClick={createLogout}>
+                    Logout
+                </ProfileItem>
+            </ProfileSection>}
         </M_Container>
     </M_Wrapper>
 };

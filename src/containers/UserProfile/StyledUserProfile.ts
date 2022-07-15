@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import * as UIConstants from '../../UIConstants';
+
 interface TabMenuElement {
     isSelectdItem: boolean
 }
@@ -9,6 +11,9 @@ width: 100%;
 box-sizing: border-box;
 position: relative;
 height: 98vh;
+${UIConstants.mobileView}{
+    height: 200vh;
+}
 `;
 
 export const Viewheader = styled.div`
@@ -20,6 +25,9 @@ background-color: #3A57E8;
 font-size: 16px;
 font-weight: 500;
 padding-top: 30px;
+${UIConstants.mobileView}{
+    height: 160px;
+}
 `;
 
 export const Container = styled.div`
@@ -28,6 +36,10 @@ box-sizing: border-box;
 padding: 50px;
 position: absolute;
 top: 20%;
+${UIConstants.mobileView}{
+    padding: 0 10px;
+    top: 14%;
+}
 `;
 
 export const ProfileContainer = styled.div`
@@ -45,6 +57,9 @@ display: flex;
 flex-flow: row nowrap;
 max-height: 170px;
 border-bottom: 1px solid #E8E8E8;
+${UIConstants.mobileView}{
+    overflow-x: scroll;
+}
 `;
 
 export const TabMenuElement = styled.div`
@@ -59,6 +74,9 @@ export const TabMenuBody = styled.div`
 width: 100%;
 box-sizing: border-box;
 padding: 30px;
+${UIConstants.mobileView}{
+    padding: 15px;
+}
 `;
 
 export const TabMenuContent = styled.div`
