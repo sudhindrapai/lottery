@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Box from '@mui/material/Box';
-
+import * as UIConstants from '../../../UIConstants';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 
 interface TicketType {
@@ -24,6 +24,12 @@ export const ModalBox = styled(Box)`
   border: none;
   border-radius: 10px;
   background-color: #ffffff;
+  ${UIConstants.mobileView}{
+      min-width: 100%;
+      width: 100%;
+      left: 0;
+      top: 5%;
+  }
 `;
 
 export const ModalHeader = styled.div`
@@ -35,6 +41,9 @@ align-items:center;
 justify-content: space-between;
 padding: 20px;
 border-bottom: 1px solid #E9EFFF;
+${UIConstants.mobileView}{
+    padding: 15px;
+}
 `;
 
 export const Title = styled.div`
@@ -52,6 +61,9 @@ export const ModalBody = styled.div`
 width: 100%;
 box-sizing: border-box;
 padding: 30px;
+${UIConstants.mobileView}{
+    padding: 15px;
+}
 `;
 
 export const SectionTitle = styled.div`
@@ -99,6 +111,9 @@ span{
     font-size: 20px;
     margin-left: 15px;
 };
+${UIConstants.mobileView}{
+    margin-top: 10px;
+}
 `;
 
 export const ActionSection = styled.div`
