@@ -21,7 +21,9 @@ interface CreateAccount {
     emailId: string,
     password: string,
     firstName: string,
-    lastName: string
+    lastName: string,
+    using2FA: boolean,
+    agreeTC:boolean
 }
 
 const registrationFormInitalState: RegFormState = {
@@ -147,6 +149,8 @@ const RegistrationForm:React.FC<RegistrationProps> = ({onRegister, onSelectLogin
             password: "",
             firstName:"",
             lastName:"",
+            using2FA:false,
+            agreeTC: true
         };
         
         for (let element of values.form){

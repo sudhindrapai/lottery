@@ -35,7 +35,7 @@ const resetStateInitialState: ResetSliceState = {
 
 export const resetPasswordHandler = createAsyncThunk(
     'resetPassword',
-    async (payloadObj:ResetPassword, {dispatch}) => {
+    async (payloadObj:any, {dispatch}) => {
 
         dispatch(toggleLoading({
             isLoading: false
@@ -45,9 +45,10 @@ export const resetPasswordHandler = createAsyncThunk(
 
         await fetch(`${endpoint.resetPassword}/${publicUserId}`, {
             method: 'PUT',
-            body: JSON.stringify(payloadObj),
+            body: JSON.stringify(payloadObj.requestBody),
             headers:{
-                Authorization: `Bearer ${getLocalStorage(localStorageActiontype.GET_ACCESS_TOKEN)}`,
+                Authorization: `Bearer ${getLocalStorage(payloadObj.token)}`,
+                publicUserId:payloadObj.userId,
                 "Content-type": "application/json; charset=UTF-8",
             }
         })

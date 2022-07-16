@@ -25,6 +25,8 @@ interface CreateAccount {
     password: string,
     firstName:string,
     lastName:string,
+    using2FA: boolean,
+    agreeTC:boolean
 }
 
 export const createSignup = createAsyncThunk(
@@ -45,14 +47,22 @@ export const createSignup = createAsyncThunk(
             return response.json();
         })
         .then((data) => {
-            dispatch(toggleRegister({
-                isRegistered: true
-            }));
-            dispatch(toggleNotificationVisibility({
-                isVisible: true,
-                status: NotificationType.success,
-                message: data.errorMsg
-            }))
+            if (data.statusCode === 200) {
+                dispatch(toggleRegister({
+                    isRegistered: true
+                }));
+                dispatch(toggleNotificationVisibility({
+                    isVisible: true,
+                    status: NotificationType.success,
+                    message: data.errorMsg
+                }));
+            } else {
+                dispatch(toggleNotificationVisibility({
+                    isVisible: true,
+                    status: NotificationType.error,
+                    message: data.errorMsg
+                }));
+            }
         })
         .catch((error) => {
             dispatch(toggleNotificationVisibility({

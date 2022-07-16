@@ -1,9 +1,15 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import FormBuilder from '../../FormBuilder/FormBuilder';
 import {updateFormInputState, validateForm} from '../../../Utility/Utility';
 import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement,
      ButtonSizeVariant, ButtonVariant, ButtonType, AppButtonType} from '../../../Utility/InterFacesAndEnum';
-import Button from '../../../components/UI/Buttons/Button'
+import Button from '../../../components/UI/Buttons/Button';
+
+import {RootState} from '../../../app/store';
+import {useSelector, useDispatch} from 'react-redux';
+import {toggleLinkSentState} from '../../../features/forgotPassword'
+import {RouterPath} from '../../../routes';
+import {useNavigate} from 'react-router-dom';
 
 interface ForgotPasswordFormState {
     form: FormElement[],
@@ -45,7 +51,23 @@ const ForgotPasswordFormInitalState: ForgotPasswordFormState = {
 
 const ForgotPassword:React.FC<ForgotPasswordProps> = ({onClickSendLink}) => {
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const [values, setValues] = useState<ForgotPasswordFormState>(ForgotPasswordFormInitalState);
+
+    let isLinkSent = useSelector((state:RootState) => state.forgotPassword.isLinkSent);
+
+    useEffect(() => {
+        if (isLinkSent === true) {
+            navigate(RouterPath.root);
+        }
+        return () => {
+            dispatch(toggleLinkSentState({
+                isLinkSent: false
+            }));
+        }
+    },[isLinkSent]);
 
     const handleInputChange = (event:React.ChangeEvent <HTMLTextAreaElement | HTMLInputElement>):void => {
         let updatedStateArray = updateFormInputState(event, values.form)

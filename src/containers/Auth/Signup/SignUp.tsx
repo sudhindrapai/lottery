@@ -18,6 +18,8 @@ interface CreateAccount {
     password: string,
     firstName:string,
     lastName:string,
+    using2FA: boolean,
+    agreeTC:boolean
 }
 const SignUp:FC = () => {
     const navigate = useNavigate();

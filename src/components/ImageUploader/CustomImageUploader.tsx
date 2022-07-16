@@ -1,6 +1,6 @@
 import {FC, useRef} from 'react';
 import {Container, ProfileImage, UpdateImageText} from './StyledImageUploader';
-import ProfileAvtarUrl from '../../assets/profileavtar.webp'
+import ProfileAvtarUrl from '../../assets/profileavtar.webp';
 
 import * as localStorageActioinType from '../../localStorage/ActionTypes';
 import {getLocalStorage} from '../../localStorage/GetLocalStorage';
@@ -43,7 +43,7 @@ const CustomImageUploader:FC<ImageUploaderProps> = (props) => {
       }
 
     return <Container>
-        <ProfileImage src={ProfileAvtarUrl} />
+        <ProfileImage src={url} />
         <input
           style={{ display: "none" }}
           id={"imageFileInput"}

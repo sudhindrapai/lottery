@@ -1,5 +1,3 @@
-import React from "react";
-
 import * as localStorageActionType from './localStorage/ActionTypes';
 import {getLocalStorage} from './localStorage/GetLocalStorage';
 

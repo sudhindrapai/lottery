@@ -1,5 +1,7 @@
 import * as endpoint from '../networkUtilities/endpoints';
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {NotificationType} from '../Utility/InterFacesAndEnum';
+import {toggleNotificationVisibility} from './notificationSlice';
 
 interface ForgotPasswordState {
     isLinkSent: boolean,
@@ -39,13 +41,31 @@ export const forgotPasswordHandler = createAsyncThunk(
             endpoint.forgotPassword,
             {
                 method: 'POST',
-                body: JSON.stringify(payloadObj)
+                body: JSON.stringify(payloadObj),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                }
             })
             .then((response) => {
-                response.json();
-                dispatch(toggleLinkSentState({
-                    isLinkSent: true
-                }))
+                return response.json();
+            })
+            .then((response) => {
+                if (response.statusCode === 200) {
+                    dispatch(toggleLinkSentState({
+                        isLinkSent: true
+                    }));
+                    dispatch(toggleNotificationVisibility({
+                        isVisible: true,
+                        status: NotificationType.success,
+                        message: "Reset link sent to registered emailid"
+                    }));
+                } else {
+                    dispatch(toggleNotificationVisibility({
+                        isVisible: true,
+                        status: NotificationType.error,
+                        message: response.errorMsg
+                    }));
+                }
             })
             .catch((error) => {
                 dispatch(updateMessage({

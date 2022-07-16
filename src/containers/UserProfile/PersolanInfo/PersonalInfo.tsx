@@ -7,6 +7,9 @@ import {FormElementType, customValidationType, InputVariant, InputTypes, FormEle
 import Button from '../../../components/UI/Buttons/Button';
 import ImageUploader from '../../../components/ImageUploader/CustomImageUploader';
 
+// import ProfileAvtarUrl from '../../assets/profileavtar.webp';
+import ProfileAvtarUrl from '../../../assets/profileavtar.webp'
+
 import {Container,FormSection} from './StyledPersonalInfo';
 
 import * as localStorageActioinType from '../../../localStorage/ActionTypes';
@@ -89,6 +92,8 @@ const PersonalInfo:FC = () => {
 
     const [values, setValues] = useState<PersonalInfo>(PersonalInfoState);
 
+    const [profileImage, setProfileImage] = useState(ProfileAvtarUrl);
+
     const userDetailRef = useRef({});
 
     useEffect(() => {
@@ -113,7 +118,7 @@ const PersonalInfo:FC = () => {
     }
 
     const updateLocalForm = (userObj: any) => {
-        const {firstName, lastName, mobileNo} = JSON.parse(userObj);
+        const {firstName, lastName, mobileNo, imageUrl} = JSON.parse(userObj);
         let updatedArry = [];
         for (let formObj of values.form) {
             if (formObj.id === "firstName") {
@@ -123,15 +128,16 @@ const PersonalInfo:FC = () => {
                 formObj.value = lastName;
             }
             if (formObj.id === "mobileNumber" && mobileNo) {
-                formObj.value = mobileNo? "0" :parseInt(mobileNo);
+                formObj.value = mobileNo;
             }
             updatedArry.push(formObj)
         }
+        setProfileImage(imageUrl);
         setValues({
             ...values,
             form:updatedArry,
             isValidForm: values.isValidForm
-        })
+        });
     }
 
     const handleFormSubmision = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -169,7 +175,7 @@ const PersonalInfo:FC = () => {
 
     return <form name={"Customer Registration"} html-for={"customer resgistraion"} autoComplete="off">
         <Container>
-        <ImageUploader url={""} onSelectImage={onSelectProfileImage} />
+        <ImageUploader url={profileImage} onSelectImage={onSelectProfileImage} />
         <FormSection>
     <FormBuilder formElements={values.form} onInputChange = {handleInputChange}
     onChangeDate={() => {}}
