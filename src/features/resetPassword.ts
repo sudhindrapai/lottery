@@ -41,14 +41,12 @@ export const resetPasswordHandler = createAsyncThunk(
             isLoading: false
         }));
 
-        let publicUserId = getLocalStorage(localStorageActiontype.GET_PUBLIC_USER_ID);
 
-        await fetch(`${endpoint.resetPassword}/${publicUserId}`, {
+        await fetch(`${endpoint.resetPassword}/${payloadObj.userId}`, {
             method: 'PUT',
             body: JSON.stringify(payloadObj.requestBody),
             headers:{
                 Authorization: `Bearer ${getLocalStorage(payloadObj.token)}`,
-                publicUserId:payloadObj.userId,
                 "Content-type": "application/json; charset=UTF-8",
             }
         })
