@@ -5,9 +5,11 @@ import MainLottery from '../../components/MainLottery/MainLottery';
 import UpcomingLotteries from '../../components/HP-UpcomingLotteries/UpcomingLotterites';
 import LotteryWinners from '../../components/HP-TopLotteriesWinners/TopLotteryWinners';
 import SimilarProducts from '../AuctionSimilarProducts/SimilarProducts';
+import Promotions from '../Promotions/Promotion'
 import AuctionWinners from '../../components/HP-TopAuctionWinners/AuctionWinners'
 import {MainPageWrapper, SectionTwo, Section, Title, AuctionSection, TitelWrapper,
      MoreAuction, AuctionWinnerSection, MoreLotteries, SectionWrapper} from './StyledHome';
+
 
 const Home:FC = () => {
     const navigate = useNavigate();
@@ -17,6 +19,7 @@ const Home:FC = () => {
 
     return <div>
         <MainPageWrapper>
+            <Promotions pageName={"HOME"} />
         <MainLottery />
         </MainPageWrapper>
         <SectionTwo>

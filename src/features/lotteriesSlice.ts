@@ -33,7 +33,7 @@ interface LotteryObj {
 
 interface lotteryState {
     lotteries: LotteryObj[],
-    upcomingLotteries: LotteryObj[]
+    upcomingLotteries: LotteryObj[],
 }
 
 const initalState:lotteryState = {
@@ -48,6 +48,7 @@ interface getLottery {
 interface UpcomingLotteries {
     upcomingLottery:LotteryObj[]
 }
+
 
 export const getLotteries = createAsyncThunk(
     'get lotteries',

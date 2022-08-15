@@ -1,5 +1,5 @@
 import {FC, Fragment, useEffect, useState} from 'react';
-import DesktopNavigation from '../../components/Navigation/DesktopNavigation';
+import Promotion from '../Promotions/Promotion';
 import {ButtonSizeVariant, ButtonType, ButtonVariant,AppButtonType} from '../../Utility/InterFacesAndEnum';
 import Button from '../../components/UI/Buttons/Button';
 import AuctionItem from '../../components/AuctionCards/AuctionCards';
@@ -110,6 +110,7 @@ const Auction:FC = () => {
 
     return <Fragment>
         <Wrapper>
+            <Promotion pageName={"AUCTION"} />
             <BannerSection>
                 <BannerContainer>
                     <img src={"https://picsum.photos/450/520"} />

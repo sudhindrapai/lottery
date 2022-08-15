@@ -24,3 +24,4 @@ export const getAuctionDetailById = `${baseUrl}/kingsrings/api/v1/auction/list/`
 export const purchaseAuction = `${baseUrl}/kingsrings/api/v1/purchaseauctionticket/create`;
 export const uploadImage = `${baseUrl}/kingsrings/api/v1/file/upload`;
 export const getAuctionWinnerList = `${baseUrl}/kingsrings/api/v1/auction/winnerslist`;
+export const getPromotions = `${baseUrl}/kingsrings/api/v1/promotion/list`; /** ?promotionPage=LOTTERY */

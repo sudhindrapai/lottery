@@ -1,5 +1,6 @@
 import {FC, Fragment, useEffect, useState} from 'react';
 import LiveLottery from '../../components/LiveLottery/LiveLottery';
+import Promotion from '../Promotions/Promotion';
 import UpcomingLottery from '../../components/UpcomingLottery/UpcomingLottery';
 import {LotteryContainer, BannerImg, UpcomingLotteryContainer, Lottery, SectionTitle} from './StyledLotteries';
 import BannerImgUrl from '../../assets/BANNER-LOTTERY-SECTION.jpg'
@@ -81,8 +82,8 @@ const Lotteries:FC = () => {
     const onSelectyNotifyMe = (id: number) => {};
 
     return <Fragment>
-        {/* <Navigation /> */}
         {buyModal}
+        <Promotion pageName={"LOTTERY"} />
         <BannerImg src={BannerImgUrl} />
         <LotteryContainer>
             <SectionTitle>
