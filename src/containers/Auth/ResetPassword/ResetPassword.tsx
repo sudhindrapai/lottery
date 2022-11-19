@@ -6,7 +6,7 @@ import {resetPasswordHandler} from '../../../features/resetPassword';
 import { RootState } from '../../../app/store';
 import {StyledWrapper, StyledFormContainer, StyledFormHeader, StyledIconContainer, StyledDescription} from './StyledResetPassword';
 
-import {useNavigate, useSearchParams} from 'react-router-dom';
+import {useNavigate, useSearchParams, useLocation} from 'react-router-dom';
 import AuthWrapper from '../AuthWrapper/AuthWrapper';
 
 import {FeatherCross} from '../../../icons';
@@ -21,16 +21,23 @@ interface ResetPassword {
 
 const ResetPassword:React.FC = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const dispatch = useDispatch();
-    const [searchParams] = useSearchParams();
+    const [searchParams,setSearchParams] = useSearchParams();
     let loading = useSelector((state:RootState) => state.resetPassword.isLoading);
 
     const passwordResetHandler = (obj:ResetPassword):void => {
     let userId = searchParams.get("publicUserId");
     let token = searchParams.get("token");
+    
+    let updatedSearchParam = location.search.slice(1);
+    let valuesArray = updatedSearchParam.split("&");
+    userId = valuesArray[0].split("publicUserId=")[1]
+    token = valuesArray[1].split("token=")[1]
+    
     let resetObj = {
         requestBody:obj,
-        useId:userId,
+        userId:userId,
         token:token
     }
         dispatch(resetPasswordHandler(resetObj));

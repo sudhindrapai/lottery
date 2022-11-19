@@ -4,10 +4,20 @@ import * as endpoint from '../networkUtilities/endpoints';
 import * as localStorageActionType from '../localStorage/ActionTypes';
 import {getLocalStorage} from '../localStorage/GetLocalStorage';
 
-const purchaseInitialState = {
+interface PurchaseLotteryInitialState {
+    isPurchased: boolean,
+    isPaymentInitiated:boolean,
+    message:string,
+    totalNoOfTickets: number,
+    paypalResponse:any
+}
+
+const purchaseInitialState:PurchaseLotteryInitialState = {
     isPurchased: false,
+    isPaymentInitiated:false,
     message:"",
-    totalNoOfTickets: 0
+    totalNoOfTickets: 0,
+    paypalResponse:{}
 }
 
 interface PurchaseLottery {
@@ -22,7 +32,8 @@ interface PurchaseLottery {
 interface TogglePurchaseState {
     isPurchased: boolean,
     message: string,
-    tickets: number
+    tickets: number,
+
 }
 
 export const purchaseLottery = createAsyncThunk(
@@ -41,13 +52,39 @@ export const purchaseLottery = createAsyncThunk(
             return response.json();
         })
         .then((data) => {
-            if (data.statusCode === 200) {
-                dispatch(togglePurchaseState({
-                    isPurchased: true,
-                    message: data.errorMsg,
-                    tickets: data.result.length
+            console.log(data,"data from pyament")
+                dispatch(storePaymentResponse({
+                    data:data
                 }));
+        })
+    }
+);
+// ?token=6VN41912HE320334F&PayerID=Z25MADH6SXGWE
+export const paymentComplete = createAsyncThunk(
+    'payment complete',
+    async (payload:any,{dispatch}) => {
+        await fetch (`${endpoint.createPaymentComplete}${payload.payerId}`,{
+            method: 'POST',
+            headers:{
+                Authorization: `Bearer ${getLocalStorage(localStorageActionType.GET_ACCESS_TOKEN)}`,
+                "Content-type": "application/json; charset=UTF-8",
             }
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((response) => {
+           dispatch(togglePurchaseState({
+               isPurchased: true,
+               message:"Perchased successfully",
+               tickets: response.length
+           }))
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+        .finally(() => {
+            console.log("finaly")
         })
     }
 );
@@ -63,9 +100,16 @@ const purchaseLotterySlice = createSlice({
                 message: action.payload.message,
                 totalNoOfTickets: action.payload.tickets
             }
+        },
+        storePaymentResponse: (state, action:PayloadAction<any>) => {
+            return {
+                ...state,
+                paypalResponse:action.payload.data,
+                isPaymentInitiated:true
+            }
         }
     }
 });
 
 export default purchaseLotterySlice.reducer;
-export const {togglePurchaseState} = purchaseLotterySlice.actions;
+export const {togglePurchaseState,storePaymentResponse} = purchaseLotterySlice.actions;

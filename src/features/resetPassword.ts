@@ -46,7 +46,7 @@ export const resetPasswordHandler = createAsyncThunk(
             method: 'PUT',
             body: JSON.stringify(payloadObj.requestBody),
             headers:{
-                Authorization: `Bearer ${getLocalStorage(payloadObj.token)}`,
+                Authorization: `Bearer ${payloadObj.token}`,
                 "Content-type": "application/json; charset=UTF-8",
             }
         })

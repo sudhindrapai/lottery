@@ -37,6 +37,8 @@ import { RootState } from '../../app/store';
     const [ticketDetailObj, setTicketDetail] = useState<any>(null);
 
     let isPurchased = useSelector((state:RootState) => state.purchaseLottery.isPurchased);
+    let isPaymentInitiated = useSelector((state:RootState) => state.purchaseLottery.isPaymentInitiated);
+    let paymentDetails = useSelector((state:RootState) => state.purchaseLottery.paypalResponse);
 
     useEffect(() => {
         if (ticketDetailObj === null) {
@@ -50,15 +52,20 @@ import { RootState } from '../../app/store';
                 ...userDetailObj
             }
             setTicketDetail(updatedTicketDetailObj);
-console.log(updatedTicketDetailObj)
         }
     },[]);
 
     useEffect(() => {
-        if (isPurchased === true) {
-            navigate(RouterPath.lotteryPaymentSuccess);
+        if (isPaymentInitiated === true) {
+            // navigate(RouterPath.lotteryPaymentSuccess);
+            let linksArray = paymentDetails?.links;
+            let payerActionObj = linksArray.filter((obj:any) => {
+                return obj.rel === "payer-action"
+            })[0];
+            let link = payerActionObj.href;
+            window.open(link,'_self');
         }
-    },[isPurchased])
+    },[isPaymentInitiated])
 
     const redirectToPaymentSuccess = () => {
 
