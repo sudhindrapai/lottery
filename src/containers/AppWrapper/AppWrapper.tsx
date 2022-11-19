@@ -7,12 +7,22 @@ import {RouterPath} from '../../routes';
 import {useLocation} from 'react-router-dom';
 
 let footerExcludeUrl = [
-    RouterPath.resendResetLink, RouterPath.resetPassword, RouterPath.signIn, RouterPath.signUp, RouterPath.twoFA, RouterPath.forgotPassword
-]
+    RouterPath.resendResetLink, 
+    RouterPath.resetPassword, RouterPath.signIn, 
+    RouterPath.signUp, RouterPath.twoFA, RouterPath.forgotPassword, RouterPath.paypalSuccess, RouterPath.paypalFail
+];
+
+let headerExcludeUrl = [RouterPath.paypalSuccess, RouterPath.paypalFail];
 
 const AppWrapper:React.FC = ({children}) => {
     let params = useLocation();
-    let FooterView = <Fragment></Fragment>
+    let FooterView = <Fragment></Fragment>;
+
+    let header = <Fragment></Fragment>
+
+    if (headerExcludeUrl.indexOf(params.pathname) === -1) {
+        header = <Navigation />
+    }
 
     if (footerExcludeUrl.indexOf(params.pathname) === -1) {
         FooterView = <FooterWapper>
@@ -22,7 +32,7 @@ const AppWrapper:React.FC = ({children}) => {
 
     return <Wrapper>
         <Notification />
-        <Navigation />
+        {header}
         {children}
         {FooterView}
     </Wrapper>

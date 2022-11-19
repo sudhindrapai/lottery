@@ -15,7 +15,7 @@ interface PurchaseLottery {
     userId: number,
     paymentId: number,
     purchaseDate: Date,
-    ticketType: "G" | "M",
+    ticketType: "G" | "M" | "B",
     noOfTickets:number 
 }
 
@@ -28,6 +28,7 @@ interface TogglePurchaseState {
 export const purchaseLottery = createAsyncThunk(
     'purchase ticket',
     async (payload:PurchaseLottery,{dispatch}) => {
+        payload["ticketType"] = "B";
         await fetch(endpoint.purchaseLottery, {
             method: 'POST',
             body:JSON.stringify(payload),
@@ -40,7 +41,6 @@ export const purchaseLottery = createAsyncThunk(
             return response.json();
         })
         .then((data) => {
-            console.log(data,'purchaseLottery');
             if (data.statusCode === 200) {
                 dispatch(togglePurchaseState({
                     isPurchased: true,

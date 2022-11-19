@@ -16,7 +16,7 @@ export const updateProfile = `${baseUrl}/kingsrings/api/v1/user/update/`; /** {{
 export const updateAddress = `${baseUrl}/kingsrings/api/v1/user/updateaddress/`; /** {{publicUserId}} */
 export const toggleTwoFA = `${baseUrl}/kingsrings/api/v1/user/enabledisable2fa/`; /**  */
 export const verifyTwoFACode = `${baseUrl}/kingsrings/api/v1/user/verifyenable2faotp`; /** {{publicUserId}} */
-export const purchaseLottery = `${baseUrl}/kingsrings/api/v1/purchaseticket/create`;
+export const purchaseLottery = `${baseUrl}/kingsrings/api/v1/purchaselotteryticket/create`;
 export const getOrdersList = `${baseUrl}/kingsrings/api/v1/purchaseticket/list`; /** ?userId=3 */
 export const createAuctionRequest = `${baseUrl}/kingsrings/api/v1/auction/create` /** create auction */
 export const getAuctionList = `${baseUrl}/kingsrings/api/v1/auction/list`; /** ?auctionStatus=U */
@@ -25,3 +25,8 @@ export const purchaseAuction = `${baseUrl}/kingsrings/api/v1/purchaseauctiontick
 export const uploadImage = `${baseUrl}/kingsrings/api/v1/file/upload`;
 export const getAuctionWinnerList = `${baseUrl}/kingsrings/api/v1/auction/winnerslist`;
 export const getPromotions = `${baseUrl}/kingsrings/api/v1/promotion/list`; /** ?promotionPage=LOTTERY */
+export const generatePaypalToken = `https://api-m.sandbox.paypal.com/v1/oauth2/token`;
+export const createCheckoutNew = `https://api-m.sandbox.paypal.com/v2/checkout/orders`;
+export const createNewCapture = 'https://api-m.sandbox.paypal.com/v2/checkout/orders';
+export const createPaypalCheckout = `${baseUrl}/kingsrings/api/v1/payment/checkout`;
+export const createPaymentComplete = `${baseUrl}`;

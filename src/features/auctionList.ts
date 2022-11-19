@@ -1,11 +1,10 @@
 import {createSlice, PayloadAction, createAsyncThunk} from '@reduxjs/toolkit';
-import * as endpoints from '../networkUtilities/endpoints'
+import * as endpoints from '../networkUtilities/endpoints';
 import {toggleNotificationVisibility} from './notificationSlice';
 import {NotificationType} from '../Utility/InterFacesAndEnum';
 
 import * as localStorageActionType from '../localStorage/ActionTypes';
-import {getLocalStorage} from '../localStorage/GetLocalStorage'; 
-import exp from 'constants';
+import {getLocalStorage} from '../localStorage/GetLocalStorage';
 
 interface AuctionItem{
     auctionDesc: string

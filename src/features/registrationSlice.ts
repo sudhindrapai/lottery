@@ -26,7 +26,8 @@ interface CreateAccount {
     firstName:string,
     lastName:string,
     using2FA: boolean,
-    agreeTC:boolean
+    agreeTC:boolean,
+    mobileNo:string
 }
 
 export const createSignup = createAsyncThunk(

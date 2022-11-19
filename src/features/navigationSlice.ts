@@ -21,6 +21,8 @@ export const AppRoutePath = {
     auctionDetail: "/auction/detail/:auctionId",
     createAuction: "/auction/create",
     auctionPaymentSuccess: "/auction/payment-success",
+    paypalSuccess:"/payment/success",
+    paypalFail: "/payment/fail",
     tempRoot: "/",
     root: "/",
     notFound: "*"

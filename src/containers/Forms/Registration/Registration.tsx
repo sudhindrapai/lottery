@@ -23,7 +23,8 @@ interface CreateAccount {
     firstName: string,
     lastName: string,
     using2FA: boolean,
-    agreeTC:boolean
+    agreeTC:boolean,
+    mobileNo:string
 }
 
 const registrationFormInitalState: RegFormState = {
@@ -149,6 +150,7 @@ const RegistrationForm:React.FC<RegistrationProps> = ({onRegister, onSelectLogin
             password: "",
             firstName:"",
             lastName:"",
+            mobileNo:"",
             using2FA:false,
             agreeTC: true
         };
@@ -158,6 +160,7 @@ const RegistrationForm:React.FC<RegistrationProps> = ({onRegister, onSelectLogin
             createRegMethod["password"] = element.id === "password"? element.value : createRegMethod.password;
             createRegMethod["firstName"] = element.id === "firstName"? element.value : createRegMethod.firstName;
             createRegMethod["lastName"] = element.id === "lastName"? element.value : createRegMethod.lastName;
+            createRegMethod["mobileNo"] = element.id === "mobileNumber"? element.value : createRegMethod.mobileNo;
         }
         onRegister(createRegMethod);
     }
