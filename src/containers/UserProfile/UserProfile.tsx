@@ -5,6 +5,7 @@ import PersonalInfoForm from './PersolanInfo/PersonalInfo';
 import Address from './Address/Address';
 import ChangePassword from './ChangePassword/ChangePassword';
 import TwoFA from './2FA/2FA';
+import Subscription from './Subscription/Subscription';
 
 import {useSelector, useDispatch} from 'react-redux';
 import {getUserProfileDetail} from '../../features/userProfileSlice';
@@ -13,7 +14,7 @@ const tabMenuOptions = [
     {
         label: "Personal Info",
         id: 1,
-        isSelected: true
+        isSelected: false
     },
     {
         label: "Address",
@@ -29,6 +30,11 @@ const tabMenuOptions = [
         label: "2 Factor Authentication",
         id: 4,
         isSelected: false
+    },
+    {
+        label: "Subscription",
+        id: 5,
+        isSelected: true
     }
 ]
 
@@ -67,6 +73,8 @@ const UserProfile:FC = () => {
                 detailView = <ChangePassword />
             } else if (menuObj.id === 4) {
                 detailView = <TwoFA />
+            } else if (menuObj.id === 5) {
+                detailView = <Subscription />
             }
         }
     }

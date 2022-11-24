@@ -35,7 +35,7 @@ width: 100%;
 box-sizing: border-box;
 padding: 50px;
 position: absolute;
-top: 20%;
+top: 6%;
 ${UIConstants.mobileView}{
     padding: 0 10px;
     top: 14%;
