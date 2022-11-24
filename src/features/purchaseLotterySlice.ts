@@ -107,9 +107,19 @@ const purchaseLotterySlice = createSlice({
                 paypalResponse:action.payload.data,
                 isPaymentInitiated:true
             }
+        },
+        resetLotteryPurchaseState:(state,action:PayloadAction<void>) => {
+            return{
+                ...state,
+                isPurchased: false,
+                isPaymentInitiated:false,
+                message:"",
+                totalNoOfTickets: 0,
+                paypalResponse:{}
+            }
         }
     }
 });
 
 export default purchaseLotterySlice.reducer;
-export const {togglePurchaseState,storePaymentResponse} = purchaseLotterySlice.actions;
+export const {togglePurchaseState,storePaymentResponse,resetLotteryPurchaseState} = purchaseLotterySlice.actions;

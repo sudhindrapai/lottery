@@ -6,12 +6,22 @@ import Button from '../../components/UI/Buttons/Button';
 import successSrc from '../../assets/success.svg';
 import {RouterPath} from '../../routes'
 import {useNavigate} from 'react-router-dom';
-import {useSelector} from 'react-redux';
+import {resetLotteryPurchaseState} from '../../features/purchaseLotterySlice'
+import {useSelector, useDispatch} from 'react-redux';
 import { RootState } from '../../app/store';
 
 const PaymentSuccess:FC = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     let totalNoOfTickets = useSelector((state:RootState) => state.purchaseLottery.totalNoOfTickets);
+
+    const resetRootState = () => {
+        dispatch(resetLotteryPurchaseState());
+        
+        navigate(RouterPath.root, { replace: true });
+        window.location.replace(RouterPath.root);
+    };
+
     return(
         <Wrapper>
             <ViewHeader />
@@ -33,9 +43,9 @@ const PaymentSuccess:FC = () => {
                     variant={ButtonVariant.contained} 
                     type={ButtonType.submit} 
                     clicked={() => {
-                        navigate(RouterPath.root);
+                        resetRootState();
                     }} >
-                        Continue Shopping
+                        Continue Shopping 1
                 </Button>
                 </ActionSection>
             </Container>

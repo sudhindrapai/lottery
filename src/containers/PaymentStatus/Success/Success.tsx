@@ -19,12 +19,16 @@ const Success:FC = () => {
     useEffect(() => {
         let searchUrl = location.search;
         let searchItems = searchUrl.split("&PayerID=");
-        let token = searchItems[0].slice(7)
-        dispatch(paymentComplete({payerId:token}));
+        let token = searchItems[0].slice(7);
+        if (token !== undefined && token !== null && token.length > 0) {
+            dispatch(paymentComplete({payerId:token}));
+        }
     },[]);
 
     useEffect(() => {
-        navigation(RouterPath.lotteryPaymentSuccess);
+        if (isSuccess === true) {
+            navigation(RouterPath.lotteryPaymentSuccess);
+        }
     },[isSuccess])
 
     return <styled.Wrapper>
