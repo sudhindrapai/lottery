@@ -45,7 +45,7 @@ const PaymentSuccess:FC = () => {
                     clicked={() => {
                         resetRootState();
                     }} >
-                        Continue Shopping 1
+                        Continue Shopping
                 </Button>
                 </ActionSection>
             </Container>
