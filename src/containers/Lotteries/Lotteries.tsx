@@ -86,9 +86,9 @@ const Lotteries:FC = () => {
         <Promotion pageName={"LOTTERY"} />
         <BannerImg src={BannerImgUrl} />
         <LotteryContainer>
-            <SectionTitle>
+            {lotteriesList.length > 0 && <SectionTitle>
             Live lotteries
-            </SectionTitle>
+            </SectionTitle>}
         {lotteriesList.map((lotteryObj) => {
             return <LiveLottery lotteryType={lotteryObj.rewardType} 
             id={lotteryObj.lotteryGameId}
@@ -98,9 +98,9 @@ const Lotteries:FC = () => {
             lotteryEndTime = {lotteryObj.lotteryGameEndDate} 
             entryPrice={23} usersCound={1000} drawDate={lotteryObj.lotteryGameEndDate} />
         })}
-<SectionTitle>
+{upcomingLotteries.length > 0 && <SectionTitle>
 Upcoming lotteries
-            </SectionTitle>
+            </SectionTitle>}
 <UpcomingLotteryContainer>
         {upcomingLotteries.map((lotteryObj) => {
             return <Lottery>
