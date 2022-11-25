@@ -1,10 +1,13 @@
-import React, {useState, FC, Fragment} from 'react';
+import React, {useState, FC, Fragment, useEffect, useRef} from 'react';
 import FormBuilder from '../../FormBuilder/FormBuilder';
 import Button from '../../../components/UI/Buttons/Button';
 import {updateFormInputState, validateForm} from '../../../Utility/Utility';
 import {ActionBtn} from './StyledAddAddressForm';
 import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement,
      ButtonSizeVariant, ButtonVariant, ButtonType, AppButtonType} from '../../../Utility/InterFacesAndEnum';
+
+import * as localStorageActioinType from '../../../localStorage/ActionTypes';
+import {getLocalStorage} from '../../../localStorage/GetLocalStorage';
 
 interface AddAddress {
     form: FormElement[],
@@ -108,6 +111,8 @@ const AddressForm:FC<AddAddressProps> = ({onUpdateAddress}) => {
 
     const [values, setValues] = useState<AddAddress>(AddAddressState);
 
+    const userDetailRef = useRef({});
+
     const handleInputChange = (event:React.ChangeEvent <HTMLTextAreaElement | HTMLInputElement>):void => {
         let updatedStateArray = updateFormInputState(event, values.form)
         setValues({
@@ -115,6 +120,40 @@ const AddressForm:FC<AddAddressProps> = ({onUpdateAddress}) => {
             form: updatedStateArray
         });
     }
+
+    useEffect(() => {
+        let userObj = getLocalStorage(localStorageActioinType.GET_USER_DETAILS);
+        if (Object.keys(userObj).length > 0) {
+            userDetailRef.current = userObj;
+            let {pincCde,country,state,address} = JSON.parse(userObj);
+
+            let updatedArry = [];
+            for (let formObj of values.form) {
+                if (formObj.id === "address") {
+                    formObj.value = address;
+                }
+                if (formObj.id === "state") {
+                    formObj.value = state;
+                }
+                if (formObj.id === "country") {
+                    formObj.value = country;
+                }
+                if (formObj.id === "pincode") {
+                    formObj.value = pincCde;
+                }
+                updatedArry.push(formObj)   
+            }
+
+            console.log(updatedArry,"updatedArry")
+
+            setValues({
+                ...values,
+                form:updatedArry,
+                isValidForm: values.isValidForm
+            });
+
+        }
+    },[])
 
   
 
