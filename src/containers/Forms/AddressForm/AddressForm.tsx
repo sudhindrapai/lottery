@@ -144,8 +144,6 @@ const AddressForm:FC<AddAddressProps> = ({onUpdateAddress}) => {
                 updatedArry.push(formObj)   
             }
 
-            console.log(updatedArry,"updatedArry")
-
             setValues({
                 ...values,
                 form:updatedArry,
