@@ -1,9 +1,13 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import FormBuilder from '../../FormBuilder/FormBuilder';
 import {updateFormInputState, validateForm} from '../../../Utility/Utility';
 import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement,
      ButtonSizeVariant, ButtonVariant, ButtonType, AppButtonType} from '../../../Utility/InterFacesAndEnum';
-import Button from '../../../components/UI/Buttons/Button'
+import Button from '../../../components/UI/Buttons/Button';
+
+import {useSelector,useDispatch} from 'react-redux';
+import {RootState} from '../../../app/store';
+import {toggleUpdatePasswordState} from '../../../features/updatePasswordSlicd';
 
 interface UpdatePasswordFormState {
     form: FormElement[],

@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, useState, useEffect} from 'react';
 
 import FormBuilder from '../../FormBuilder/FormBuilder';
 import {updateFormInputState, validateForm} from '../../../Utility/Utility';
@@ -8,6 +8,7 @@ import Button from '../../../components/UI/Buttons/Button';
 
 import {updatePasswordHandler} from '../../../features/updatePasswordSlicd';
 import {useSelector, useDispatch} from 'react-redux';
+import {RootState} from '../../../app/store'
 
 interface PasswordUpdate {
     form: FormElement[],
@@ -88,6 +89,14 @@ const PersonalInfo = () => {
     const dispatch = useDispatch();
 
     const [values, setValues] = useState<PasswordUpdate>(passwordUpdateState);
+
+    let isPassWordUpdated = useSelector((state:RootState) => state.Profile.isUpdated);
+
+    useEffect(() => {
+        if (isPassWordUpdated === true) {
+            window.location.reload();
+        }
+    },[isPassWordUpdated])
 
     const handleInputChange = (event:React.ChangeEvent <HTMLTextAreaElement | HTMLInputElement>):void => {
         let updatedStateArray = updateFormInputState(event, values.form)
