@@ -14,6 +14,7 @@ import AuctionSlice from '../features/auctionList';
 import OrdersSlice from '../features/ordersSlice';
 import ImageUploader from '../features/imageUploaderSlice';
 import Promotion from '../features/promotion';
+import Subscription from '../features/subScription';
 
 const store = configureStore({
     reducer:{
@@ -31,7 +32,8 @@ const store = configureStore({
        auction: AuctionSlice,
        orders:OrdersSlice,
        images:ImageUploader,
-       promotion:Promotion
+       promotion:Promotion,
+       subscription: Subscription
     }
 })
 

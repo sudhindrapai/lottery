@@ -8,17 +8,17 @@ import {getLocalStorage} from '../localStorage/GetLocalStorage';
 
 interface AuctionItem{
     auctionDesc: string
-auctionEndDate: string
-auctionId: number
-auctionPrice: number
-auctionStatus: string
-auctionTitle: string
-bronzeTicketPrice: number
-imageUrls: string[] | null
-noOfUsersJoined: null | number
-productCategory: string
-productType: string
-userName: string
+    auctionEndDate: string
+    auctionId: number
+    auctionPrice: number
+    auctionStatus: string
+    auctionTitle: string
+    bronzeTicketPrice: number
+    imageUrls: string[] | null
+    noOfUsersJoined: null | number
+    productCategory: string
+    productType: string
+    userName: string
 }
 
 interface AuctionDetailObj {

@@ -23,11 +23,17 @@ margin: 30px 0;
 `;
 
 export const MembershipDetail = styled.div`
-margin-top: 30px;
+margin-top: 15px;
 width: 100%;
 box-sizing: border-box;
 color: rgba(32,14,50,0.5);
 font-size: 14px;
 font-weight: 400;
 text-align:left;
+ol {
+    padding-left: 15px;
+    li{
+        padding-bottom: 10px;
+    }
+}
 `;

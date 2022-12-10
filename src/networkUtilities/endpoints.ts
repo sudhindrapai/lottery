@@ -31,3 +31,4 @@ export const createCheckoutNew = `https://api-m.sandbox.paypal.com/v2/checkout/o
 export const createNewCapture = 'https://api-m.sandbox.paypal.com/v2/checkout/orders';
 export const createPaypalCheckout = `${baseUrl}/kingsrings/api/v1/payment/checkout`;
 export const createPaymentComplete = `${baseUrl}/kingsrings/api/v1/payment/complete/`; /* PayerID=Z25MADH6SXGWE */
+export const getSubscriptionDetail = `${baseUrl}/kingsrings/api/v1/payment/getsubscription`; /**  */
