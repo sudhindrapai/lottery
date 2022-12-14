@@ -18,8 +18,15 @@ color: #000000;
 export const ActionBtnContainer = styled.div`
 width: 100%;
 box-sizing: border-box;
-width: 200px;
+width: auto;
 margin: 30px 0;
+display: flex;
+flex-flow: row nowrap;
+align-items: center;
+justify-content: flex-start;
+button{
+    margin-right: 10px;
+}
 `;
 
 export const MembershipDetail = styled.div`

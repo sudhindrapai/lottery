@@ -5,7 +5,8 @@ import Button from '../../../components/UI/Buttons/Button';
 import {ButtonSizeVariant, ButtonVariant, ButtonType, AppButtonType} from '../../../Utility/InterFacesAndEnum';
 
 import {RootState} from '../../../app/store';
-import {getSubscriptionDetailData} from '../../../features/subScription';
+import {getSubscriptionDetailData,buyGoldMembership,
+    suspendGoldmembership, reActivateMembership} from '../../../features/subScription';
 import {useSelector, useDispatch} from 'react-redux';
 
 const Subscription:FC = () => {
@@ -19,10 +20,20 @@ const Subscription:FC = () => {
     },[])
 
     const purchaseMembership = () => {
-
+        dispatch(buyGoldMembership());
     };
 
+    const suspendMembership = () => {
+        dispatch(suspendGoldmembership({
+            reason: "Not intrested anymore"
+        }));
+    }
 
+    const reActivateUserMembership = () => {
+        dispatch(reActivateMembership({
+            reason: "Re-activate"
+        }));
+    };
 
     return <style.Container>
         <style.Title>
@@ -55,6 +66,26 @@ const Subscription:FC = () => {
         type={ButtonType.submit} 
         clicked={purchaseMembership} >
             Buy Membership
+    </Button>
+    <Button 
+        appBtnType={AppButtonType.primaryBtn}
+        disabled={false} 
+        fullWidth={true} 
+        size={ButtonSizeVariant.medium} 
+        variant={ButtonVariant.contained} 
+        type={ButtonType.submit} 
+        clicked={purchaseMembership} >
+            Cancel Membership
+    </Button>
+    <Button 
+        appBtnType={AppButtonType.primaryBtn}
+        disabled={false} 
+        fullWidth={true} 
+        size={ButtonSizeVariant.medium} 
+        variant={ButtonVariant.contained} 
+        type={ButtonType.submit} 
+        clicked={purchaseMembership} >
+            Activate Membership
     </Button>
         </style.ActionBtnContainer>
     </style.Container>

@@ -11,11 +11,16 @@ interface SubscriptionInterface{
     isSubscribed:boolean
 }
 
+interface ActivateAndSuspendPayload {
+    reason: string
+}
+
 const subScriptionInitialState:SubscriptionInterface = {
     subscription:[],
     isSubscribed:false
 };
 
+// function to get subscription details
 export const getSubscriptionDetailData = createAsyncThunk(
     'get subscription detail',
     async(payload:void,{dispatch}) => {
@@ -23,7 +28,7 @@ export const getSubscriptionDetailData = createAsyncThunk(
             method: 'GET',
             headers:{
                 Authorization: `Bearer ${getLocalStorage(localStorageActionType.GET_ACCESS_TOKEN)}`,
-                "Content-type": "application/json; charset=UTF-8",
+                "Content-type": "application/json; charset=UTF-8"
             }
         })
         .then((response) => {
@@ -35,6 +40,66 @@ export const getSubscriptionDetailData = createAsyncThunk(
                     status: false
                 }))
             }
+        })
+    }
+);
+
+// function to buy goldmembership
+export const buyGoldMembership = createAsyncThunk(
+    'buy goldmembership',
+    async (payload:void,{dispatch}) => {
+        fetch(endpoint.buyGoldMembership,{
+            method: 'POST',
+            headers:{
+                Authorization: `Bearer ${getLocalStorage(localStorageActionType.GET_ACCESS_TOKEN)}`,
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((response) => {
+            console.log(response);
+        })
+    }
+);
+
+export const suspendGoldmembership = createAsyncThunk(
+    'suspend goldmembership of user',
+    async(payload:ActivateAndSuspendPayload,{dispatch}) => {
+        fetch (endpoint.suspendGoldMembership,{
+            method: 'PUT',
+            headers:{
+                Authorization: `Bearer ${getLocalStorage(localStorageActionType.GET_ACCESS_TOKEN)}`,
+                "Content-type": "application/json; charset=UTF-8"
+            },
+            body:JSON.stringify(payload)
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((response) => {
+            console.log(response);
+        })
+    }
+);
+
+export const reActivateMembership = createAsyncThunk(
+    'reactivate user gold membership',
+    async (payload: ActivateAndSuspendPayload, {dispatch}) => {
+        fetch(endpoint.reActivateGoldMembership,{
+            method:'PUT',
+            headers:{
+                Authorization: `Bearer ${getLocalStorage(localStorageActionType.GET_ACCESS_TOKEN)}`,
+                "Content-type": "application/json; charset=UTF-8"
+            },
+            body:JSON.stringify(payload)
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((response) => {
+            console.log(response);
         })
     }
 );
