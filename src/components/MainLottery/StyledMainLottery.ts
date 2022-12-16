@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import {FooterOption} from '../LiveLottery/StyledLiveLottery';
 import * as UIConstants from '../../UIConstants';
+import bgImg from '../../assets/mainLotteryBgImg.jpg';
 
 export const Wrapper = styled.div`
 width: 100%;
@@ -40,6 +41,7 @@ export const Coin = styled.img`
 height: 120px;
 width: 120px;
 margin-bottom: 8px;
+mix-blend-mode:multiply;
 `;
 
 export const CoinLabel = styled.div`
@@ -62,6 +64,7 @@ ${UIConstants.mobileView}{
 export const MainLotteryImg = styled.img`
 width: 350px;
 object-fit: contain;
+mix-blend-mode:multiply;
 ${UIConstants.mobileView}{
     height: 200px;
 }

@@ -24,6 +24,7 @@ import Purchases from './containers/Purchases/Purchases';
 import AuctionPaymentSuccess from './containers/AuctionPaymentSuccess/PaymentSuccess';
 import PaypalSuccess from './containers/PaymentStatus/Success/Success';
 import PaypalFail from './containers/PaymentStatus/Fail/Fail';
+import MembershipSuccess from './containers/BuyMembershipStatus/Success/Success';
 
 export const RouterPath = {
   ...AppRoutePath
@@ -56,6 +57,7 @@ const AppRoutes = () => {
             <Route path={RouterPath.auctionPaymentSuccess} element={<AuctionPaymentSuccess />} />
             <Route path={RouterPath.paypalSuccess} element={<PaypalSuccess />} />
             <Route path={RouterPath.paypalFail} element={<PaypalFail />} />
+            <Route path={RouterPath.membershipSuccess} element={<MembershipSuccess />} />
       </Routes>
     )
 }

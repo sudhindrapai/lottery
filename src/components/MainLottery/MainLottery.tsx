@@ -1,6 +1,7 @@
 import {FC} from 'react';
 import {Wrapper, Container,CoinsSection, Coin, CoinLabel,
-    MainLotterySection, MainLotteryImg, RewardDetail, LotteryDrawWrapper, DrawLabel, AuctionBtns, FooterSection} from './StyledMainLottery';
+    MainLotterySection, MainLotteryImg, RewardDetail, LotteryDrawWrapper,
+     DrawLabel, AuctionBtns, FooterSection} from './StyledMainLottery';
 
 import {ButtonSizeVariant, ButtonType, ButtonVariant, AppButtonType} from '../../Utility/InterFacesAndEnum';
 import Button from '../UI/Buttons/Button';

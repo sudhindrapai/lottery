@@ -23,6 +23,8 @@ export const AppRoutePath = {
     auctionPaymentSuccess: "/auction/payment-success",
     paypalSuccess:"/payment/success",
     paypalFail: "/payment/fail",
+    membershipSuccess:"/goldmembership/success",
+    membershipFail:"/goldmembership/fail",
     tempRoot: "/",
     root: "/",
     notFound: "*"

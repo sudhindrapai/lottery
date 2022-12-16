@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import * as UIConstants from '../../UIConstants';
+import bgImg from '../../assets/mainLotteryBgImg.jpg';
 
 export const MainPageWrapper = styled.div`
 width: 100%;
@@ -8,6 +9,9 @@ background-color: #ffffff;
 margin-top: 2px;
 padding: 50px 80px;
 border-bottom: 1px solid #D4D8E2;
+background-image: url(${bgImg});
+background-size: contain;
+background-position: center;
 ${UIConstants.mobileView}{
     padding: 10px;
 }
