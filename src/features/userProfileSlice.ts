@@ -198,7 +198,20 @@ export const toggleTwoFA = createAsyncThunk(
                 status: NotificationType.success,
                 message: data.errorMsg
             }));
-        })
+
+            let isEnabled = getLocalStorage(localStorageActionType.GET_TWO_FA_STATUS);
+
+            let updatedStatus = false;
+
+            if (isEnabled === "true") {
+                updatedStatus = false;
+            } else if (isEnabled === "false") {
+                updatedStatus = true;
+            }
+
+            setLocalStorage(localStorageActionType.SET_TWO_FA_STATUS,updatedStatus);
+
+        });
     }
 );
 

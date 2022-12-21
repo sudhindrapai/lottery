@@ -6,7 +6,8 @@ import {toggleNotificationVisibility} from './notificationSlice';
 interface ForgotPasswordState {
     isLinkSent: boolean,
     isLoading: boolean,
-    errorMessage: string
+    errorMessage: string,
+    publicUserId:string
 }
 
 interface ToggleLinkSentState {
@@ -28,6 +29,7 @@ interface ForgotPassword {
 const forgotPasswordInitialState:ForgotPasswordState = {
     isLinkSent: false,
     isLoading: false,
+    publicUserId:"",
     errorMessage: ""
 }
 
@@ -51,6 +53,11 @@ export const forgotPasswordHandler = createAsyncThunk(
             })
             .then((response) => {
                 if (response.statusCode === 200) {
+                    let resultObj = response.result;
+                    let publicUserId = Object.keys(resultObj).length > 0 ? resultObj.publicUserId : "";
+                    dispatch(setPublicUserId({
+                        publicUserId:publicUserId
+                    }));
                     dispatch(toggleLinkSentState({
                         isLinkSent: true
                     }));
@@ -102,9 +109,15 @@ const forgotPassword = createSlice({
                 ...state,
                 errorMessage: action.payload.message
             }
+        },
+        setPublicUserId: (state, action:PayloadAction<any>) => {
+            return {
+                ...state,
+                publicUserId:action.payload.publicUserId
+            }
         }
     }
 });
 
-export const {resetState, toggleLinkSentState, toggleLoading, updateMessage} = forgotPassword.actions;
+export const {resetState, toggleLinkSentState, toggleLoading, updateMessage, setPublicUserId} = forgotPassword.actions;
 export default forgotPassword.reducer

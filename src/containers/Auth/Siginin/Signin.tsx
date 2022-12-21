@@ -1,12 +1,16 @@
-import {useEffect, FC} from 'react';
+import {useEffect, FC, useState} from 'react';
 import {StyledWrapper, StyledFormContainer, Image} from './styleSignin';
 import Loader from '../../../components/Loader/Loader';
 import SigninForm from '../../Forms/Login/Login';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../app/store';
 import { createLogin, toggleLogin } from '../../../features/loginSlice';
+import {validateLogin} from '../../../Utility/formValidation';
 import {getUserProfileDetail} from '../../../features/userProfileSlice';
 import { useNavigate } from "react-router-dom";
+
+import {NotificationType} from '../../../Utility/InterFacesAndEnum';
+import {toggleNotificationVisibility} from '../../../features/notificationSlice';
 
 import {RouterPath} from '../../../routes';
 import LoginImage from '../../../assets/loginImage.png';
@@ -26,10 +30,19 @@ const Login:FC = () => {
 
     let loadingState = useSelector((state:RootState) => state.login.isLoading);
     let isLoggedIn = useSelector((state:RootState) => state.login.isLoggedin);
-    let isAuthenticated = useSelector((state: RootState) => state.login.isAuthenticated)
+    let isAuthenticated = useSelector((state: RootState) => state.login.isAuthenticated);
 
     const signinHandler = (obj:SigninAccount):void => {
-        dispatch(createLogin(obj))
+        let statusObj = validateLogin(obj);
+        if (statusObj.status === true) {
+            dispatch(createLogin(obj))
+        } else {
+            dispatch(toggleNotificationVisibility({
+                isVisible: true,
+                status: NotificationType.error,
+                message: statusObj.message
+            }));
+        }
     }
 
     const redirectToForgotPassword = (): void => {

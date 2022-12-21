@@ -8,7 +8,11 @@ import Button from '../../../components/UI/Buttons/Button';
 
 import {updatePasswordHandler} from '../../../features/updatePasswordSlicd';
 import {useSelector, useDispatch} from 'react-redux';
-import {RootState} from '../../../app/store'
+import {RootState} from '../../../app/store';
+
+import {validateChangePassword} from '../../../Utility/formValidation';
+import {NotificationType} from '../../../Utility/InterFacesAndEnum';
+import {toggleNotificationVisibility} from '../../../features/notificationSlice';
 
 interface PasswordUpdate {
     form: FormElement[],
@@ -128,7 +132,17 @@ const PersonalInfo = () => {
             }
 
         }
-        dispatch(updatePasswordHandler(updatePasswordObj));
+
+        let validatedObj = validateChangePassword(updatePasswordObj);
+        if (validatedObj.status === true) {
+            dispatch(updatePasswordHandler(updatePasswordObj));
+        } else {
+            dispatch(toggleNotificationVisibility({
+                isVisible: true,
+                status: NotificationType.error,
+                message: validatedObj.message
+            }));
+        }
     }
 
     return <form name={"Customer Registration"} html-for={"customer resgistraion"} autoComplete="off">

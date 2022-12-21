@@ -8,6 +8,11 @@ max-height: 200px;
 export const ProfileImage = styled.img`
 object-fit: contain;
 width: 100%;
+max-height: 200px;
+max-width: 200px;
+height: 150px;
+width: 150px;
+border-radius: 50%;
 `;
 
 export const UpdateImageText = styled.div`

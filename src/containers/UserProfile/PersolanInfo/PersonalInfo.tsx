@@ -18,6 +18,11 @@ import {getLocalStorage} from '../../../localStorage/GetLocalStorage';
 import {updatePersonalDetails,uploadProfileImage} from '../../../features/userProfileSlice';
 import {useSelector, useDispatch} from 'react-redux';
 
+import {validateUpdatePersonalInfo} from '../../../Utility/formValidation';
+
+import {NotificationType} from '../../../Utility/InterFacesAndEnum';
+import {toggleNotificationVisibility} from '../../../features/notificationSlice';
+
 interface PersonalInfo {
     form: FormElement[],
     isValidForm: boolean
@@ -165,11 +170,20 @@ const PersonalInfo:FC = () => {
                 updateProfileObj["mobileNo"] = formObj.value;
             }
         };
-        dispatch(updatePersonalDetails(updateProfileObj));
+        let validatedObj = validateUpdatePersonalInfo(updateProfileObj);
+        if (validatedObj.status === true) {
+            dispatch(updatePersonalDetails(updateProfileObj));
+        } else {
+            dispatch(toggleNotificationVisibility({
+                isVisible: true,
+                status: NotificationType.error,
+                message: validatedObj.message
+            }));
+        }
+
     }
 
     const onSelectProfileImage = (fileObj:any) => {
-        console.log(fileObj,'fileObj')
         dispatch(uploadProfileImage(fileObj));
     }
 

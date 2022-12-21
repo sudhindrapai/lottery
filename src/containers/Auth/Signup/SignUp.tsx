@@ -9,6 +9,11 @@ import {FeatierArrowLeft} from '../../../icons';
 import {useNavigate} from 'react-router-dom';
 import {RouterPath} from '../../../routes';
 
+import {NotificationType} from '../../../Utility/InterFacesAndEnum';
+import {toggleNotificationVisibility} from '../../../features/notificationSlice';
+
+import {validateSignup} from '../../../Utility/formValidation';
+
 import {StyledWrapper, StyledFormContainer, StyledFormHeader, StyledIconContainer} from './StylesSignup';
 
 import RegImgUrl from '../../../assets/regImage.png';
@@ -30,7 +35,18 @@ const SignUp:FC = () => {
     const isSignedUp = useSelector((state: RootState) => state.register.isAccountCreated);
 
     const customerRegistrationHandler = (obj:CreateAccount):void => {
-        dispatch(createSignup(obj))
+        let validatedObj = validateSignup(obj);
+        console.log(validatedObj,"validateSignup")
+        if (validatedObj.status === true) {
+            dispatch(createSignup(validatedObj.requestObj))
+        } else {
+            dispatch(toggleNotificationVisibility({
+                isVisible: true,
+                status: NotificationType.error,
+                message: validatedObj.message
+            }));
+        }
+        
     };
 
     const routeTologin = () => {

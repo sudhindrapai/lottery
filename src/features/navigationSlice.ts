@@ -8,7 +8,7 @@ export const AppRoutePath = {
     signIn: "/account/signin",
     twoFA: "/account/2FA",
     updatePassword: "/account/password-update",
-    resetPassword: "/auth/password-reset",
+    resetPassword: "/auth/password-reset/:publicUserId",
     resendResetLink: "/account/resend-pwd-reset-link",
     forgotPassword: "/account/forgot-password",
     lotteries: "/lottery",

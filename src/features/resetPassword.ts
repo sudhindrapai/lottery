@@ -4,6 +4,9 @@ import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import * as localStorageActiontype from '../localStorage/ActionTypes';
 import {getLocalStorage} from '../localStorage/GetLocalStorage';
 
+import {NotificationType} from '../Utility/InterFacesAndEnum';
+import {toggleNotificationVisibility} from './notificationSlice';
+
 interface ResetSliceState {
     isPasswordUpdated:boolean,
     isLoading: boolean,
@@ -41,17 +44,33 @@ export const resetPasswordHandler = createAsyncThunk(
             isLoading: false
         }));
 
-
+        // Authorization: `Bearer ${payloadObj.token}`,
         await fetch(`${endpoint.resetPassword}/${payloadObj.userId}`, {
             method: 'PUT',
             body: JSON.stringify(payloadObj.requestBody),
             headers:{
-                Authorization: `Bearer ${payloadObj.token}`,
                 "Content-type": "application/json; charset=UTF-8",
             }
         })
         .then((response) => {
-            response.json();
+            return response.json();
+        })
+        .then((response) => {
+            
+            if (response.statusCode === 200) {
+                dispatch(toggleNotificationVisibility({
+                    isVisible: true,
+                    status: NotificationType.success,
+                    message: response.errorMsg
+                }));
+            } else {
+                dispatch(toggleNotificationVisibility({
+                    isVisible: true,
+                    status: NotificationType.error,
+                    message: response.errorMsg
+                }));
+            }
+
             dispatch(togglePasswordUpdateState(
                 {
                     isPasswordUpdated: true

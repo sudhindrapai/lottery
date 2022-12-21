@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import ForgotPasswordForm from '../../Forms/ForgotPassword/ForgotPassword';
 import {useSelector, useDispatch} from 'react-redux';
 import {forgotPasswordHandler} from '../../../features/forgotPassword';
@@ -21,6 +21,7 @@ const ForgotPassword: React.FC = () => {
 
     const dispatch = useDispatch();
     let loading = useSelector((state: RootState) => state.forgotPassword.isLoading);
+    let isLinkSent = useSelector((state:RootState) => state.forgotPassword.isLinkSent);
 
     const onClickSendLink = (obj:ForgotPassword):void => {
         dispatch(forgotPasswordHandler(obj))
@@ -29,6 +30,12 @@ const ForgotPassword: React.FC = () => {
     const routeToLogin = () => {
         navigate(RouterPath.signIn);
     }
+
+    useEffect(() => {
+        if (isLinkSent === true) {
+            // navigate(RouterPath.resetPassword)
+        }
+    },[isLinkSent])
 
     return <StyledWrapper>
         <Loader isLoading={loading} />

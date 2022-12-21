@@ -27,6 +27,8 @@ const TwoFa:FC = () => {
         dispatch(toggleTwoFA());
         if (isEnabled === false) {
             toggleModal();
+            setStatus(true);
+        } else if (isEnabled === true) {
             setStatus(false);
         }
     }
@@ -42,7 +44,7 @@ const TwoFa:FC = () => {
         }
         if (isEnabled === null) {
             let data = getLocalStorage(localStorageAction.GET_TWO_FA_STATUS);
-            setStatus(data === true);
+            setStatus(data === "true");
         }
     },[isVerified]);
 

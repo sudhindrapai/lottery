@@ -152,7 +152,7 @@ const RegistrationForm:React.FC<RegistrationProps> = ({onRegister, onSelectLogin
             lastName:"",
             mobileNo:"",
             using2FA:false,
-            agreeTC: true
+            agreeTC: false
         };
         
         for (let element of values.form){
@@ -161,6 +161,7 @@ const RegistrationForm:React.FC<RegistrationProps> = ({onRegister, onSelectLogin
             createRegMethod["firstName"] = element.id === "firstName"? element.value : createRegMethod.firstName;
             createRegMethod["lastName"] = element.id === "lastName"? element.value : createRegMethod.lastName;
             createRegMethod["mobileNo"] = element.id === "mobileNumber"? element.value : createRegMethod.mobileNo;
+            createRegMethod["agreeTC"] = isAgreed;
         }
         onRegister(createRegMethod);
     }

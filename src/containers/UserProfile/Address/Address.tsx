@@ -10,6 +10,10 @@ import {setLocalStorage} from '../../../localStorage/SetLocalStorage';
 import {useDispatch} from 'react-redux';
 import {updateAddress} from '../../../features/userProfileSlice';
 
+import {validateAddres} from '../../../Utility/formValidation';
+import {NotificationType} from '../../../Utility/InterFacesAndEnum';
+import {toggleNotificationVisibility} from '../../../features/notificationSlice';
+
 interface UpdateAddressForm {
     address:string,
     country:string,
@@ -31,7 +35,17 @@ const AddressComponent:FC = () => {
     const [isVisible, setModalVisibility] = useState(false);
 
     const addNewAddress = (addressObj:UpdateAddressForm) => {
-        dispatch(updateAddress(addressObj));
+        let validatedObj = validateAddres(addressObj);
+        if (validatedObj.status === true) {
+            dispatch(updateAddress(addressObj));
+        } else {
+            dispatch(toggleNotificationVisibility({
+                isVisible: true,
+                status: NotificationType.error,
+                message: validatedObj.message
+            }));
+        }
+
     }
 
     return <Container>

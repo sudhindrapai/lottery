@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import FormBuilder from '../../FormBuilder/FormBuilder';
-import {updateFormInputState, validateForm} from '../../../Utility/Utility';
+import {updateFormInputState} from '../../../Utility/Utility';
 import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement,
      ButtonSizeVariant, ButtonVariant, ButtonType, AppButtonType} from '../../../Utility/InterFacesAndEnum';
 import Button from '../../../components/UI/Buttons/Button';
@@ -10,6 +10,11 @@ import {useSelector, useDispatch} from 'react-redux';
 import {toggleLinkSentState} from '../../../features/forgotPassword'
 import {RouterPath} from '../../../routes';
 import {useNavigate} from 'react-router-dom';
+
+import {validateForgotPassword} from '../../../Utility/formValidation';
+
+import {NotificationType} from '../../../Utility/InterFacesAndEnum';
+import {toggleNotificationVisibility} from '../../../features/notificationSlice';
 
 interface ForgotPasswordFormState {
     form: FormElement[],
@@ -57,10 +62,11 @@ const ForgotPassword:React.FC<ForgotPasswordProps> = ({onClickSendLink}) => {
     const [values, setValues] = useState<ForgotPasswordFormState>(ForgotPasswordFormInitalState);
 
     let isLinkSent = useSelector((state:RootState) => state.forgotPassword.isLinkSent);
+    let publicUserId = useSelector((state:RootState) => state.forgotPassword.publicUserId);
 
     useEffect(() => {
         if (isLinkSent === true) {
-            navigate(RouterPath.root);
+            navigate(`/auth/password-reset/${publicUserId}`);
         }
         return () => {
             dispatch(toggleLinkSentState({
@@ -79,7 +85,6 @@ const ForgotPassword:React.FC<ForgotPasswordProps> = ({onClickSendLink}) => {
 
     const handleFormSubmision = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault()
-        let isValidForm = validateForm(values.form);
         let ForgotPassword:ForgotPassword = {
             emailId: ""
         };
@@ -87,7 +92,17 @@ const ForgotPassword:React.FC<ForgotPasswordProps> = ({onClickSendLink}) => {
             ForgotPassword["emailId"] = element.id === "emailId"? element.value : ForgotPassword.emailId
         }
 
-        onClickSendLink(ForgotPassword);
+        let validatedObj = validateForgotPassword(ForgotPassword)
+
+        if (validatedObj.status === true) {
+            onClickSendLink(ForgotPassword);
+        } else {
+            dispatch(toggleNotificationVisibility({
+                isVisible: true,
+                status: NotificationType.error,
+                message: validatedObj.message
+            }));
+        }
     }
 
     return <form name={"Forgot Password"} html-for={"Forgot Password"} autoComplete="off">

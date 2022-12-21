@@ -1,22 +1,25 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import FormBuilder from '../../FormBuilder/FormBuilder';
-import {updateFormInputState, validateForm} from '../../../Utility/Utility';
+import {updateFormInputState} from '../../../Utility/Utility';
 import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement,
      ButtonSizeVariant, ButtonVariant, ButtonType, AppButtonType} from '../../../Utility/InterFacesAndEnum';
 import Button from '../../../components/UI/Buttons/Button';
+
+import {useParams} from 'react-router-dom';
 
 interface ResetPasswordFormState {
     form: FormElement[],
     isValidForm: boolean
 }
 
-interface ResetPassword {
+interface ResetPasswordObj {
     newPassword: string,
-    confirmPassword: string
+    confirmPassword: string,
+    otp:string
 }
 
 interface ResetPasswordProps {
-    onResetPassword(obj:ResetPassword):void
+    onResetPassword(obj:ResetPasswordObj):void
 }
 
 
@@ -59,7 +62,26 @@ const ResetPasswordFormInitalState: ResetPasswordFormState = {
             dropdownValues:[],
             slectedDate:null,
             isPasswordHidden:true
-        }
+        },
+        {
+            elementType: FormElementType.input,
+            value:"",
+            id:"otp",
+            isRequired:true,
+            fullWidth: true,
+            isCustomValidationRequred: false,
+            inputVariant: InputVariant.outlined,
+            inputType: InputTypes.number,
+            customValidationType: customValidationType.numberValidation,
+            isValidInput:false,
+            isTouched:false,
+            errorMessage:"",
+            label:"6 digit OTP",
+            radioGroupValues:[],
+            dropdownValues:[],
+            slectedDate:null,
+            isPasswordHidden:true
+        },
     ],
     isValidForm: false
 }
@@ -67,6 +89,8 @@ const ResetPasswordFormInitalState: ResetPasswordFormState = {
 const ResetPassword:React.FC<ResetPasswordProps> = ({onResetPassword}) => {
 
     const [values, setValues] = useState<ResetPasswordFormState>(ResetPasswordFormInitalState);
+
+    const param = useParams();
 
     const handleInputChange = (event:React.ChangeEvent <HTMLTextAreaElement | HTMLInputElement>):void => {
         let updatedStateArray = updateFormInputState(event, values.form)
@@ -78,14 +102,16 @@ const ResetPassword:React.FC<ResetPasswordProps> = ({onResetPassword}) => {
 
     const handleFormSubmision = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault()
-        let isValidForm = validateForm(values.form);
-        let resetPassword:ResetPassword = {
+
+        let resetPassword:ResetPasswordObj = {
             newPassword: "",
-            confirmPassword: ""
+            confirmPassword: "",
+            otp:""
         };
         for (let element of values.form){
             resetPassword["newPassword"] = element.id === "newPassword"? element.value : resetPassword.newPassword
             resetPassword["confirmPassword"] = element.id === "confirmPassword" ? element.value : resetPassword.confirmPassword
+            resetPassword["otp"] = element.id === "otp" ? element.value : resetPassword.otp;
         }
         onResetPassword(resetPassword)
     }
