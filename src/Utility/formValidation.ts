@@ -249,7 +249,6 @@ export const validateChangePassword = (obj:any) => {
     return statusObj;
 }
 
-
 export const validateResetPassword = (obj:any) => {
     let newPassword = obj.newPassword;
     let confirmPassword = obj.confirmPassword;
@@ -293,3 +292,125 @@ export const validateResetPassword = (obj:any) => {
 
     return statusObj;
 };
+
+export const validateAuctionReqForm = (obj:any) => {
+    console.log(obj,"[validateAuctionReqForm]")
+
+    let title = obj.auctionTitle;
+    let auctiondesc = obj.auctionDesc;
+    let proposedPrice = obj.auctionProposedPrice;
+    let address = obj.address;
+    let state = obj.state;
+    let city = obj.city;
+    let country = obj.country;
+    let pincode = obj.pincode;
+    let emailId = obj.userEmailId;
+    let mobileNo = obj.userMobile;
+    let name = obj.userName;
+    let category = obj.productCategory;
+    let type = obj.productType;
+    let startDate = obj.auctionStartDate;
+    let endDate = obj.auctionEndDate;
+
+    let statusObj:Status = {
+        status:true,
+        message:"",
+        requestObj:obj
+    }
+
+    if (statusObj.status && title.length === 0) {
+        statusObj["message"] = "auction title should not be empty";
+        statusObj["status"] = false;
+    }
+
+    if (statusObj.status && auctiondesc.length === 0) {
+        statusObj["message"] = "auction description should not be empty";
+        statusObj["status"] = false;
+    }
+
+    if (statusObj.status && proposedPrice.length === 0 ) {
+        statusObj["message"] = "propsed price should not be empty";
+        statusObj["status"] = false;
+    } else if (statusObj.status && proposedPrice.length > 0 && parseInt(proposedPrice) <= 0) {
+        statusObj["message"] = "invalid proposed price";
+        statusObj["status"] = false;
+    }
+
+    if (statusObj.status && address.length === 0) {
+        statusObj["message"] = "address should not be empty";
+        statusObj["status"] = false;
+    }
+
+    if (statusObj.status && state.length === 0) {
+        statusObj["message"] = "state should not be empty";
+        statusObj["status"] = false;
+    }
+
+    if (statusObj.status && city.length === 0) {
+        statusObj["message"] = "state should not be empty";
+        statusObj["status"] = false;
+    }
+
+    if (statusObj.status && country.length === 0) {
+        statusObj["message"] = "country should not be empty";
+        statusObj["status"] = false;
+    }
+
+    if (statusObj.status && pincode.length === 0) {
+        statusObj["message"] = "pincode should not be empty";
+        statusObj["status"] = false;
+    } 
+    if (statusObj.status && pincode.length <= 6) {
+        statusObj["message"] = "invalid pincode";
+        statusObj["status"] = false;
+    }
+
+    if (statusObj.status && emailId.length === 0) {
+        statusObj["message"] = errorMessages.emptyEmailId;
+        statusObj["status"] = false;
+    } 
+    if (statusObj.status && emailId.length > 0) {
+        let isValidEmail = validateEmail(emailId);
+        if (isValidEmail === false) {
+            statusObj["status"] = false;
+            statusObj["message"] = errorMessages.invalidEmailId;
+        }
+    }
+
+    if (statusObj.status && mobileNo.length === 0) {
+        statusObj["status"] = false;
+        statusObj["message"] = errorMessages.emptyMobileNumber;
+    } 
+    if (statusObj.status && mobileNo.length > 0 && mobileNo.length < 10) {
+        statusObj["status"] = false;
+        statusObj["message"] = errorMessages.invalidMobileNumber;
+    } 
+
+    if (statusObj.status && name.length === 0) {
+        statusObj["status"] = false;
+        statusObj["message"] = "name should not be empty";
+    }
+
+    if (statusObj.status && category.length === 0) {
+        statusObj["status"] = false;
+        statusObj["message"] = "product category should not be empty";
+    }
+
+    if (statusObj.status && type.length === 0) {
+        statusObj["status"] = false;
+        statusObj["message"] = "product type should not be empty";
+    }
+
+    if (statusObj.status && startDate.length === 0) {
+        statusObj["status"] = false;
+        statusObj["message"] = "start date should not be empty";
+    }
+
+    if (statusObj.status && endDate.length === 0) {
+        statusObj["status"] = false;
+        statusObj["message"] = "end date should not be empty";
+    }
+
+
+    return statusObj;
+}

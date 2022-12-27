@@ -19,6 +19,10 @@ import { RootState } from '../../app/store';
 
 import {countryNames} from '../../assets/DropdownValues/DropdownValues';
 
+import {validateAuctionReqForm} from '../../Utility/formValidation';
+import {toggleNotificationVisibility} from '../../features/notificationSlice';
+import {NotificationType} from '../../Utility/InterFacesAndEnum'
+
 interface CreateAuction {
     form: FormElement[],
     isValidForm: boolean
@@ -300,7 +304,7 @@ const ProductDetail: CreateAuction = {
     form:[
         {
             elementType: FormElementType.select,
-            value:"select",
+            value:"",
             id:"productType",
             isRequired:true,
             fullWidth: true,
@@ -312,14 +316,14 @@ const ProductDetail: CreateAuction = {
             isTouched:false,
             errorMessage:"",
             label:"Type",
-            dropdownValues:["select","Vehicle"],
+            dropdownValues:["select","vehicle"],
             radioGroupValues:[],
             slectedDate:null,
             isPasswordHidden:true
         },
         {
             elementType: FormElementType.select,
-            value:"select",
+            value:"",
             id:"productCategory",
             isRequired:false,
             fullWidth: true,
@@ -332,7 +336,7 @@ const ProductDetail: CreateAuction = {
             errorMessage:"",
             label:"Category",
             radioGroupValues:[],
-            dropdownValues:["select","Car"],
+            dropdownValues:["select","car"],
             slectedDate:null,
             isPasswordHidden:true
         }
@@ -477,7 +481,16 @@ const CreateAuction:FC = () => {
         let value = formElement.value;
         requestObj[formElement.id] = value
     }
-dispatch(createAuctionRequest(requestObj));
+    let validatedObj = validateAuctionReqForm(requestObj);
+    if (validatedObj.status === true) {
+        dispatch(createAuctionRequest(requestObj));
+    } else {
+        dispatch(toggleNotificationVisibility({
+            isVisible: true,
+            status: NotificationType.error,
+            message: validatedObj.message
+        }));
+    }
     };
 
     return <Wrapper>
