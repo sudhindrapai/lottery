@@ -39,7 +39,8 @@ const Home:FC = () => {
         </MoreLotteries>
         </Section>
         </SectionTwo>
-        <SectionWrapper>
+        {/* Fix me  */}
+        {/* <SectionWrapper>
         <AuctionSection>
             <TitelWrapper>
                 <Title>
@@ -51,13 +52,13 @@ const Home:FC = () => {
                 </TitelWrapper>
             <SimilarProducts isTitleRequired={false} />
         </AuctionSection>
-        </SectionWrapper>
-        <AuctionSection>
+        </SectionWrapper> */}
+        {/* <AuctionSection>
         <Title>
         Top Auction winners
                 </Title>
         <AuctionWinners />
-        </AuctionSection>
+        </AuctionSection> */}
     </div>
 }
 

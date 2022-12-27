@@ -63,12 +63,12 @@ const DesktopNavigation: React.FC = () => {
     };
 
     let walletView = <Fragment>
-        <WalletContainer>
+        {/* <WalletContainer>
             <WalletIcon />
             <Amount>
             &#x24; 0.00
             </Amount>
-        </WalletContainer>
+        </WalletContainer> */}
         <ProfielWapper>
         <ProfileOption>
             Hi, {name}
