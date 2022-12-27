@@ -34,11 +34,13 @@ interface LotteryObj {
 interface lotteryState {
     lotteries: LotteryObj[],
     upcomingLotteries: LotteryObj[],
+    winnerList:any
 }
 
 const initalState:lotteryState = {
     lotteries:[],
-    upcomingLotteries: []
+    upcomingLotteries: [],
+    winnerList:[]
 }
 
 interface getLottery {
@@ -121,6 +123,28 @@ export const getUpcomingLotteries = createAsyncThunk(
     }
 );
 
+export const getLotteryWinnerList = createAsyncThunk(
+    'lottery winner details',
+    async(payload:void,{dispatch}) => {
+        await fetch(endpoints.getLotteryWinnerList,{
+            method: 'GET',
+            headers:{
+                Authorization: `Bearer ${getLocalStorage(localStorageActionType.GET_ACCESS_TOKEN)}`,
+                "Content-type": "application/json; charset=UTF-8",
+            }
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((response) => {
+            console.log(response,"[getLotteryWinnerList]")
+            dispatch(setWinnerList({
+                data:response.result
+            }))
+        })
+    }
+);
+
 const LotterySlice = createSlice({
     name: 'lottery Slice',
     initialState: initalState,
@@ -136,9 +160,15 @@ const LotterySlice = createSlice({
                 ...state,
                 upcomingLotteries: action.payload.upcomingLottery
             }
+        },
+        setWinnerList:(state, action:PayloadAction<{data:any}>) =>{
+            return {
+                ...state,
+                winnerList: action.payload.data
+            }
         }
     }
 });
 
-export const {setLotteryResponse, setUpcomingLottery} = LotterySlice.actions;
+export const {setLotteryResponse, setUpcomingLottery, setWinnerList} = LotterySlice.actions;
 export default LotterySlice.reducer

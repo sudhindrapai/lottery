@@ -71,8 +71,7 @@ export const resetPasswordHandler = createAsyncThunk(
                 }));
             }
 
-            dispatch(togglePasswordUpdateState(
-                {
+            dispatch(togglePasswordUpdateState({
                     isPasswordUpdated: true
                 }
             ));

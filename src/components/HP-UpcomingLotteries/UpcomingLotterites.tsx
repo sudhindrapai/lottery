@@ -18,8 +18,6 @@ const UpcomingLotteries:FC = () => {
         }
     },[]);
 
-    console.log(upcomingLotteries,"upcomingLotteries");
-
     let lotteries = upcomingLotteries.map((lotteryObj) => {
         return <Container>
         <CoinImg src={LotteryCoin} />

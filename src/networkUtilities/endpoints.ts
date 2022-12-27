@@ -35,3 +35,4 @@ export const getSubscriptionDetail = `${baseUrl}/kingsrings/api/v1/payment/getsu
 export const buyGoldMembership = `${baseUrl}/kingsrings/api/v1/payment/createsubscription`; /**  */;
 export const suspendGoldMembership = `${baseUrl}/kingsrings/api/v1/payment/suspendsubscription/I-DVRKN18NJL8B`;
 export const reActivateGoldMembership = `${baseUrl}/kingsrings/api/v1/payment/activatesubscription/I-DVRKN18NJL8B`;
+export const getLotteryWinnerList = `${baseUrl}/kingsrings/api/v1/lotterygame/winnerslist`;
