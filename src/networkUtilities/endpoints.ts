@@ -18,7 +18,7 @@ export const toggleTwoFA = `${baseUrl}/kingsrings/api/v1/user/enabledisable2fa/`
 export const verifyTwoFACode = `${baseUrl}/kingsrings/api/v1/user/verifyenable2faotp`; /** {{publicUserId}} */
 // export const purchaseLottery = `${baseUrl}/kingsrings/api/v1/purchaselotteryticket/create`; /** Fixme */
 export const purchaseLottery = `${baseUrl}/kingsrings/api/v1/payment/checkout`;
-export const getOrdersList = `${baseUrl}/kingsrings/api/v1/purchaseticket/list`; /** ?userId=3 */
+export const getOrdersList = `${baseUrl}/kingsrings/api/v1/purchaselotteryticket/list`; /** ?userId=3 */
 export const createAuctionRequest = `${baseUrl}/kingsrings/api/v1/auction/create` /** create auction */
 export const getAuctionList = `${baseUrl}/kingsrings/api/v1/auction/list`; /** ?auctionStatus=U */
 export const getAuctionDetailById = `${baseUrl}/kingsrings/api/v1/auction/list/`; /** 6 */

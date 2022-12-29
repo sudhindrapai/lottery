@@ -294,8 +294,7 @@ export const validateResetPassword = (obj:any) => {
 };
 
 export const validateAuctionReqForm = (obj:any) => {
-    console.log(obj,"[validateAuctionReqForm]")
-
+   
     let title = obj.auctionTitle;
     let auctiondesc = obj.auctionDesc;
     let proposedPrice = obj.auctionProposedPrice;

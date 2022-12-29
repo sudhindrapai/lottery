@@ -5,13 +5,13 @@ import * as localStorageActionType from '../localStorage/ActionTypes';
 import {getLocalStorage} from '../localStorage/GetLocalStorage';
 
 const ordersInitialState = {
-    orders:[],
+    lotteryOrders:[],
     page:1
 }
 
-export const getOrders = createAsyncThunk(
+export const getLotteryOrders = createAsyncThunk(
     'get users order list',
-    async (payload, {dispatch}) => {
+    async (payload:void, {dispatch}) => {
         let userObj = JSON.parse(getLocalStorage(localStorageActionType.GET_USER_DETAILS));
 
         await fetch(`${endpoint.getOrdersList}?userId=${userObj.userId}`,{
@@ -25,7 +25,10 @@ export const getOrders = createAsyncThunk(
             return response.json();
         })
         .then((response) => {
-            console.log(response.data);
+            let dataList = response.result;
+            dispatch(setOrders({
+                lotteryOrders:dataList
+            }))
         })
     }
 )
@@ -36,7 +39,8 @@ const ordersSlice = createSlice({
     reducers: {
         setOrders: (state, action:PayloadAction<any>) => {
             return {
-                ...state
+                ...state,
+                lotteryOrders:action.payload.lotteryOrders
             }
         }
     }
