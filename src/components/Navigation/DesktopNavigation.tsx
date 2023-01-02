@@ -44,7 +44,6 @@ const DesktopNavigation: React.FC = () => {
     useEffect(() => {
         if (name === "") {
             let useerDetailObj = getLocalStorage(localStorageActionType.GET_USER_DETAILS);
-            // console.log(Object.keys(useerDetailObj).length > 0,"useerDetailObj")
             if (useerDetailObj !== null && Object.keys(useerDetailObj).length > 0) {
                 let userObj = JSON.parse(getLocalStorage(localStorageActionType.GET_USER_DETAILS));
                 setName(userObj.firstName);

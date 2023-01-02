@@ -60,13 +60,13 @@ let navigationState:NavigationState = {
         navRoute: AppRoutePath?.lotteries,
         isSelected: true
     },
-    {
-        label: "Auction",
-        key: "auction",
-        activeRoutes:[AppRoutePath?.auctionList, AppRoutePath.auctionDetail],
-        navRoute:AppRoutePath?.auctionList,
-        isSelected: false
-    },
+    // {
+    //     label: "Auction",
+    //     key: "auction",
+    //     activeRoutes:[AppRoutePath?.auctionList, AppRoutePath.auctionDetail],
+    //     navRoute:AppRoutePath?.auctionList,
+    //     isSelected: false
+    // },
     {
         label: "purchase",
         key:"auction",
