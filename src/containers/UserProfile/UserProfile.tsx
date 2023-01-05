@@ -6,60 +6,66 @@ import Address from './Address/Address';
 import ChangePassword from './ChangePassword/ChangePassword';
 import TwoFA from './2FA/2FA';
 import Subscription from './Subscription/Subscription';
-
-import {useSelector, useDispatch} from 'react-redux';
-import {getUserProfileDetail} from '../../features/userProfileSlice';
+import {useLocation} from 'react-router-dom'
 
 const tabMenuOptions = [
     {
         label: "Personal Info",
+        propsId:"PROFILE",
         id: 1,
         isSelected: false
     },
     {
         label: "Address",
+        propsId:"ADDRESS",
         id: 2,
         isSelected: false
     },
     {
         label: "Change Password",
+        propsId:"CHANGE PASSWORD",
         id: 3,
         isSelected: false
     },
     {
         label: "2 Factor Authentication",
+        propsId:"SETTINGS",
         id: 4,
         isSelected: false
     },
     {
         label: "Subscription",
+        propsId:"MEMBERSHIP",
         id: 5,
         isSelected: true
     }
 ]
 
+interface ProfileProps {
+    activeState:string
+}
 
-const UserProfile:FC = () => {
-
-    // const dispatch = useDispatch();
+const UserProfile:FC<ProfileProps> = ({activeState}) => {
 
     const [tabMenu, setTabMenuHandler] = useState(tabMenuOptions);
 
+    const location = useLocation();
+
     let tabMenuView = tabMenu.map((menuObj) => {
-        return <TabMenuElement onClick={() => {updateTabMenu(menuObj.id)}} key={menuObj.id} isSelectdItem ={menuObj.isSelected} >
+        return <TabMenuElement key={menuObj.id} isSelectdItem ={menuObj.isSelected} >
             {menuObj.label}
         </TabMenuElement>
     });
 
-    const updateTabMenu = (menuId: number) => {
+    useEffect(() => {
         let updatedMenu = tabMenu.map((menuObj) => {
             return {
                 ...menuObj,
-                isSelected: menuObj.id === menuId
+                isSelected: menuObj.propsId === activeState
             }
         });
         setTabMenuHandler(updatedMenu);
-    }
+    },[location]);
 
     let detailView = <PersonalInfoForm />;
 
@@ -81,7 +87,7 @@ const UserProfile:FC = () => {
 
     return <Wrapper>
         <Viewheader >
-            Home / Profile
+            {activeState}
         </Viewheader>
         <Container>
             <ProfileContainer>

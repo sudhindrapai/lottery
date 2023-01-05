@@ -64,9 +64,12 @@ ${UIConstants.mobileView}{
 
 export const TabMenuElement = styled.div`
 font-size: 16px;
+display:${(props:TabMenuElement) => props.isSelectdItem ? 'inline-flex':'none'};
 color: ${(props:TabMenuElement) => props.isSelectdItem ? '#3A57E8':'#200E32'};
 padding: 20px 30px;
-background-color: ${(props:TabMenuElement) => props.isSelectdItem ? 'rgba(58, 87, 232, 0.12);':'#ffffff'};
+/* background-color: ${(props:TabMenuElement) => props.isSelectdItem ? 'rgba(58, 87, 232, 0.12);':'#ffffff'}; */
+background-color: #ffffff; 
+min-width: 180px;
 border-bottom: ${(props:TabMenuElement) => props.isSelectdItem ? '2px solid #3A57E8':''};
 `;
 

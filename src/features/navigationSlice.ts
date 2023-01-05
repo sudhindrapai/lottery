@@ -4,6 +4,10 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 export const AppRoutePath = {
     profile: "/account/profile",
+    address:"/account/address",
+    changePassword:"/account/change-password",
+    settings:"/account/two-fa",
+    membership:"/account/membership",
     signUp: "/account/registration",
     signIn: "/account/signin",
     twoFA: "/account/2FA",

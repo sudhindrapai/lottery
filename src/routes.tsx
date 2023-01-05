@@ -14,7 +14,7 @@ import ForgotPassword from './containers/Auth/ForgotPassword/ForgotPassword';
 import Home from './containers/Home/home';
 import Lottery from './containers/Lotteries/Lotteries';
 import LotteryPayment from "./containers/LotteryPayment/LotteryPayment";
-import UrserProfile from './containers/UserProfile/UserProfile';
+import UserProfile from './containers/UserProfile/UserProfile';
 import PaymentSuccess from './containers/LotteryPaymentSuccess/PaymentSuccess';
 import Auction from './containers/Auction/AuctionList';
 import AuctionDetail from './containers/AuctionDetail/AuctionDetail';
@@ -35,7 +35,11 @@ const AppRoutes = () => {
   const rootComponent = getLocalStorage(localStorageActionType.GET_ACCESS_TOKEN) ? <Home /> : <Home />;
     return (
         <Routes>
-            <Route path={RouterPath.profile} element={<Profile />} />
+            <Route path={RouterPath.profile} element={<UserProfile activeState={"PROFILE"} />} />
+            <Route path={RouterPath.address} element={<UserProfile activeState={"ADDRESS"} />} />
+            <Route path={RouterPath.changePassword} element={<UserProfile activeState={"CHANGE PASSWORD"} />} />
+            <Route path={RouterPath.settings} element={<UserProfile activeState={"SETTINGS"} />} />
+            <Route path={RouterPath.membership} element={<UserProfile activeState={"MEMBERSHIP"} />} />
             <Route path={RouterPath.signUp} element={<Registration />} />
             <Route path={RouterPath.signIn} element={<Signin />} />
             <Route path={RouterPath.twoFA} element={<TwoFA />} />
@@ -48,7 +52,7 @@ const AppRoutes = () => {
             <Route path={RouterPath.lotteries} element={<Lottery />} />
             <Route path={RouterPath.lotteryPaymentView} element={<LotteryPayment />} />
             <Route path={RouterPath.lotteryPaymentSuccess} element={<PaymentSuccess />} />
-            <Route path={RouterPath.userProfile} element={<UrserProfile />} />
+            <Route path={RouterPath.userProfile} element={<UserProfile activeState={"PROFILE"} />} />
             <Route path={RouterPath.auctionList} element={<Auction />} />
             <Route path={RouterPath.notFound} element={<h2>404</h2>} />
             <Route path={RouterPath.auctionDetail} element={<AuctionDetail />} />

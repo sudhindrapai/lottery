@@ -103,7 +103,7 @@ margin-left: 10px;
 export const DropdownContainer = styled.div`
 position: absolute;
 top: auto;
-width: 150px;
+width: 186px;
 z-index: 1;
 box-shadow: 0px 4px 44px rgb(0 0 0 / 12%);
   background-color: #FFFFFF;

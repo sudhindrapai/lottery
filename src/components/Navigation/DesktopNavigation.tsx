@@ -74,7 +74,19 @@ const DesktopNavigation: React.FC = () => {
         </ProfileOption>
         <DropdownContainer>
             <DropdownOption onClick={() => {redirectToView(RouterPath.userProfile)}} >
-                Profile
+                Manage Profile
+            </DropdownOption>
+            <DropdownOption onClick={() => {redirectToView(RouterPath.address)}} >
+                My Address
+            </DropdownOption>
+            <DropdownOption onClick={() => {redirectToView(RouterPath.changePassword)}} >
+                Change Password
+            </DropdownOption>
+            <DropdownOption onClick={() => {redirectToView(RouterPath.settings)}} >
+                2FA Settings
+            </DropdownOption>
+            <DropdownOption onClick={() => {redirectToView(RouterPath.membership)}} >
+                Membership
             </DropdownOption>
             <DropdownOption onClick={createLogout} >
                 Logout
