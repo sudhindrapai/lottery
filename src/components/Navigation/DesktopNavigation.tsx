@@ -119,7 +119,7 @@ const DesktopNavigation: React.FC = () => {
     });
 
     return<StyledDesktopNavContainer>
-        <LogoSection>
+        <LogoSection onClick={() => {redirectToView(RouterPath.root)}} >
         <img src={headerLogo} />
         </LogoSection>
         <NavSection>

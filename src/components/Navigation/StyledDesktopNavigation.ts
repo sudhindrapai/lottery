@@ -21,6 +21,7 @@ padding: 16px;
 
 export const LogoSection = styled.div`
 width: 15%;
+cursor: pointer;
 `;
 
 export const NavSection = styled.div`

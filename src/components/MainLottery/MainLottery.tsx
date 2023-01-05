@@ -15,13 +15,17 @@ import Coin3Src from '../../assets/coin3.png';
 import CountdownTimer from '../CountdownTimer/CountdownTimer';
 import {transformDate} from '../../Utility/Utility';
 
+import {useNavigate} from 'react-router-dom';
+import {RouterPath} from '../../routes';
+
 import * as LiveLotteryStyle from '../LiveLottery/StyledLiveLottery'
 
 const MainLottery:FC = () => {
+    const navigate = useNavigate();
     return<Wrapper>
         <Container>
             <CoinsSection>
-                <Coin src={Coin1Src} />
+                {/* <Coin src={Coin1Src} />
                 <CoinLabel>
                 Gold Coin
                 </CoinLabel>
@@ -33,7 +37,7 @@ const MainLottery:FC = () => {
                 <CoinLabel>
                 Live Science 
                 The Profound His...
-                </CoinLabel>
+                </CoinLabel> */}
             </CoinsSection>
             <MainLotterySection>
                 <MainLotteryImg src={LotteryCoin} />
@@ -58,13 +62,13 @@ const MainLottery:FC = () => {
         appBtnType={AppButtonType.secondary}
         fullWidth={false} 
         variant={ButtonVariant.contained} 
-        type={ButtonType.default} size={ButtonSizeVariant.small} clicked={() => {}} >
+        type={ButtonType.default} size={ButtonSizeVariant.small} clicked={() => {navigate(RouterPath.membership)}} >
             BUY GOLD MEMBERSHIP
         </Button>
                     </AuctionBtns>
             </MainLotterySection>
             <CoinsSection>
-                <Coin src={Coin1Src} />
+                {/* <Coin src={Coin1Src} />
                 <CoinLabel>
                 Gold Coin
                 </CoinLabel>
@@ -76,7 +80,7 @@ const MainLottery:FC = () => {
                 <CoinLabel>
                 Live Science 
                 The Profound His...
-                </CoinLabel>
+                </CoinLabel> */}
             </CoinsSection>
             </Container>
         <FooterSection>
