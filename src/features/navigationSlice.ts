@@ -31,7 +31,9 @@ export const AppRoutePath = {
     membershipFail:"/goldmembership/fail",
     tempRoot: "/",
     root: "/",
-    notFound: "*"
+    notFound: "*",
+    termsAndCondition:"/terms-conditions",
+    privacyPolicy:"/privacy-policy"
   };
 
 interface NavigationState {

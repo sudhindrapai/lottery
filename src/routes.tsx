@@ -25,6 +25,8 @@ import AuctionPaymentSuccess from './containers/AuctionPaymentSuccess/PaymentSuc
 import PaypalSuccess from './containers/PaymentStatus/Success/Success';
 import PaypalFail from './containers/PaymentStatus/Fail/Fail';
 import MembershipSuccess from './containers/BuyMembershipStatus/Success/Success';
+import TextAreaComponent from './containers/TAndC/TandC';
+import PrivacyPolicy from './containers/PrivacyPolicy/PrivacyPolicy';
 
 export const RouterPath = {
   ...AppRoutePath
@@ -62,6 +64,8 @@ const AppRoutes = () => {
             <Route path={RouterPath.paypalSuccess} element={<PaypalSuccess />} />
             <Route path={RouterPath.paypalFail} element={<PaypalFail />} />
             <Route path={RouterPath.membershipSuccess} element={<MembershipSuccess />} />
+            <Route path={RouterPath.termsAndCondition} element={<TextAreaComponent />} />
+            <Route path={RouterPath.privacyPolicy} element={<PrivacyPolicy />} />
       </Routes>
     )
 }

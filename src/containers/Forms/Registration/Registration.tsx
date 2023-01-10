@@ -5,7 +5,10 @@ import {updateFormInputState, validateForm} from '../../../Utility/Utility';
 import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement, 
     ButtonSizeVariant, ButtonVariant, ButtonType, AppButtonType} from '../../../Utility/InterFacesAndEnum';
 import {LoginAccountContainer,LoginAccountOption,TermsConditionContainer, EmptyCheckbox,
-     SelectedCheckbox, TermsText} from './StyledReg'
+     SelectedCheckbox, TermsText} from './StyledReg';
+
+import {useNavigate} from 'react-router-dom';
+import {RouterPath} from '../../../routes'   
 
 interface RegFormState {
     form: FormElement[],
@@ -130,6 +133,8 @@ const registrationFormInitalState: RegFormState = {
 
 const RegistrationForm:React.FC<RegistrationProps> = ({onRegister, onSelectLogin}) => {
 
+    const navigate = useNavigate();
+
     const [values, setValues] = useState<RegFormState>(registrationFormInitalState);
 
     const [isAgreed, setAgreeState] = useState<boolean>(false) 
@@ -177,7 +182,7 @@ const RegistrationForm:React.FC<RegistrationProps> = ({onRegister, onSelectLogin
                 <TermsConditionContainer >
                     {isAgreed ? <SelectedCheckbox onClick={toggleAgreeState} /> : <EmptyCheckbox onClick={toggleAgreeState} />}
                     <TermsText>
-                    Agree to <span>terms and conditions</span>
+                    Agree to <span onClick={() => {navigate(RouterPath.termsAndCondition)}} >terms and conditions</span>
                     </TermsText>
                 </TermsConditionContainer>
                 <Button 

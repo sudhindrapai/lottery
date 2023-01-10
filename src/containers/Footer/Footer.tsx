@@ -1,8 +1,17 @@
 import {FC} from 'react';
-import LogoSrc from '../../assets/headerLogo.svg'
+import LogoSrc from '../../assets/headerLogo.svg';
 import {FooterWrapper,FooterTop, FooterLogoSection, LogoImg, LogoDesc, FooterItems, FooterItemTitle, 
     FooterItmValue, FooterBottom, CopyRight, FollowUsContainer, FollowUsTitle, Twitter} from './StyledFooter';
+import {RouterPath} from '../../routes';
+import {useNavigate} from 'react-router-dom';
+
 const Footer:FC = () => {
+    const navigate = useNavigate();
+
+    const redirectToView = (path:string) => {
+        navigate(path);
+    };
+
     return <FooterWrapper>
         <FooterTop>
             <FooterLogoSection>
@@ -14,16 +23,16 @@ const Footer:FC = () => {
                 </LogoDesc>
             </FooterLogoSection>
             <FooterItems>
-                <FooterItemTitle>
+                <FooterItemTitle onClick={() => {redirectToView(RouterPath.root)}} >
                 Home
                 </FooterItemTitle>
-                <FooterItmValue>
+                <FooterItmValue onClick={() => {redirectToView(RouterPath.lotteries)}} >
                 Lottery
                 </FooterItmValue>
-                <FooterItmValue>
+                <FooterItmValue onClick={() => {redirectToView(RouterPath.auction)}} >
                 Auction
                 </FooterItmValue>
-                <FooterItmValue>
+                <FooterItmValue onClick={() => {redirectToView(RouterPath.orders)}} >
                 Purchases
                 </FooterItmValue>
             </FooterItems>
@@ -31,10 +40,10 @@ const Footer:FC = () => {
                 <FooterItemTitle>
                 Policy
                 </FooterItemTitle>
-                <FooterItmValue>
+                <FooterItmValue onClick={() => {redirectToView(RouterPath.privacyPolicy)}} >
                 Privacy and Policy
                 </FooterItmValue>
-                <FooterItmValue>
+                <FooterItmValue onClick={() => {redirectToView(RouterPath.termsAndCondition)}} >
                 Terms &amp; Conditions
                 </FooterItmValue>
             </FooterItems>
