@@ -72,3 +72,10 @@ justify-content: flex-end;
 color: #FFB332;
 flex-basis: 20%;
 `;
+
+export const EmptyLottery = styled.div`
+width: 100%;
+box-sizing: border-box;
+text-align: left;
+color: #000000;
+`;

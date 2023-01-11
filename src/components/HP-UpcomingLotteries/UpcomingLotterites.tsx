@@ -1,6 +1,6 @@
 import {FC, useEffect} from 'react';
 import {Wrapper,Container,CoinImg, LotteryDetail, RewardTitle, Reward,
-     StartsWrapper, Label, Value, NotifySection} from './StyledUpcomingLotteries';
+     StartsWrapper, Label, Value, NotifySection,EmptyLottery} from './StyledUpcomingLotteries';
 import LotteryCoin from '../../assets/lotteryCoin.png';
 import {transformDate} from '../../Utility/Utility';
 
@@ -44,7 +44,7 @@ const UpcomingLotteries:FC = () => {
     })
 
     return <Wrapper>
-        {lotteries}
+        {upcomingLotteries.length > 0 ? lotteries : <EmptyLottery>No upcoming lotteries</EmptyLottery>}
     </Wrapper>
 };
 
