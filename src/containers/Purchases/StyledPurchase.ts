@@ -62,4 +62,6 @@ export const ViewBody = styled.div`
 width: 100%;
 box-sizing: border-box;
 padding: 15px;
+max-height: 550px;
+overflow-y: auto;
 `;

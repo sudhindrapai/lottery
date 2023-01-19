@@ -4,6 +4,7 @@ import * as endpoint from '../networkUtilities/endpoints';
 import * as localStorageActionType from '../localStorage/ActionTypes';
 import {getLocalStorage} from '../localStorage/GetLocalStorage';
 
+
 const ordersInitialState = {
     lotteryOrders:[],
     page:1
@@ -26,6 +27,12 @@ export const getLotteryOrders = createAsyncThunk(
         })
         .then((response) => {
             let dataList = response.result;
+            dataList = dataList.map((obj:any) => {
+                return {
+                    ...obj,
+                    isExpanded: false
+                }
+            })
             dispatch(setOrders({
                 lotteryOrders:dataList
             }))
