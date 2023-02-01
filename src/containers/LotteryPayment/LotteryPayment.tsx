@@ -1,4 +1,4 @@
-import {FC, Fragment, useState, useEffect} from 'react';
+import {FC, useState, useEffect} from 'react';
 import Navigation from '../../components/Navigation/DesktopNavigation';
 import CoinImgSrc from '../../assets/lotteryCoin.png'
 import {FormElementType, customValidationType, InputVariant, InputTypes, FormElement,
@@ -27,7 +27,7 @@ import { RootState } from '../../app/store';
         userId: number,
         paymentId: number,
         purchaseDate: Date,
-        ticketType: "G" | "M",
+        ticketType: string,
         noOfTickets:number 
     }
 
@@ -69,14 +69,20 @@ import { RootState } from '../../app/store';
 
     const redirectToPaymentSuccess = () => {
 
+        let ticketType = ticketDetailObj.label === "Silver Ticket" ? "S" :
+        ticketDetailObj.label === "Gold Ticket" ? "G" :
+        ticketDetailObj.label === "Platinum Ticket" ? "P" : "B"
+
         let purchaseLotteryObj:PurchaseLotteryBody = {
             "lotteryGameId": ticketDetailObj?.lotteryGameId,
             "userId": ticketDetailObj.userId,
             "paymentId": 2,
             "purchaseDate": new Date(),
-            "ticketType": ticketDetailObj?.rewardType,
+            "ticketType": ticketType,
             "noOfTickets": ticketDetailObj?.noOfTickets
         };
+
+        // console.log(purchaseLotteryObj,ticketDetailObj,"purchaseLotteryObj")
 
         dispatch(purchaseLottery(purchaseLotteryObj));
     };
@@ -132,8 +138,8 @@ import { RootState } from '../../app/store';
                                 </Value>
                             </LotteryDetail>
                             <LotteryDetail>
-                                <GoldTicketView >
-                                    Gold Ticket
+                                <GoldTicketView type={ticketDetailObj?.label}>
+                                {ticketDetailObj?.label}
                                 </GoldTicketView>
                             </LotteryDetail>
                         </PurchaseDetails>

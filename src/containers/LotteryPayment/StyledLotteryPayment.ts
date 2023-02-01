@@ -1,5 +1,14 @@
 import styled from 'styled-components';
 
+interface TicketTypes {
+type:string
+}
+
+const goldBgColor = "linear-gradient(76.64deg, #EFDFA3 5.43%, #CE8631 29.33%, #C1A053 47.47%, #F4C045 68.72%, #C88221 90.4%)";
+const bronzeBgColor = "linear-gradient(76.64deg,#775345 5.43%,#CA9274 29.33%,#9E7C59 68.72%,#D8A58A 90.4%)";
+const silverBgColor = "linear-gradient(80.76deg,#CECED5 12.22%,#E4E4E8 87.16%)";
+const platinumBgColor = "linear-gradient(76.68deg,#797979 10.83%,#D4D4D4 44.62%,#D2D2D2 45.2%,#8D8D8D 84.98%)";
+
 export const Wrapper = styled.div`
 width: 100%;
 box-sizing: border-box;
@@ -102,7 +111,8 @@ color: #200E32;
 `;
 
 export const GoldTicketView = styled.div`
-background: linear-gradient(76.64deg, #EFDFA3 5.43%, #CE8631 29.33%, #C1A053 47.47%, #F4C045 68.72%, #C88221 90.4%);
+background:${(props:TicketTypes)  => props.type === "Gold Ticket" ? 
+goldBgColor : props.type === "Silver Ticket" ? silverBgColor : props.type === "Platinum Ticket" ? platinumBgColor : bronzeBgColor};
 border-radius: 6px;
 width: 100%;
 height: 54px;

@@ -6,11 +6,20 @@ interface ValueProps{
     textAlign:string
 }
 
+export const Wrapper = styled.div`
+width: 100%;
+box-sizing: border-box;
+position: relative;
+`;
+
 export const Values = styled.div`
 width: 100%;
 box-sizing: border-box;
 max-height: 500px;
 overflow-y: auto;
+${Wrapper}:nth-child(2n){
+    background-color: #F9F9F9;
+};
 `;
 
 export const CollapseBtn = styled.div`
@@ -23,12 +32,6 @@ border-bottom: none;
 cursor:pointer;
 `;
 
-
-export const Wrapper = styled.div`
-width: 100%;
-box-sizing: border-box;
-position: relative;
-`;
 
 
 export const ChevronDown = styled(ExpandMoreIcon)`
