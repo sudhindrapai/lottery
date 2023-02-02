@@ -30,13 +30,34 @@ const LotteryPurchaseList:FC = () => {
 
     const [tabMenu, setTabMenu] = useState(lotteryTabMenu);
 
+    const [liveLottery, setLiveLottery] = useState([]);
+    const [executedLottery, setExecutedLottery] = useState([]);
+    const [activeTabMenuId, setMenuId] = useState(1);
+
     const lotteryList = useSelector((state:RootState) => state.orders.lotteryOrders)
 
     useEffect(() => {
         dispatch(getLotteryOrders());
     },[]);
 
+    useEffect(() => {
+        if (lotteryList.length > 0) {
+            let executedLottery = [];
+            let currentLottery = [];
+            
+            executedLottery = lotteryList.filter((obj:any) => {
+                return obj.lotteryGameStatus === "E"
+            });
+            currentLottery = lotteryList.filter((obj:any) => {
+                return obj.lotteryGameStatus !== "E"
+            });
+            setLiveLottery(currentLottery);
+            setExecutedLottery(executedLottery);
+        }
+    },[lotteryList])
+
     const toggleActiveState = (id:number) => {
+        setMenuId(id)
         setTabMenu((tabMenu) => {
             return tabMenu.map((menuObj) => {
                 return{
@@ -89,7 +110,7 @@ const LotteryPurchaseList:FC = () => {
                 Purchased Date
             </Style.Label>
         </Style.CollapseHeader>
-        <Collapse onToggle={toggleLotteryCollapse} data={lotteryList} />
+        <Collapse onToggle={toggleLotteryCollapse} data={activeTabMenuId === 1 ? liveLottery : executedLottery} />
     </Style.Wrapper>
 };
 

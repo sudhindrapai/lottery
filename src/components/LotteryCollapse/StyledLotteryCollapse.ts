@@ -3,7 +3,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 interface ValueProps{
     width: number|string,
-    textAlign:string
+    textAlign:string,
+    color?:string
 }
 
 export const Wrapper = styled.div`
@@ -42,6 +43,8 @@ export const Value = styled.div`
 color: #000000;
 width: ${(props:ValueProps) => props.width};
 text-align: ${(props:ValueProps) =>props.textAlign};
+color: ${(props:ValueProps) => props.color !== undefined ? props.color : '#000000'};
+font-weight: ${(props:ValueProps) => props.color !== undefined ? 600 : "unset"};
 `;
 
 export const CollapseBody = styled.div`

@@ -34,6 +34,7 @@ interface LotteryCollapseProps{
 const LotteryCollapse:FC<LotteryCollapseProps> = ({data,onToggle}):any => {
 
     let CollapseView = data.map((lotteryObj) => {
+        let color = lotteryObj.winnerStatus === null ? "#FFB332" :lotteryObj.winnerStatus === "Winner" ? "#219653" : "#E30000"
             return <Style.Wrapper onClick={() => {onToggle(lotteryObj.ticketNo)}}>
             <Style.CollapseBtn>
                 <Style.ChevronDown />
@@ -46,8 +47,8 @@ const LotteryCollapse:FC<LotteryCollapseProps> = ({data,onToggle}):any => {
                 <Style.Value width={"15%"} textAlign={"center"}  >
                       {lotteryObj.rewardType === "M" ? lotteryObj.rewardAmount : lotteryObj.rewardGiftName}
                 </Style.Value>
-                <Style.Value width={"20%"} textAlign={"center"}  >
-                      {lotteryObj.winnerStatus}
+                <Style.Value width={"20%"} textAlign={"center"} color={color}  >
+                      {lotteryObj.winnerStatus === null ? "Yet to Announce" : lotteryObj.winnerStatus} 
                 </Style.Value>
                 <Style.Value width={"35%"} textAlign={"right"}  >
                     {transformDate(lotteryObj.purchaseDate? new Date() : lotteryObj.purchaseDate)}
@@ -68,7 +69,9 @@ const LotteryCollapse:FC<LotteryCollapseProps> = ({data,onToggle}):any => {
                             Ticket Type
                         </Style.TicketDetailTitle>
                         <Style.TicketDetailValue>
-                            {lotteryObj.ticketType}
+                            {lotteryObj.ticketType === "B" ? "Bronze Ticket" : 
+                            lotteryObj.ticketType === "G" ? "Gold Ticket" : lotteryObj.ticketType === "P" ? 
+                            "Platinum Ticket" : "Silver Ticket"}
                         </Style.TicketDetailValue>
                     </Style.TicketDetail>
                     <Style.TicketDetail>
