@@ -47,7 +47,8 @@ const LotteryPurchaseList:FC = () => {
             
             executedLottery = lotteryList.filter((obj:any) => {
                 return obj.lotteryGameStatus === "E"
-            });
+            })
+        
             currentLottery = lotteryList.filter((obj:any) => {
                 return obj.lotteryGameStatus !== "E"
             });

@@ -27,10 +27,20 @@ export const getLotteryOrders = createAsyncThunk(
         })
         .then((response) => {
             let dataList = response.result;
+            let isExcutedLotteryFound = false;
+            let isLiveLotteryFound = false;
             dataList = dataList.map((obj:any) => {
+                let isExpanded = false;
+                if (obj.lotteryGameStatus === "E" && isExcutedLotteryFound === false) {
+                    isExpanded = true;
+                    isExcutedLotteryFound = true;
+                } else if (obj.lotteryGameStatus !== "E" && isLiveLotteryFound === false) {
+                    isLiveLotteryFound = true;
+                    isExpanded = true;
+                }
                 return {
                     ...obj,
-                    isExpanded: false
+                    isExpanded:isExpanded
                 }
             })
             dispatch(setOrders({

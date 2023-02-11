@@ -33,7 +33,7 @@ interface LotteryCollapseProps{
 
 const LotteryCollapse:FC<LotteryCollapseProps> = ({data,onToggle}):any => {
 
-    let CollapseView = data.map((lotteryObj) => {
+    let CollapseView = data.map((lotteryObj, index) => {
         let color = lotteryObj.winnerStatus === null ? "#FFB332" :lotteryObj.winnerStatus === "Winner" ? "#219653" : "#E30000"
             return <Style.Wrapper onClick={() => {onToggle(lotteryObj.ticketNo)}}>
             <Style.CollapseBtn>
